@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Up2You Intro</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f5;
+      overflow: hidden;
+    }
+    .logo {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: blue;
+      position: absolute;
+      right: -100%;
+      transition: all 1.5s ease-in-out;
+    }
+    .logo.active {
+      right: 50%;
+      transform: translateX(50%);
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo" id="logo">Up2You</div>
+
+  <script>
+    window.onload = () => {
+      setTimeout(() => {
+        document.getElementById('logo').classList.add('active');
+      }, 500);  // Delay before moving to center
+      setTimeout(() => {
+        window.location.href = 'login.html'; // Redirect to login page after animation
+      }, 3000);  // Adjust time for redirect
+    };
+  </script>
+</body>
+</html>
