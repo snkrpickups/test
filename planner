@@ -127,3 +127,4 @@
 
 </body>
 </html>
+<button onclick="window.location.href='login.html'">Logout</button>
