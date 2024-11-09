@@ -67,3 +67,14 @@
   </script>
 </body>
 </html>
+<script>
+  function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    if (username && password) {
+      window.location.href = 'activity_planner.html'; // Redirect to activity planner
+    } else {
+      alert("Please enter a username and password.");
+    }
+  }
+</script>
