@@ -67,10 +67,3 @@
   </script>
 </body>
 </html>
-<script>
-  window.onload = () => {
-    setTimeout(() => {
-      window.location.href = 'login.html'; // Redirect to login page
-    }, 3000); // Adjust time as needed
-  };
-</script>
