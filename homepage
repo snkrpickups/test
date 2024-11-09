@@ -51,3 +51,4 @@
     }, 3000); // Adjust time as needed
   };
 </script>
+<a href="login.html">Go to Login</a>
