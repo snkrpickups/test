@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity Planner - Up2You</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .planner-container {
+      width: 100%;
+      max-width: 500px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+    select, input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .results {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="planner-container">
+  <h2>Activity Planner</h2>
+  
+  <label for="occasion">Occasion</label>
+  <select id="occasion">
+    <option value="casual">Casual</option>
+    <option value="romantic">Romantic</option>
+    <option value="family">Family</option>
+    <option value="friends">Friends</option>
+  </select>
+
+  <label for="cost">Cost</label>
+  <select id="cost">
+    <option value="low">Low</option>
+    <option value="medium">Medium</option>
+    <option value="high">High</option>
+  </select>
+
+  <label for="starRating">Star Rating</label>
+  <select id="starRating">
+    <option value="1">1 Star</option>
+    <option value="2">2 Stars</option>
+    <option value="3">3 Stars</option>
+    <option value="4">4 Stars</option>
+    <option value="5">5 Stars</option>
+  </select>
+
+  <button onclick="findActivities()">Find Activities</button>
+
+  <div class="results" id="results">
+    <!-- Filtered activity suggestions will appear here -->
+  </div>
+</div>
+
+<script>
+  // Mock data for activities
+  const activities = [
+    { name: "Picnic at the Park", occasion: "casual", cost: "low", rating: 3 },
+    { name: "Fine Dining", occasion: "romantic", cost: "high", rating: 5 },
+    { name: "Bowling Night", occasion: "friends", cost: "medium", rating: 4 },
+    { name: "Family Movie Night", occasion: "family", cost: "low", rating: 3 }
+  ];
+
+  function findActivities() {
+    const occasion = document.getElementById("occasion").value;
+    const cost = document.getElementById("cost").value;
+    const rating = parseInt(document.getElementById("starRating").value);
+
+    const resultsDiv = document.getElementById("results");
+    resultsDiv.innerHTML = "";  // Clear previous results
+
+    // Filter activities based on user inputs
+    const filteredActivities = activities.filter(activity =>
+      activity.occasion === occasion && activity.cost === cost && activity.rating >= rating
+    );
+
+    if (filteredActivities.length > 0) {
+      filteredActivities.forEach(activity => {
+        const div = document.createElement("div");
+        div.className = "result-item";
+        div.innerText = `${activity.name} - ${activity.rating} Stars`;
+        resultsDiv.appendChild(div);
+      });
+    } else {
+      resultsDiv.innerHTML = "<p>No matching activities found.</p>";
+    }
+  }
+</script>
+
+</body>
+</html>
