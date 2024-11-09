@@ -78,3 +78,4 @@
     }
   }
 </script>
+<a href="activity_planner.html">Proceed to Activity Planner</a>
