@@ -1,0 +1,128 @@
+/* ============================================================
+   FOX CONSULTING LLC — Core Tokens: Color + Type
+   Import this file first. Fonts load from Google Fonts;
+   see fonts/README.md to bundle them locally for offline use.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Montserrat:wght@600;700;800&display=swap');
+
+:root {
+  /* ---------- BRAND COLOR: Fox Orange ---------- */
+  --fox-50:  #FFF3EB;
+  --fox-100: #FFE0CC;
+  --fox-200: #FFBE94;
+  --fox-300: #FF995C;
+  --fox-400: #FB7733;
+  --fox-500: #EC5E12;   /* PRIMARY — the fox */
+  --fox-600: #C94B0A;   /* hover / ember */
+  --fox-700: #A03B0A;
+  --fox-800: #7A2F0D;
+  --fox-900: #4D1E0A;
+
+  /* ---------- CHAR: warm near-black ---------- */
+  --char-950: #14110E;  /* primary ink / dark surfaces */
+  --char-900: #1E1A16;
+  --char-800: #2A251F;
+  --char-700: #3A332B;
+  --char-600: #524A40;
+
+  /* ---------- SAND: warm neutrals ---------- */
+  --sand-50:  #FAF6F0;  /* paper / page background */
+  --sand-100: #F3ECE2;
+  --sand-200: #E8DDCD;  /* hairline borders on light */
+  --sand-300: #D6C7B2;
+  --sand-400: #B8A488;
+  --sand-500: #8C7A63;  /* muted label text */
+  --sand-600: #6B5D4B;  /* secondary text */
+
+  /* ---------- SEMANTIC (warm-tuned) ---------- */
+  --success: #1F8A5B;
+  --success-bg: #E4F3EC;
+  --warning: #C98A00;
+  --warning-bg: #FBF0D6;
+  --danger:  #CF3A2B;
+  --danger-bg: #FBE6E3;
+  --info:    #2F6FB0;
+  --info-bg: #E4EEF8;
+
+  /* ---------- SEMANTIC ROLES ---------- */
+  --bg:            var(--sand-50);
+  --bg-elevated:   #FFFFFF;
+  --bg-sunken:     var(--sand-100);
+  --bg-inverse:    var(--char-950);
+  --fg:            var(--char-950);   /* primary text */
+  --fg-secondary:  var(--sand-600);   /* supporting text */
+  --fg-muted:      var(--sand-500);   /* labels / meta */
+  --fg-inverse:    var(--sand-50);
+  --accent:        var(--fox-500);
+  --accent-hover:  var(--fox-600);
+  --accent-fg:     #FFFFFF;           /* text on orange */
+  --border:        var(--sand-200);
+  --border-strong: var(--sand-300);
+  --border-inverse:var(--char-800);
+  --ring:          color-mix(in oklch, var(--fox-500) 45%, transparent);
+
+  /* ---------- TYPE FAMILIES ---------- */
+  --font-display: 'Archivo', system-ui, sans-serif;       /* headlines, the "fox" energy */
+  --font-body:    'Hanken Grotesk', system-ui, sans-serif;/* body + UI workhorse */
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace; /* data, metrics, automation */
+  --font-logo:    'Montserrat', system-ui, sans-serif;    /* the FOX CONSULTING wordmark only */
+
+  /* ---------- TYPE SCALE (fluid-ish, px) ---------- */
+  --text-display: 800 64px/1.02 var(--font-display);
+  --text-h1:      800 44px/1.06 var(--font-display);
+  --text-h2:      700 32px/1.12 var(--font-display);
+  --text-h3:      700 24px/1.2  var(--font-display);
+  --text-h4:      600 19px/1.3  var(--font-body);
+  --text-lead:    400 20px/1.5  var(--font-body);
+  --text-body:    400 16px/1.6  var(--font-body);
+  --text-small:   400 14px/1.55 var(--font-body);
+  --text-caption: 500 12px/1.4  var(--font-body);
+  --text-mono:    500 13px/1.5  var(--font-mono);
+  --text-overline:700 12px/1.3  var(--font-mono); /* all-caps eyebrow labels */
+
+  /* letter-spacing helpers */
+  --tracking-tight:   -0.02em;
+  --tracking-display: -0.025em;
+  --tracking-overline: 0.14em;
+
+  /* ---------- SPACING (4px base) ---------- */
+  --space-1: 4px;   --space-2: 8px;   --space-3: 12px;  --space-4: 16px;
+  --space-5: 20px;  --space-6: 24px;  --space-8: 32px;  --space-10: 40px;
+  --space-12: 48px; --space-16: 64px; --space-20: 80px; --space-24: 96px;
+
+  /* ---------- RADIUS ---------- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-2xl: 28px;
+  --radius-pill: 999px;
+
+  /* ---------- SHADOWS (warm-tinted) ---------- */
+  --shadow-xs: 0 1px 2px rgba(20,17,14,.06);
+  --shadow-sm: 0 2px 6px -1px rgba(20,17,14,.09);
+  --shadow-md: 0 6px 18px -6px rgba(20,17,14,.14);
+  --shadow-lg: 0 16px 40px -12px rgba(20,17,14,.18);
+  --shadow-accent: 0 8px 24px -8px rgba(236,94,18,.45); /* glow under orange CTAs */
+  --shadow-inset: inset 0 1px 0 rgba(255,255,255,.5);
+}
+
+/* ============================================================
+   SEMANTIC ELEMENT DEFAULTS — opt in via .fox-prose or use vars
+   ============================================================ */
+.fox-type-display { font: var(--text-display); letter-spacing: var(--tracking-display); color: var(--fg); }
+.fox-type-h1 { font: var(--text-h1); letter-spacing: var(--tracking-display); color: var(--fg); }
+.fox-type-h2 { font: var(--text-h2); letter-spacing: var(--tracking-tight); color: var(--fg); }
+.fox-type-h3 { font: var(--text-h3); letter-spacing: var(--tracking-tight); color: var(--fg); }
+.fox-type-h4 { font: var(--text-h4); color: var(--fg); }
+.fox-type-lead { font: var(--text-lead); color: var(--fg-secondary); }
+.fox-type-body { font: var(--text-body); color: var(--fg); }
+.fox-type-small { font: var(--text-small); color: var(--fg-secondary); }
+.fox-type-mono { font: var(--text-mono); color: var(--fg); }
+.fox-overline {
+  font: var(--text-overline);
+  letter-spacing: var(--tracking-overline);
+  text-transform: uppercase;
+  color: var(--accent);
+}
