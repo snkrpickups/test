@@ -7,6 +7,46 @@
   <meta name="description" content="Your operations teardown request is in. Fox Consulting will reply personally within one business day.">
   <meta name="robots" content="noindex">
 
+  <!-- ============================================================
+       ANALYTICS — keep these IDs identical to index.html.
+       This page fires the LEAD CONVERSION (a real submission landed
+       here). niche is read from the URL for per-variant attribution.
+       ============================================================ -->
+  <script>
+    window.FOX_ANALYTICS = {
+      GA4_ID: "",            // e.g. "G-XXXXXXXXXX"  (same as index.html)
+      META_PIXEL_ID: ""      // e.g. "1234567890123456"  (same as index.html)
+    };
+  </script>
+  <script>
+    (function () {
+      var cfg = window.FOX_ANALYTICS || {};
+      var niche = new URLSearchParams(location.search).get('niche') || 'general';
+      // ---- Google Analytics 4 ----
+      if (cfg.GA4_ID) {
+        var s = document.createElement('script'); s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + cfg.GA4_ID;
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { dataLayer.push(arguments); };
+        gtag('js', new Date());
+        gtag('config', cfg.GA4_ID);
+        gtag('event', 'generate_lead', { niche: niche });
+      }
+      // ---- Meta (Facebook) Pixel ----
+      if (cfg.META_PIXEL_ID) {
+        !function (f, b, e, v, n, t, s) {
+          if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+          if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = [];
+          t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
+        }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', cfg.META_PIXEL_ID);
+        fbq('track', 'PageView');
+        fbq('track', 'Lead', { content_category: niche });
+      }
+    })();
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="colors_and_type.css">
