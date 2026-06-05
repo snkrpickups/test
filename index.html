@@ -378,6 +378,39 @@
     .form-success h3 { color: var(--fg-inverse); font-size: 24px; letter-spacing: var(--tracking-tight); margin-bottom: var(--space-3); }
     .form-success p { color: color-mix(in srgb, var(--sand-50) 72%, transparent); font: var(--text-body); max-width: 34ch; margin: 0 auto; }
 
+    /* ---- case study cards ---- */
+    .case-card { border: 1px solid var(--border-inverse); border-radius: var(--radius-lg); padding: var(--space-10); background: color-mix(in srgb, var(--char-900) 70%, transparent); transition: border-color .2s; }
+    .case-card:hover { border-color: rgba(236,94,18,.4); }
+    .case-industry { font: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; color: var(--fox-400); display: block; margin-bottom: var(--space-8); }
+    .case-fields { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); margin-bottom: var(--space-8); }
+    .case-label { font: 700 11px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .12em; color: var(--fox-400); margin: 0 0 var(--space-3); }
+    .case-value { font: var(--text-body); color: color-mix(in srgb, var(--sand-50) 80%, transparent); margin: 0; line-height: 1.6; }
+    .case-result { border-top: 1px solid var(--border-inverse); padding-top: var(--space-8); margin-top: var(--space-2); }
+    .case-result-num { font: 800 38px/1.1 var(--font-mono); color: var(--fg-inverse); margin: var(--space-3) 0 0; letter-spacing: -.02em; }
+    .case-quote { border-left: 2px solid var(--fox-500); margin: var(--space-8) 0 0; padding-left: var(--space-6); font: var(--text-lead); color: color-mix(in srgb, var(--sand-50) 78%, transparent); font-style: normal; }
+    .case-quote cite { display: block; font: var(--text-mono); color: var(--fox-400); margin-top: var(--space-3); font-style: normal; }
+
+    /* ---- guarantee ---- */
+    .guarantee-banner { background: color-mix(in srgb, var(--fox-50) 55%, transparent); border: 1px solid var(--fox-100); border-radius: var(--radius-lg); padding: var(--space-5) var(--space-6); margin-bottom: var(--space-8); }
+    .guarantee-banner p { font: 600 15px/1.5 var(--font-body); color: var(--fg); margin: 0; }
+    .plan .guarantee-line { color: var(--success); font-weight: 700; }
+    .plan .bonus-li { color: var(--fox-600); }
+    .plan .bonus-li svg { color: var(--fox-500); }
+    .bonus-tag { font: 700 10px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .08em; background: var(--fox-50); color: var(--fox-600); border: 1px solid var(--fox-100); border-radius: var(--radius-pill); padding: 3px 7px; margin-right: 4px; flex: none; }
+
+    /* ---- hero proof strip + scarcity ---- */
+    .hero-proof-strip { font: var(--text-small); color: var(--fg-muted); margin-top: var(--space-4); }
+    .scarcity { font: 600 13px/1.4 var(--font-mono); color: var(--fg-muted); margin-top: var(--space-3); }
+    .scarcity .slots { color: var(--accent); }
+    .contact-scarcity { font: 600 13px/1.4 var(--font-mono); color: color-mix(in srgb, var(--sand-50) 56%, transparent); margin-top: var(--space-5); }
+    .contact-scarcity .slots { color: var(--fox-400); }
+
+    /* ---- optional form fields ---- */
+    .form-optional { margin-top: var(--space-2); border: none; padding: 0; }
+    .form-optional summary { font: 600 13px/1 var(--font-body); color: var(--fox-400); cursor: pointer; padding: var(--space-3) 0; list-style: none; }
+    .form-optional summary::-webkit-details-marker { display: none; }
+    .form-optional-body { display: grid; gap: var(--space-4); padding-top: var(--space-3); }
+
     /* ---- footer ---- */
     footer { background: var(--bg); border-top: 1px solid var(--border); padding: var(--space-12) 0; }
     .foot { display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); flex-wrap: wrap; }
@@ -403,7 +436,7 @@
     /* ---- responsive ---- */
     @media (max-width: 900px) {
       .hero-grid { grid-template-columns: 1fr; gap: var(--space-10); }
-      .cards, .examples, .steps, .plans, .cmd-grid, .cmd-features { grid-template-columns: 1fr; }
+      .cards, .examples, .steps, .plans, .cmd-grid, .cmd-features, .case-fields { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; gap: var(--space-10); }
       .stats-inner { gap: var(--space-2); }
       .stat-item + .stat-item::before { display: none; }
@@ -470,7 +503,8 @@
           <a class="btn btn-primary btn-lg" data-book href="#contact" id="heroCta">Show me where the leak is <span class="arrow">&rarr;</span></a>
           <a class="btn btn-ghost btn-lg" href="#work">See the work</a>
         </div>
-        <p class="hero-note" id="heroNote">We built and ran the full operations stack for a <b>medical clinic franchise</b> — phones, scheduling, billing workflows, reporting. <b>That's the experience behind every teardown we run.</b><br><br><em style="font-style:normal;color:var(--fg-muted);">Free teardown = 90 minutes on-site, written fix plan yours to keep — whether or not we work together.</em></p>
+        <p class="hero-proof-strip" id="heroNote">Built and ran the full operations stack for a medical clinic franchise. That's the experience behind every teardown.</p>
+        <p class="scarcity" id="heroScarcity"></p>
       </div>
 
       <!-- VIDEO PLAYER -->
@@ -548,11 +582,10 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <p class="overline">The work</p>
-        <h2>Three businesses. Three leaks. Here's what closing them looked like.</h2>
-        <p>Same pattern every time: find the busywork, build the system, hand it back running.</p>
+        <h2>We've been in the operation. Here's what we built.</h2>
+        <p>Same pattern every time: find the leak, build the fix, hand it back running.</p>
       </div>
-      <div class="examples" id="exampleCards"></div>
-      <p class="proof-quote reveal">"<span id="proofText"></span>"<span class="by">// Fox Consulting LLC</span></p>
+      <div id="caseGrid"></div>
     </div>
   </section>
 
@@ -603,7 +636,10 @@
       <div class="sec-head reveal">
         <p class="overline">Pricing</p>
         <h2>Pick the leak. Pick the package. Keep what we build.</h2>
-        <p>Flat, local pricing — no retainers, no 12-month commitments, no per-seat bills that grow every time you add staff. You own everything we ship.</p>
+        <p>Flat, local pricing. No retainers, no 12-month commitments, no per-seat bills. You own everything we ship. And you don't pay for a build until it's running.</p>
+      </div>
+      <div class="guarantee-banner reveal">
+        <p>Every build comes with a guarantee. You don't pay until it's running. If it doesn't close the leak, we keep building free until it does.</p>
       </div>
       <div class="plans">
         <article class="plan reveal">
@@ -626,6 +662,9 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Built inside Google Workspace — $0 new software</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Real-time data, readable at a glance</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Team walkthrough + 30 days of tweaks</li>
+            <li class="bonus-li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span><span class="bonus-tag">Bonus</span> Morning Pulse: a one-page daily summary auto-sent to your inbox</span></li>
+            <li class="bonus-li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span><span class="bonus-tag">Bonus</span> 10-minute walkthrough video so your team reads the dashboard from day one</span></li>
+            <li class="guarantee-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Guarantee: you don't pay until it's built, tested, and running in your business.</li>
           </ul>
           <a class="btn btn-ghost" data-book href="#contact">Get a command center <span class="arrow">&rarr;</span></a>
         </article>
@@ -639,6 +678,7 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Wired into your existing tools</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Team training + documentation</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 30 days of fixes included</li>
+            <li class="guarantee-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Guarantee: if it doesn't close the leak, we keep building free until it does.</li>
           </ul>
           <a class="btn btn-primary" data-book href="#contact">Start with the teardown <span class="arrow">&rarr;</span></a>
         </article>
@@ -650,7 +690,8 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Ongoing builds and integrations</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Priority support and monitoring</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Quarterly operations review</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Month to month — cancel anytime</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Month to month, cancel anytime</li>
+            <li class="guarantee-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Guarantee: cancel any month you don't see value. No penalty, no clawback.</li>
           </ul>
           <a class="btn btn-ghost" data-book href="#contact">See if it's a fit <span class="arrow">&rarr;</span></a>
         </article>
@@ -668,38 +709,39 @@
         <a class="deet" href="tel:+13217509608"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>(321) 750-9608</span></a>
         <a class="deet" href="mailto:hello@foxconsulting.co"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><span>hello@foxconsulting.co</span></a>
         <a class="deet" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>Winter Park, Orlando &amp; Brevard County, FL</span></a>
+        <p class="contact-scarcity" id="contactScarcity"></p>
       </div>
 
       <div class="booking">
         <p class="form-kicker" id="formKicker">Where's your operation leaking time?</p>
         <p class="form-sub" id="formSub">30 seconds. No sales pitch — we read every one and reply personally within one business day.</p>
         <form id="leadForm" novalidate>
-          <!-- field order: name → time sink → email → business → phone -->
           <div class="field">
-            <label for="name">Your name <span class="req">*</span></label>
-            <input id="name" name="name" type="text" autocomplete="name" placeholder="First and last" required>
+            <label for="timesink">What's the one task eating the most time in your week? <span class="req">*</span></label>
+            <textarea id="timesink" name="timesink" rows="3" placeholder="The task that keeps eating your week" required></textarea>
           </div>
           <div class="field">
-            <label for="headache" id="headacheLabel">Biggest time sink in your week <span class="req">*</span></label>
-            <textarea id="headache" name="headache" rows="3" placeholder="The task that keeps eating your week" required></textarea>
+            <label for="contact">Best email or phone to send your fix plan <span class="req">*</span></label>
+            <input id="contact" name="contact" type="text" autocomplete="email" placeholder="email@yourbusiness.com or (321) 555-0123" required>
           </div>
-          <div class="field">
-            <label for="email">Email <span class="req">*</span></label>
-            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@yourbusiness.com" required>
-          </div>
-          <div class="field">
-            <label for="business" id="businessLabel">Business <span class="req">*</span></label>
-            <input id="business" name="business" type="text" autocomplete="organization" placeholder="What you run" required>
-          </div>
-          <div class="field">
-            <label for="phone">Phone <span class="hint">— if you'd rather just talk (totally optional)</span></label>
-            <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="(321) 555-0123">
-          </div>
+          <details class="form-optional">
+            <summary>Add your name and business (optional)</summary>
+            <div class="form-optional-body">
+              <div class="field">
+                <label for="name">Your name</label>
+                <input id="name" name="name" type="text" autocomplete="name" placeholder="First and last">
+              </div>
+              <div class="field">
+                <label for="business">Business</label>
+                <input id="business" name="business" type="text" autocomplete="organization" placeholder="What you run">
+              </div>
+            </div>
+          </details>
           <input type="hidden" name="niche" id="nicheField" value="general">
           <input type="hidden" name="_utms" id="utmField" value="">
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
           <button class="btn btn-primary btn-lg" type="submit" id="leadSubmit">Show me where the leak is <span class="arrow">&rarr;</span></button>
-          <p class="form-reassure">Local to Winter Park, Orlando &amp; Brevard County. No sales call unless you ask for one. We don't share your info.</p>
+          <p class="form-reassure">30 seconds. No sales call unless you ask for one. We read every one ourselves and reply within one business day. We don't share your info.</p>
         </form>
         <div class="form-success" id="formSuccess" role="status" aria-live="polite">
           <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
@@ -731,6 +773,29 @@
        ============================================================ */
     var FORMSPREE_ID = "xeewoyqw";
 
+    /* ============================================================
+       CASE STUDIES — fill in result and quote as you close clients.
+       Leave result/quote as "" to hide those elements entirely.
+       ============================================================ */
+    var CASES = [
+      {
+        industry: "Medical clinic franchise, multi-location",
+        leak: "Phones, scheduling, billing, and reporting all run by hand across locations. Every number lived in a separate system nobody had time to check.",
+        build: "We built and ran the full operations stack from phone coverage and scheduling to a live multi-location reporting dashboard pulling from every system at once.",
+        result: "", // e.g. "11 hrs/week of manual admin eliminated across every location"
+        quote: "",  // e.g. "We finally know what's happening at every location before 9am."
+        quoteName: "" // e.g. "Maria, Practice Director"
+      }
+    ];
+
+    /* ============================================================
+       SCARCITY — update N and Month each month. No auto-countdown.
+       ============================================================ */
+    var SCARCITY = {
+      n: "4",          // slots remaining this month
+      month: "July"    // current month name
+    };
+
     var ICONS = {
       phone: '<path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/>',
       flow:  '<path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/>',
@@ -755,10 +820,10 @@
         title: "Fox Consulting — AI-enabled operations for local businesses",
         meta: "Fox Consulting finds where your operation leaks time and money, then builds the AI systems that stop it. Local to Winter Park, Orlando, and Brevard County, FL.",
         overline: "LOCAL AI OPERATIONS &middot; WINTER PARK &middot; ORLANDO &middot; BREVARD",
-        h1: 'We find where your operation <span class="ink">leaks time and money</span> — then build the AI systems that stop it.',
-        lead: "You didn't start your business to do data entry at 9pm. We diagnose the busywork draining your week and build the assistants, pipelines, and dashboards that handle it without you.",
+        h1: 'We find the busywork stealing <span class="ink">10+ hours a week</span> from your business, then build the AI system that does it for you, for good.',
+        lead: "You didn't start your business to do data entry at 9pm. We diagnose the busywork draining your week and build the assistants, pipelines, and dashboards that handle it without you. That's up to 13 weeks of your year back.",
         cta: 'Show me where the leak is <span class="arrow">&rarr;</span>',
-        note: 'We built and ran the full operations stack for a <b>medical clinic franchise</b> — phones, scheduling, billing workflows, reporting. That\'s the experience behind every teardown we run.<br><br><em style="font-style:normal;color:var(--fg-muted);">Free teardown = 90 minutes on-site, written fix plan yours to keep — whether or not we work together.</em>',
+        note: 'Built and ran the full operations stack for a medical clinic franchise. That\'s the experience behind every teardown.',
         stats: [
           { num:"11", u:"hrs", lab:"manual invoicing cut from the week" },
           { num:"24", u:"/7", lab:"phone coverage that books jobs and follows up" },
@@ -791,9 +856,12 @@
         successMsg: "Thanks. We read every submission and reply personally within one business day with where we'd look first.",
         faqH2: "The questions every owner asks before booking.",
         faq: [
-          { q: "Is this going to be some software I have to manage?", a: "No. We don't sell subscriptions or licenses. We build systems that run on tools you already own — your scheduler, your CRM, your phone provider. When we're done, your team runs it. We're not a vendor you depend on forever." },
-          { q: "I've tried AI tools before and my team didn't use them.", a: "That's the most common thing we hear — and it's usually because the tool was built for a generic business, not yours. We build to your specific workflow, train your team on it, and don't hand it off until it's actually running. The written fix plan from the teardown is yours regardless." },
-          { q: "How do I know this is worth $4,500?", a: "The teardown is free, and the written fix plan is yours to keep whether you hire us or not. Most clients find that a single recovered hour per week or one extra booked job per month more than covers a project at this price. We don't ask you to take that on faith — you'll see the math in the teardown itself." }
+          { q: "I've been burned by agencies before. How is this different?", a: "Fair. Three differences: you don't pay for a build until it's running, you own everything we ship (no lock-in), and we're local and accountable. If it doesn't close the leak, we keep working until it does." },
+          { q: "Do I have to buy new software?", a: "No. We build inside the Google Workspace you already pay for. No new vendor, no new password, no subscription to forget to cancel." },
+          { q: "What if my team won't use it?", a: "We build it where your team already logs in every morning, and we train them on it. If it doesn't get used, it doesn't count as done." },
+          { q: "How long does it take?", a: "Most single systems are live in about two weeks. The teardown itself is 90 minutes, and you leave with the written fix plan that day." },
+          { q: "What does it actually cost?", a: "Flat project pricing, no retainers. Command Center is $3,500, a Single System is $4,500, ongoing partnership is $3,200/month. See pricing below." },
+          { q: "What happens after you build it?", a: "It's documented and runs without us. Your team owns it. We only stay on if you want the next leak fixed too." }
         ],
         cmdCenter: {
           lead: "We connect your scheduling tool, payment processor, and spreadsheets into a single dashboard your whole team reads every morning. Built inside Google Workspace — no new software, no new monthly bill, no login nobody uses.",
@@ -811,9 +879,9 @@
         meta: "Every missed call is a booked job gone to a competitor. Fox builds the AI phone, dispatch, and invoicing systems that stop the leak. Free teardown.",
         overline: "FOR HVAC, PLUMBING &amp; ROOFING SHOPS &middot; ORLANDO &middot; BREVARD",
         h1: 'That call you just missed? Your competitor picked it up. We build the AI that <span class="ink">answers it, books it, and sends the invoice.</span>',
-        lead: "You're under a truck or up on a roof while the phone rings out to voicemail — and that caller already dialed the next company on the list. We install an AI front desk that answers every call, books the slot, and handles the paperwork.",
+        lead: "You're under a truck or up on a roof while the phone rings out to voicemail, and that caller already dialed the next company on the list. We build the AI front desk that answers every call, books the slot, and handles the paperwork. That's jobs back in your week, for good.",
         cta: 'Find my missed-call leak <span class="arrow">&rarr;</span>',
-        note: 'We built the full operations stack for a <b>real multi-location business</b> before we sold a day of it — phones, dispatch, billing, reporting. That\'s the experience behind every fix plan.<br><br><em style="font-style:normal;color:var(--fg-muted);">Free teardown = 90 min on-site, ranked list of where you\'re losing jobs. Yours to keep no matter what.</em>',
+        note: 'Built and ran the full operations stack for a real multi-location business. That\'s the experience behind every fix plan.',
         stats: [
           { num:"27", u:"%", lab:"of inbound calls go unanswered at a busy trades shop — each one a job at risk" },
           { num:"9",  u:"hrs", lab:"of dispatch, quoting, and invoicing off the owner's week" },
@@ -842,13 +910,16 @@
         bizWord: "Business", bizPlaceholder: "HVAC, plumbing, roofing, etc.",
         headacheLabel: "What's costing you the most jobs?",
         headachePlaceholder: "Missed calls, dispatch chaos, slow invoicing...",
-        submit: 'Find my missed-call leak <span class="arrow">&rarr;</span>',
+        submit: 'Show me where the leak is <span class="arrow">&rarr;</span>',
         successMsg: "Thanks. We read every submission and reply personally within one business day with where you're losing the most jobs.",
-        faqH2: "What trades owners ask before booking the teardown.",
+        faqH2: "The questions every owner asks before booking.",
         faq: [
-          { q: "My guys won't use another app. I've been down that road.", a: "Nothing your crew touches changes. The AI front desk answers calls and routes jobs to your existing scheduler. The dashboard reads from tools you already run. We build around your workflow, not against it — and we don't hand it off until your team is actually using it." },
-          { q: "I already run ServiceTitan / Housecall Pro / Jobber. Does this replace it?", a: "No. We wire into it. A booked call shows up in your dispatch board automatically. Your invoicing, job costing, and reporting pull from the same system. We add the layer that closes the leaks your platform doesn't cover — primarily the after-hours calls it can't answer and the paperwork it doesn't automate." },
-          { q: "What does this actually cost, total — including the AI tools?", a: "The $4,500 project price covers the build, integration, and training. The AI and automation tools we wire in typically run $50–$150/month in platform costs — which you own, not us. Most clients recover that in the first week from reduced missed calls alone. We'll show you the math in the teardown." }
+          { q: "I've been burned by agencies before. How is this different?", a: "Fair. Three differences: you don't pay for a build until it's running, you own everything we ship (no lock-in), and we're local and accountable. If it doesn't close the leak, we keep working until it does." },
+          { q: "Do I have to buy new software?", a: "No. We build inside the Google Workspace you already pay for. No new vendor, no new password, no subscription to forget to cancel." },
+          { q: "What if my team won't use it?", a: "We build it where your team already logs in every morning, and we train them on it. If it doesn't get used, it doesn't count as done." },
+          { q: "How long does it take?", a: "Most single systems are live in about two weeks. The teardown itself is 90 minutes, and you leave with the written fix plan that day." },
+          { q: "What does it actually cost?", a: "Flat project pricing, no retainers. Command Center is $3,500, a Single System is $4,500, ongoing partnership is $3,200/month. See pricing below." },
+          { q: "What happens after you build it?", a: "It's documented and runs without us. Your team owns it. We only stay on if you want the next leak fixed too." }
         ],
         cmdCenter: {
           lead: "We connect your field service platform, payment system, and job tracking into a single screen every dispatcher and owner reads every morning. Built inside Google Workspace — nothing new to buy, nothing new to log into.",
@@ -866,9 +937,9 @@
         meta: "We find where your practice loses chair time — unbooked slots, no-shows, phone overload — then build the AI systems that stop it. Free teardown, Winter Park FL.",
         overline: "FOR DENTAL &amp; MEDICAL PRACTICES &middot; WINTER PARK &middot; ORLANDO &middot; BREVARD",
         h1: 'Every call that hits voicemail is a chair that stays empty. We build the AI systems that <span class="ink">answer the phones, fill the schedule, and chase the no-shows.</span>',
-        lead: "Your front desk can't pick up every line, work the recall list, and run insurance at the same time — so calls go to voicemail and slots go empty. We build the AI phone, reminder, and reactivation systems wired into the tools you already use.",
+        lead: "Your front desk can't pick up every line, work the recall list, and run insurance at the same time, so calls go to voicemail and slots go empty. We build the AI phone, reminder, and reactivation systems wired into the tools you already use. That's fewer empty chairs and less overtime, every week.",
         cta: 'Find where my chairs go empty <span class="arrow">&rarr;</span>',
-        note: 'We built the full operations stack for a <b>medical clinic franchise</b> — phones, scheduling, billing workflows, multi-location reporting. That\'s not a case study. That\'s what we built.<br><br><em style="font-style:normal;color:var(--fg-muted);">Free teardown = 90 min on-site, written fix plan yours to keep. We stay on the scheduling and communications layer — not clinical records.</em>',
+        note: 'Built and ran the full operations stack for a medical clinic franchise. That\'s not a case study. That\'s what we built.',
         stats: [
           { num:"31", u:"%", lab:"fewer no-shows after automated multi-touch reminders" },
           { num:"14", u:"hrs/wk", lab:"of front-desk phone and follow-up time handed back" },
@@ -897,13 +968,16 @@
         bizWord: "Practice", bizPlaceholder: "Dental, medical, specialty, etc.",
         headacheLabel: "Where's the front desk falling behind?",
         headachePlaceholder: "No-shows, phones ringing out, recall backlog...",
-        submit: 'Find where my chairs go empty <span class="arrow">&rarr;</span>',
+        submit: 'Show me where the leak is <span class="arrow">&rarr;</span>',
         successMsg: "Thanks. We read every submission and reply personally within one business day with where your front desk is losing the most time.",
-        faqH2: "What practice owners ask before booking.",
+        faqH2: "The questions every owner asks before booking.",
         faq: [
-          { q: "What about patient privacy? Will this touch clinical records or PHI?", a: "No — and that's not a hedge. We work exclusively at the scheduling and communications layer: phone, appointment booking, reminders, recall outreach, and billing workflow routing. We do not connect to, transmit, or store clinical records, diagnostic data, or PHI. Your EHR stays where it is. If your compliance team wants to review what we build before it goes live, we welcome that." },
-          { q: "My front desk is the personal touch. I don't want patients talking to a robot.", a: "The AI takes the overflow — the third line ringing during a root canal, the 7pm callback nobody could return, the no-show text nobody had time to send. Your team handles the people in the chair. The system handles the calls and follow-ups they were already missing. Your patients get a faster response, not a worse one." },
-          { q: "We already use a PMS and a reminder add-on. Why isn't that enough?", a: "Those tools store data — they don't work your recall list, answer your overflow calls, or route your intake. We wire what you already run into one system that actually picks up, books, and follows up instead of waiting for your front desk to have a free minute. Usually we're adding capability your current stack doesn't have, not replacing it." }
+          { q: "I've been burned by agencies before. How is this different?", a: "Fair. Three differences: you don't pay for a build until it's running, you own everything we ship (no lock-in), and we're local and accountable. If it doesn't close the leak, we keep working until it does." },
+          { q: "Do I have to buy new software?", a: "No. We build inside the Google Workspace you already pay for. No new vendor, no new password, no subscription to forget to cancel." },
+          { q: "What if my team won't use it?", a: "We build it where your team already logs in every morning, and we train them on it. If it doesn't get used, it doesn't count as done." },
+          { q: "How long does it take?", a: "Most single systems are live in about two weeks. The teardown itself is 90 minutes, and you leave with the written fix plan that day." },
+          { q: "What does it actually cost?", a: "Flat project pricing, no retainers. Command Center is $3,500, a Single System is $4,500, ongoing partnership is $3,200/month. See pricing below." },
+          { q: "What happens after you build it?", a: "It's documented and runs without us. Your team owns it. We only stay on if you want the next leak fixed too." }
         ],
         cmdCenter: {
           lead: "We connect your practice management system, billing platform, and tracking sheets into a single screen your front desk and office manager read every morning. Built inside Google Workspace — no new software, no new login, no new monthly bill.",
@@ -1003,12 +1077,33 @@
       }).join(''));
     }
 
-    // form labels/copy
+    // case studies
+    (function () {
+      var ck = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;color:var(--success);flex:none;margin-top:1px"><polyline points="20 6 9 17 4 12"/></svg>';
+      var html = CASES.map(function(c) {
+        var result = c.result ? '<div class="case-result reveal"><p class="case-label">The result</p><p class="case-result-num">' + c.result + '</p></div>' : '';
+        var quote = (c.quote && c.quoteName) ? '<blockquote class="case-quote reveal">' + ck + ' "' + c.quote + '"<cite>' + c.quoteName + '</cite></blockquote>' : '';
+        return '<article class="case-card reveal">' +
+          '<span class="case-industry">' + c.industry + '</span>' +
+          '<div class="case-fields">' +
+            '<div><p class="case-label">The leak</p><p class="case-value">' + c.leak + '</p></div>' +
+            '<div><p class="case-label">The build</p><p class="case-value">' + c.build + '</p></div>' +
+          '</div>' +
+          result + quote +
+          '</article>';
+      }).join('');
+      set('caseGrid', html);
+    })();
+
+    // scarcity lines
+    (function () {
+      var txt = 'I run every teardown myself, so I take four per month. <span class="slots">' + SCARCITY.n + ' slots left</span> for ' + SCARCITY.month + '.';
+      set('heroScarcity', txt);
+      set('contactScarcity', txt);
+    })();
+
+    // form copy
     set('formKicker', d.formKicker);
-    set('businessLabel', d.bizWord + ' <span class="req">*</span>');
-    var bizInput = document.getElementById('business'); if (bizInput) bizInput.placeholder = d.bizPlaceholder;
-    set('headacheLabel', d.headacheLabel + ' <span class="req">*</span>');
-    var headInput = document.getElementById('headache'); if (headInput) headInput.placeholder = d.headachePlaceholder;
     set('leadSubmit', d.submit);
     set('successMsg', d.successMsg);
     var nf = document.getElementById('nicheField'); if (nf) nf.value = current;
@@ -1069,7 +1164,7 @@
       if (e) e.preventDefault();
       var sec = document.getElementById('contact');
       if (sec) sec.scrollIntoView({ behavior:'smooth', block:'start' });
-      var first = document.getElementById('name');
+      var first = document.getElementById('timesink');
       if (first) setTimeout(function () { first.focus({ preventScroll:true }); }, 500);
     }
     document.querySelectorAll('[data-book]').forEach(function(b) { b.addEventListener('click', scrollToForm); });
@@ -1115,11 +1210,11 @@
         e.preventDefault();
         if (form.querySelector('[name="_gotcha"]').value) { showSuccess(); return; }
         var ok = true;
-        ['name','headache','email','business'].forEach(function(id) {
+        ['timesink','contact'].forEach(function(id) {
           var f = document.getElementById(id);
-          if (f && !f.checkValidity()) { f.classList.add('invalid'); ok = false; } else if (f) { f.classList.remove('invalid'); }
+          if (f && !f.value.trim()) { f.classList.add('invalid'); ok = false; } else if (f) { f.classList.remove('invalid'); }
         });
-        if (!ok) { form.reportValidity(); return; }
+        if (!ok) { var inv = form.querySelector('.invalid'); if (inv) inv.focus(); return; }
         var saved = btn ? btn.innerHTML : '';
         if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
         if (!FORMSPREE_ID) { setTimeout(showSuccess, 500); return; }
