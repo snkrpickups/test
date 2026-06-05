@@ -14,10 +14,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="colors_and_type.css">
 
-  <!-- Calendly (booking CTA). Swap CAL_URL in the script below for your real link. -->
-  <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
-  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -146,10 +142,31 @@
     .contact .deet { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4); color: var(--fg-inverse); text-decoration: none; }
     .contact .deet svg { width: 20px; height: 20px; color: var(--fox-400); flex: none; }
     .contact .deet:hover span { text-decoration: underline; }
-    .booking { background: var(--char-900); border: 1px solid var(--border-inverse); border-radius: var(--radius-xl); padding: var(--space-6); min-height: 620px; }
-    .calendly-inline-widget { min-width: 280px; height: 600px; }
-    .booking-fallback { display: grid; gap: var(--space-4); padding: var(--space-4); text-align: center; }
-    .booking-fallback p { color: color-mix(in srgb, var(--sand-50) 72%, transparent); font: var(--text-body); }
+    .booking { background: var(--char-900); border: 1px solid var(--border-inverse); border-radius: var(--radius-xl); padding: var(--space-8); }
+    .booking .form-kicker { font: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; color: var(--fox-400); margin-bottom: var(--space-2); }
+    .booking .form-sub { font: var(--text-small); color: color-mix(in srgb, var(--sand-50) 68%, transparent); margin-bottom: var(--space-6); }
+    form#leadForm { display: grid; gap: var(--space-4); }
+    .field { display: grid; gap: var(--space-2); }
+    .field label { font: 600 13px/1 var(--font-body); color: var(--sand-300); }
+    .field label .req { color: var(--fox-400); }
+    .field .hint { font: var(--text-caption); color: var(--sand-500); }
+    .field input, .field textarea {
+      font: var(--text-body); color: var(--fg-inverse);
+      background: var(--char-950); border: 1px solid var(--border-inverse);
+      border-radius: var(--radius-md); padding: 13px var(--space-4); width: 100%;
+      transition: border-color .15s ease;
+    }
+    .field input::placeholder, .field textarea::placeholder { color: var(--sand-500); }
+    .field input:focus, .field textarea:focus { border-color: var(--accent); outline: none; }
+    .field input.invalid, .field textarea.invalid { border-color: var(--danger); }
+    #leadForm .btn { width: 100%; justify-content: center; margin-top: var(--space-2); }
+    .form-reassure { font: var(--text-caption); color: var(--sand-500); text-align: center; margin-top: var(--space-1); }
+    .form-success { display: none; text-align: center; padding: var(--space-10) var(--space-4); }
+    .form-success.show { display: block; }
+    .form-success .check { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; margin: 0 auto var(--space-5); background: color-mix(in srgb, var(--success) 22%, transparent); color: #7BD6A8; }
+    .form-success .check svg { width: 28px; height: 28px; }
+    .form-success h3 { color: var(--fg-inverse); font-size: 24px; letter-spacing: var(--tracking-tight); margin-bottom: var(--space-3); }
+    .form-success p { color: color-mix(in srgb, var(--sand-50) 72%, transparent); font: var(--text-body); max-width: 34ch; margin: 0 auto; }
 
     footer { background: var(--bg); border-top: 1px solid var(--border); padding: var(--space-12) 0; }
     .foot { display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); flex-wrap: wrap; }
@@ -323,10 +340,40 @@
         <a class="deet" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>Winter Park, Orlando &amp; Brevard County, FL</span></a>
       </div>
       <div class="booking">
-        <div class="calendly-inline-widget" data-calendly-embed style="height:600px;"></div>
-        <div class="booking-fallback" id="bookingFallback" hidden>
-          <p>Pick a time that works and we'll run your free operations teardown.</p>
-          <a class="btn btn-primary btn-lg" data-book href="#" style="justify-self:center;">Book my teardown <span class="arrow">&rarr;</span></a>
+        <p class="form-kicker" id="formKicker">Tell us where the time goes</p>
+        <p class="form-sub" id="formSub">Takes 30 seconds. No sales pitch — we read every one and reply personally within one business day.</p>
+        <form id="leadForm" novalidate>
+          <div class="field">
+            <label for="name">Your name <span class="req">*</span></label>
+            <input id="name" name="name" type="text" autocomplete="name" placeholder="First and last" required>
+          </div>
+          <div class="field">
+            <label for="business" id="businessLabel">Business <span class="req">*</span></label>
+            <input id="business" name="business" type="text" autocomplete="organization" placeholder="What you run" required>
+          </div>
+          <div class="field">
+            <label for="email">Email <span class="req">*</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@yourbusiness.com" required>
+          </div>
+          <div class="field">
+            <label for="phone">Phone <span class="hint">(optional)</span></label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="(407) 555-0123">
+          </div>
+          <div class="field">
+            <label for="headache" id="headacheLabel">Biggest time sink in your week <span class="req">*</span></label>
+            <textarea id="headache" name="headache" rows="3" placeholder="The task that keeps eating your week" required></textarea>
+          </div>
+          <input type="hidden" name="niche" id="nicheField" value="general">
+          <input type="hidden" name="source" id="sourceField" value="">
+          <!-- honeypot: bots fill this, humans don't -->
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+          <button class="btn btn-primary btn-lg" type="submit" id="leadSubmit"></button>
+          <p class="form-reassure">Local to Winter Park, Orlando &amp; Brevard County. We don't share your info.</p>
+        </form>
+        <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h3>Got it — we'll be in touch.</h3>
+          <p id="successMsg">Thanks. We read every submission and reply personally within one business day.</p>
         </div>
       </div>
     </div>
@@ -342,10 +389,13 @@
 
   <script>
     /* ============================================================
-       CONFIG — swap CAL_URL for your real Calendly link.
+       CONFIG — paste your Formspree form ID below (the part after
+       /f/ in your endpoint). Get one free at formspree.io.
+       Until it's set, the form runs in DEMO mode: it validates and
+       shows the success state but does NOT send anywhere.
        Niche variants render from NICHE below, chosen by ?niche=.
        ============================================================ */
-    var CAL_URL = "https://calendly.com/foxconsulting/operations-teardown";
+    var FORMSPREE_ID = "";  // e.g. "xayzbqrt"  ->  https://formspree.io/f/xayzbqrt
 
     var ICONS = {
       phone: '<path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/>',
@@ -394,9 +444,16 @@
           { k:"Retail & hospitality", big:"5→1", u:"", h:"Five tools, one dashboard", p:"POS, scheduling, and accounting piped into a single live view. The morning numbers meeting went from an hour to five minutes." }
         ],
         proof: "Built and ran the full tech stack for a real multi-location business. Now we do it for yours.",
-        ctaOverline: "BOOK A FREE OPERATIONS TEARDOWN",
+        ctaOverline: "TELL US WHERE THE TIME GOES",
         ctaH2: "Stop losing hours. Let's find the leak.",
-        ctaLead: "Tell us a little about your operation. Pick a time below and we'll run your teardown — on-site, local, and free."
+        ctaLead: "Tell us a little about your operation and the one task eating your week. We'll come back within one business day with where we'd look first.",
+        formKicker: "Where's your operation leaking time?",
+        bizWord: "Business",
+        bizPlaceholder: "What you run",
+        headacheLabel: "Biggest time sink in your week",
+        headachePlaceholder: "The task that keeps eating your week",
+        submit: 'Send it over <span class="arrow">&rarr;</span>',
+        successMsg: "Thanks. We read every submission and reply personally within one business day with where we'd look first."
       },
 
       "home-services": {
@@ -429,9 +486,16 @@
           { k:"Roofing & exteriors", big:"9", u:"hrs/wk", h:"The owner got his nights back", p:"Quoting, invoicing, and review requests now run themselves off closed jobs. Nine hours a week of after-dinner admin came off the owner's plate." }
         ],
         proof: "We built and ran the phones, dispatch, and invoicing for a real multi-truck operation before we sold a day of it — so we fix your week the way an operator would, not the way a software rep would.",
-        ctaOverline: "BOOK A FREE OPERATIONS TEARDOWN",
+        ctaOverline: "FIND THE JOBS YOUR PHONE IS LEAKING",
         ctaH2: "Find out exactly how many jobs your phone is leaking.",
-        ctaLead: "Tell us how your calls, dispatch, and invoicing run today. Pick a time below for an on-site teardown that ranks where your operation is bleeding work — yours to keep whether or not we build it."
+        ctaLead: "Tell us how your calls, dispatch, and invoicing run today. We'll come back within one business day with where your operation is bleeding work.",
+        formKicker: "How many jobs is your phone leaking?",
+        bizWord: "Business",
+        bizPlaceholder: "HVAC, plumbing, roofing, etc.",
+        headacheLabel: "What's costing you the most jobs?",
+        headachePlaceholder: "Missed calls, dispatch chaos, slow invoicing...",
+        submit: 'Send it over <span class="arrow">&rarr;</span>',
+        successMsg: "Thanks. We read every submission and reply personally within one business day with where you're losing the most jobs."
       },
 
       "medical": {
@@ -464,9 +528,16 @@
           { k:"Specialty practice", big:"9", u:"hrs/wk", h:"Recall list that works itself", p:"Automated recall and reactivation outreach pulled overdue patients back without the front desk hunting the schedule. Hygiene columns filled back up." }
         ],
         proof: "Built and ran the full operations stack for a real multi-location business — phones, scheduling, reporting, the works. Now we do it for your practice.",
-        ctaOverline: "BOOK A FREE OPERATIONS TEARDOWN",
+        ctaOverline: "FIND THE CHAIR TIME YOU'RE LOSING",
         ctaH2: "Stop losing chair time to a phone nobody can answer.",
-        ctaLead: "Tell us where your week goes — the calls, the no-shows, the recall list. Pick a time below and we'll set up your teardown, on-site, local, and free."
+        ctaLead: "Tell us where your week goes — the calls, the no-shows, the recall list. We'll come back within one business day with where we'd look first.",
+        formKicker: "Where's your front desk losing chair time?",
+        bizWord: "Practice",
+        bizPlaceholder: "Dental, medical, specialty, etc.",
+        headacheLabel: "Where's the front desk falling behind?",
+        headachePlaceholder: "No-shows, phones ringing out, recall list...",
+        submit: 'Send it over <span class="arrow">&rarr;</span>',
+        successMsg: "Thanks. We read every submission and reply personally within one business day with where your front desk is losing the most time."
       }
     };
 
@@ -513,33 +584,83 @@
     set('ctaH2', d.ctaH2);
     set('ctaLead', d.ctaLead);
 
+    /* ---------- form copy (niche-aware) ---------- */
+    set('formKicker', d.formKicker);
+    set('businessLabel', d.bizWord + ' <span class="req">*</span>');
+    var bizInput = document.getElementById('business'); if (bizInput) bizInput.placeholder = d.bizPlaceholder;
+    set('headacheLabel', d.headacheLabel + ' <span class="req">*</span>');
+    var headInput = document.getElementById('headache'); if (headInput) headInput.placeholder = d.headachePlaceholder;
+    set('leadSubmit', d.submit);
+    set('successMsg', d.successMsg);
+    var nf = document.getElementById('nicheField'); if (nf) nf.value = current;
+    var sf = document.getElementById('sourceField'); if (sf) sf.value = location.href;
+
     /* ---------- niche switcher active state (preserve hash) ---------- */
     document.querySelectorAll('.switch a[data-niche]').forEach(function (a) {
       if (a.getAttribute('data-niche') === current) a.setAttribute('aria-current', 'true');
     });
 
-    /* ---------- Calendly booking ---------- */
-    var calFull = CAL_URL + (CAL_URL.indexOf('?') > -1 ? '&' : '?') + 'utm_source=landing&utm_campaign=' + current;
-    function openCalendly(e) {
+    /* ---------- CTA buttons scroll to the form and focus it ---------- */
+    function scrollToForm(e) {
       if (e) e.preventDefault();
-      if (window.Calendly && Calendly.initPopupWidget) { Calendly.initPopupWidget({ url: calFull }); }
-      else { window.open(calFull, '_blank', 'noopener'); }
+      var sec = document.getElementById('contact');
+      if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var first = document.getElementById('name');
+      if (first) setTimeout(function () { first.focus({ preventScroll: true }); }, 500);
       return false;
     }
-    document.querySelectorAll('[data-book]').forEach(function (b) { b.addEventListener('click', openCalendly); });
+    document.querySelectorAll('[data-book]').forEach(function (b) { b.addEventListener('click', scrollToForm); });
 
-    function initInlineCalendly() {
-      var holder = document.querySelector('[data-calendly-embed]');
-      if (!holder) return;
-      if (window.Calendly && Calendly.initInlineWidget) {
-        Calendly.initInlineWidget({ url: calFull, parentElement: holder });
-      } else {
-        holder.style.display = 'none';
-        var fb = document.getElementById('bookingFallback'); if (fb) fb.hidden = false;
+    /* ---------- lead form: validate + submit to Formspree ---------- */
+    (function () {
+      var form = document.getElementById('leadForm');
+      if (!form) return;
+      var btn = document.getElementById('leadSubmit');
+      var btnHTML = btn ? btn.innerHTML : '';
+
+      function showSuccess() {
+        form.style.display = 'none';
+        var ok = document.getElementById('formSuccess');
+        if (ok) ok.classList.add('show');
       }
-    }
-    if (document.readyState === 'complete') initInlineCalendly();
-    else window.addEventListener('load', function () { setTimeout(initInlineCalendly, 400); });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        // honeypot: silently drop bots
+        if (form.querySelector('[name="_gotcha"]').value) { showSuccess(); return; }
+
+        // native validation
+        var ok = true;
+        ['name', 'business', 'email', 'headache'].forEach(function (id) {
+          var f = document.getElementById(id);
+          if (!f.checkValidity()) { f.classList.add('invalid'); ok = false; } else { f.classList.remove('invalid'); }
+        });
+        if (!ok) { form.reportValidity(); return; }
+
+        if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
+
+        // DEMO mode if no Formspree ID set yet
+        if (!FORMSPREE_ID) {
+          setTimeout(showSuccess, 500);
+          return;
+        }
+
+        fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        }).then(function (r) {
+          if (r.ok) { showSuccess(); }
+          else { throw new Error('bad response'); }
+        }).catch(function () {
+          if (btn) { btn.disabled = false; btn.innerHTML = btnHTML; }
+          alert("Something went wrong sending that. Email us directly at hello@foxconsulting.co and we'll jump on it.");
+        });
+      });
+
+      // clear invalid state as the user fixes fields
+      form.addEventListener('input', function (e) { if (e.target.classList) e.target.classList.remove('invalid'); });
+    })();
 
     /* ---------- mobile nav ---------- */
     (function () {
