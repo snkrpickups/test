@@ -42,15 +42,6 @@
     })();
   </script>
 
-  <!-- ============================================================
-       VIDEO — paste your Loom or YouTube embed URL to activate.
-       Loom:    https://www.loom.com/embed/YOUR_ID
-       YouTube: https://www.youtube.com/embed/YOUR_ID
-       ============================================================ -->
-  <script>
-    window.FOX_VIDEO_URL = ""; // e.g. "https://www.loom.com/embed/abc123"
-  </script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="colors_and_type.css">
@@ -132,85 +123,18 @@
               mask-image: radial-gradient(ellipse 80% 70% at 70% 30%, #000 20%, transparent 70%);
       pointer-events:none;
     }
-    /* warm orange glow orb behind the video */
-    .hero::after {
-      content:""; position:absolute; right:-80px; top:-40px; z-index:0;
-      width: 520px; height: 520px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(236,94,18,.13) 0%, transparent 68%);
-      pointer-events:none;
-    }
-    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.1fr .9fr; gap: var(--space-14); align-items: center; }
+    /* canvas particle background */
+    #hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+    .hero > *:not(#hero-bg) { position: relative; z-index: 1; }
+    @media (prefers-reduced-motion: reduce) { #hero-bg { opacity: 0.4; } }
+
+    .hero-grid { position: relative; z-index: 1; max-width: 680px; }
     .hero h1 { font-weight: 900; font-size: clamp(36px, 5.2vw, 60px); line-height: 1.03; letter-spacing: var(--tracking-display); margin: var(--space-5) 0; }
     .hero h1 .ink { color: var(--accent); }
     .hero .lead { font: var(--text-lead); color: var(--fg-secondary); max-width: 44ch; margin-bottom: var(--space-8); }
     .hero-cta { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; }
     .hero-note { font: var(--text-small); color: var(--fg-muted); margin-top: var(--space-5); line-height: 1.55; }
     .hero-note b { color: var(--fg); font-weight: 600; }
-
-    /* ---- video player ---- */
-    .video-wrap {
-      position: relative; border-radius: var(--radius-xl);
-      background: var(--char-900); border: 1px solid var(--border-inverse);
-      overflow: hidden; cursor: pointer;
-      box-shadow: var(--shadow-lg), 0 0 0 1px rgba(236,94,18,.12);
-      transition: transform .2s cubic-bezier(.2,.8,.2,1), box-shadow .2s;
-      aspect-ratio: 16/10;
-    }
-    .video-wrap:hover { transform: translate(2px,-3px); box-shadow: var(--shadow-lg), 0 0 0 1px rgba(236,94,18,.28), 0 24px 48px -16px rgba(20,17,14,.3); }
-    .video-poster {
-      width: 100%; height: 100%; object-fit: cover; display: block; opacity: .72;
-      background: linear-gradient(135deg, var(--char-900) 0%, var(--char-800) 50%, color-mix(in srgb, var(--fox-900) 60%, var(--char-900)) 100%);
-    }
-    /* grid lines on the poster */
-    .video-poster-art {
-      position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(236,94,18,.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(236,94,18,.06) 1px, transparent 1px);
-      background-size: 36px 36px;
-    }
-    .video-poster-art::after {
-      content: ""; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 60% 55% at 50% 50%, rgba(236,94,18,.12) 0%, transparent 70%);
-    }
-    .video-play {
-      position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-4);
-    }
-    .play-btn {
-      width: 72px; height: 72px; border-radius: 50%;
-      background: var(--accent); display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 0 0 12px rgba(236,94,18,.18), var(--shadow-accent);
-      transition: transform .2s cubic-bezier(.2,.8,.2,1), box-shadow .2s;
-      flex: none;
-    }
-    .video-wrap:hover .play-btn { transform: scale(1.08); box-shadow: 0 0 0 18px rgba(236,94,18,.14), 0 12px 32px -8px rgba(236,94,18,.55); }
-    .play-btn svg { margin-left: 4px; }
-    .video-label { font: 600 14px/1 var(--font-body); color: var(--sand-300); letter-spacing: .01em; }
-    .video-label em { color: var(--fox-400); font-style: normal; }
-    .video-tag {
-      position: absolute; top: var(--space-4); left: var(--space-4);
-      font: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase;
-      color: var(--fox-400); background: rgba(20,17,14,.7); padding: 5px 10px; border-radius: var(--radius-pill);
-      backdrop-filter: blur(4px);
-    }
-
-    /* ---- video modal ---- */
-    .video-modal {
-      display: none; position: fixed; inset: 0; z-index: 999;
-      background: rgba(20,17,14,.88); backdrop-filter: blur(6px);
-      align-items: center; justify-content: center; padding: var(--space-6);
-    }
-    .video-modal.open { display: flex; }
-    .modal-inner { position: relative; width: 100%; max-width: 860px; aspect-ratio: 16/9; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-lg); }
-    .modal-inner iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-    .modal-close {
-      position: absolute; top: -48px; right: 0;
-      background: transparent; border: 1px solid rgba(255,255,255,.18); border-radius: var(--radius-md);
-      color: var(--sand-50); cursor: pointer; padding: 8px 14px;
-      font: 600 13px/1 var(--font-body); display: flex; align-items: center; gap: var(--space-2);
-      transition: background .15s;
-    }
-    .modal-close:hover { background: rgba(255,255,255,.1); }
 
     /* ---- stats band (below hero) ---- */
     .stats-band { background: var(--bg-inverse); padding: var(--space-10) 0; border-bottom: 1px solid var(--char-800); }
@@ -493,41 +417,19 @@
   <!-- ===================== HERO ===================== -->
   <a id="top"></a>
   <section class="hero" id="heroSection">
+    <canvas id="hero-bg" aria-hidden="true"></canvas>
     <div class="wrap hero-grid">
-      <div>
-        <!-- Pre-populated with general variant — JS overwrites for niche-specific -->
-        <p class="overline" id="heroOverline">LOCAL AI OPERATIONS &middot; WINTER PARK &middot; ORLANDO &middot; BREVARD</p>
-        <h1 id="heroH1">We find where your operation <span class="ink">leaks time and money</span> — then build the AI systems that stop it.</h1>
-        <p class="lead" id="heroLead">You didn't start your business to do data entry at 9pm. We diagnose the busywork draining your week and build the assistants, pipelines, and dashboards that handle it without you.</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary btn-lg" data-book href="#contact" id="heroCta">Show me where the leak is <span class="arrow">&rarr;</span></a>
-          <a class="btn btn-ghost btn-lg" href="#work">See the work</a>
-        </div>
-        <p class="hero-proof-strip" id="heroNote">Built and ran the full operations stack for a medical clinic franchise. That's the experience behind every teardown.</p>
-        <p class="scarcity" id="heroScarcity"></p>
+      <p class="overline" id="heroOverline">LOCAL AI OPERATIONS &middot; WINTER PARK &middot; ORLANDO &middot; BREVARD</p>
+      <h1 id="heroH1">We find the busywork stealing <span class="ink">10+ hours a week</span> from your business, then build the AI system that does it for you, for good.</h1>
+      <p class="lead" id="heroLead">You didn't start your business to do data entry at 9pm. We diagnose the busywork draining your week and build the assistants, pipelines, and dashboards that handle it without you. That's up to 13 weeks of your year back.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary btn-lg" data-book href="#contact" id="heroCta">Show me where the leak is <span class="arrow">&rarr;</span></a>
+        <a class="btn btn-ghost btn-lg" href="#work">See the work</a>
       </div>
-
-      <!-- VIDEO PLAYER -->
-      <div class="video-wrap" id="videoWrap" role="button" aria-label="Watch the 2-minute overview" tabindex="0">
-        <div class="video-poster-art"></div>
-        <span class="video-tag">2-min overview</span>
-        <div class="video-play">
-          <div class="play-btn">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          </div>
-          <span class="video-label" id="videoLabel">Watch how it works <em>&rarr;</em></span>
-        </div>
-      </div>
+      <p class="hero-proof-strip" id="heroNote">Built and ran the full operations stack for a medical clinic franchise. That's the experience behind every teardown.</p>
+      <p class="scarcity" id="heroScarcity"></p>
     </div>
   </section>
-
-  <!-- video modal -->
-  <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Video player">
-    <div class="modal-inner">
-      <button class="modal-close" id="modalClose">Close &times;</button>
-      <iframe id="videoFrame" src="" allowfullscreen allow="autoplay"></iframe>
-    </div>
-  </div>
 
   <!-- ===================== STATS BAND ===================== -->
   <div class="stats-band">
@@ -1042,12 +944,6 @@
       return '<article class="card reveal"><div class="ic">' + icon(f.ic) + '</div><h3>' + f.h + '</h3><p>' + f.p + '</p></article>';
     }).join(''));
 
-    set('exampleCards', d.examples.map(function(e) {
-      var unit = e.u ? '<span class="u">' + e.u + '</span>' : '';
-      return '<article class="ex reveal"><p class="kicker">' + e.k + '</p><p class="big">' + e.big + unit + '</p><h3>' + e.h + '</h3><p>' + e.p + '</p></article>';
-    }).join(''));
-    set('proofText', d.proof);
-
     set('ctaOverline', d.ctaOverline);
     set('ctaH2', d.ctaH2);
     set('ctaLead', d.ctaLead);
@@ -1118,43 +1014,6 @@
         }).join('&');
         uf.value = utms;
       }
-    })();
-
-    /* ============================================================
-       VIDEO PLAYER
-       ============================================================ */
-    (function () {
-      var videoUrl = window.FOX_VIDEO_URL || '';
-      var wrap = document.getElementById('videoWrap');
-      var modal = document.getElementById('videoModal');
-      var frame = document.getElementById('videoFrame');
-      var closeBtn = document.getElementById('modalClose');
-      var label = document.getElementById('videoLabel');
-
-      if (!videoUrl && label) {
-        label.innerHTML = 'Video coming soon — <em>see how it works below</em>';
-      }
-
-      function openVideo() {
-        if (!videoUrl) { var el = document.getElementById('how'); if (el) el.scrollIntoView({ behavior:'smooth' }); return; }
-        var src = videoUrl + (videoUrl.indexOf('?') > -1 ? '&' : '?') + 'autoplay=1';
-        frame.src = src;
-        modal.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      }
-      function closeVideo() {
-        modal.classList.remove('open');
-        frame.src = '';
-        document.body.style.overflow = '';
-      }
-
-      if (wrap) {
-        wrap.addEventListener('click', openVideo);
-        wrap.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openVideo(); } });
-      }
-      if (closeBtn) closeBtn.addEventListener('click', closeVideo);
-      if (modal) modal.addEventListener('click', function(e) { if (e.target === modal) closeVideo(); });
-      document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeVideo(); });
     })();
 
     /* ============================================================
@@ -1270,6 +1129,90 @@
       els.forEach(function(el) { io.observe(el); });
     })();
 
+  </script>
+  <script>
+  (function () {
+    var canvas = document.getElementById('hero-bg');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var ACCENT = getComputedStyle(document.documentElement)
+                   .getPropertyValue('--accent') || '#EC5E12';
+    ACCENT = ACCENT.trim() || '#EC5E12';
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var DPR = Math.min(window.devicePixelRatio || 1, 2);
+    var hero = canvas.parentElement;
+    var particles = [];
+    var mouse = { x: -9999, y: -9999 };
+    var raf = null, running = false;
+
+    function size() {
+      var w = hero.clientWidth, h = hero.clientHeight;
+      canvas.width = w * DPR; canvas.height = h * DPR;
+      canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      var target = Math.min(90, Math.floor((w * h) / 16000));
+      if (w < 700) target = Math.floor(target * 0.5);
+      particles = [];
+      for (var i = 0; i < target; i++) {
+        particles.push({
+          x: Math.random() * w, y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3
+        });
+      }
+    }
+
+    function frame() {
+      var w = hero.clientWidth, h = hero.clientHeight;
+      ctx.clearRect(0, 0, w, h);
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+        var dxm = p.x - mouse.x, dym = p.y - mouse.y;
+        var dm = Math.sqrt(dxm * dxm + dym * dym);
+        if (dm < 120 && dm > 0) { p.x += (dxm / dm) * 0.6; p.y += (dym / dm) * 0.6; }
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 1.6, 0, Math.PI * 2);
+        ctx.fillStyle = ACCENT; ctx.globalAlpha = 0.5; ctx.fill();
+      }
+      for (var a = 0; a < particles.length; a++) {
+        for (var b = a + 1; b < particles.length; b++) {
+          var dx = particles[a].x - particles[b].x, dy = particles[a].y - particles[b].y;
+          var d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 130) {
+            ctx.beginPath();
+            ctx.moveTo(particles[a].x, particles[a].y);
+            ctx.lineTo(particles[b].x, particles[b].y);
+            ctx.strokeStyle = ACCENT; ctx.globalAlpha = (1 - d / 130) * 0.18;
+            ctx.lineWidth = 1; ctx.stroke();
+          }
+        }
+      }
+      ctx.globalAlpha = 1;
+      raf = requestAnimationFrame(frame);
+    }
+
+    function start() { if (!running && !reduce) { running = true; frame(); } }
+    function stop() { running = false; if (raf) cancelAnimationFrame(raf); }
+
+    size();
+    if (reduce) { frame(); }
+    else {
+      window.addEventListener('resize', function () { size(); });
+      hero.addEventListener('mousemove', function (e) {
+        var r = hero.getBoundingClientRect();
+        mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+      });
+      hero.addEventListener('mouseleave', function () { mouse.x = -9999; mouse.y = -9999; });
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (es) {
+          es[0].isIntersecting ? start() : stop();
+        }, { threshold: 0.05 }).observe(hero);
+      } else { start(); }
+    }
+  })();
   </script>
 </body>
 </html>
