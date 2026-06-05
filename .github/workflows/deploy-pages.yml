@@ -27,10 +27,11 @@ jobs:
       - uses: actions/checkout@v4
       - name: Stage site files
         run: |
-          mkdir -p _site
+          mkdir -p _site/assets
           cp index.html _site/index.html
           cp thankyou.html _site/thankyou.html
           cp colors_and_type.css _site/colors_and_type.css
+          cp assets/fox-mark.png _site/assets/fox-mark.png
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
