@@ -3,17 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fox Consulting — AI-enabled operations for local businesses</title>
+  <title id="pageTitle">Fox Consulting — AI-enabled operations for local businesses</title>
   <meta id="metaDesc" name="description" content="Fox Consulting finds where your operation leaks time and money, then builds the AI systems that stop it. Local to Winter Park, Orlando, and Brevard County, FL.">
-
   <meta property="og:title" content="Fox Consulting — stop losing hours to manual work">
   <meta property="og:description" content="We find where your operation leaks time and money, then build the AI systems that stop it. Book a free operations teardown.">
   <meta property="og:type" content="website">
 
   <!-- ============================================================
-       ANALYTICS — paste your IDs to activate. Both stay dormant
-       (nothing loads) until filled. Fires a PageView on this page;
-       the lead conversion fires on thankyou.html.
+       ANALYTICS — paste your IDs to activate. See README at bottom
+       of this file for how to get your GA4 and Meta Pixel IDs.
        ============================================================ -->
   <script>
     window.FOX_ANALYTICS = {
@@ -24,6 +22,7 @@
   <script>
     (function () {
       var cfg = window.FOX_ANALYTICS || {};
+      var params = new URLSearchParams(location.search);
       // ---- Google Analytics 4 ----
       if (cfg.GA4_ID) {
         var s = document.createElement('script'); s.async = true;
@@ -36,15 +35,20 @@
       }
       // ---- Meta (Facebook) Pixel ----
       if (cfg.META_PIXEL_ID) {
-        !function (f, b, e, v, n, t, s) {
-          if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
-          if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = [];
-          t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
-        }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', cfg.META_PIXEL_ID);
         fbq('track', 'PageView');
       }
     })();
+  </script>
+
+  <!-- ============================================================
+       VIDEO — paste your Loom or YouTube embed URL to activate.
+       Loom:    https://www.loom.com/embed/YOUR_ID
+       YouTube: https://www.youtube.com/embed/YOUR_ID
+       ============================================================ -->
+  <script>
+    window.FOX_VIDEO_URL = ""; // e.g. "https://www.loom.com/embed/abc123"
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,6 +61,7 @@
     body {
       margin: 0; background: var(--bg); color: var(--fg); font: var(--text-body);
       -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+      overflow-x: hidden;
     }
     a { color: inherit; }
     img { max-width: 100%; display: block; }
@@ -66,26 +71,33 @@
     h1, h2, h3 { font-family: var(--font-display); margin: 0; }
     p { margin: 0; }
 
+    /* ---- buttons ---- */
     .btn {
       display: inline-flex; align-items: center; gap: var(--space-2);
       font: 700 16px/1 var(--font-body); padding: 15px var(--space-6);
       border-radius: var(--radius-lg); border: 1px solid transparent;
       cursor: pointer; text-decoration: none;
-      transition: transform .18s cubic-bezier(.2,.8,.2,1), background .18s cubic-bezier(.2,.8,.2,1), box-shadow .18s cubic-bezier(.2,.8,.2,1);
+      transition: transform .18s cubic-bezier(.2,.8,.2,1), background .18s, box-shadow .18s;
     }
     .btn-primary { background: var(--accent); color: var(--accent-fg); box-shadow: var(--shadow-accent); }
-    .btn-primary:hover { background: var(--accent-hover); transform: translate(2px, -2px); }
+    .btn-primary:hover { background: var(--accent-hover); transform: translate(2px,-2px); box-shadow: 0 12px 32px -8px rgba(236,94,18,.55); }
     .btn-primary:active { transform: scale(.98); box-shadow: var(--shadow-sm); }
     .btn-ghost { background: transparent; color: var(--fg); border-color: var(--border-strong); }
     .btn-ghost:hover { background: var(--sand-100); }
     .btn-lg { padding: 18px var(--space-8); font-size: 17px; }
+    .btn-sm { padding: 10px 18px; font-size: 14px; }
     .btn .arrow { font-family: var(--font-mono); transition: transform .18s cubic-bezier(.2,.8,.2,1); }
     .btn:hover .arrow { transform: translateX(3px); }
 
-    :where(a, button, input, textarea, select):focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; border-radius: var(--radius-sm); }
+    :where(a,button,input,textarea,select):focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; border-radius: var(--radius-sm); }
 
-    /* nav */
-    header.nav { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--sand-50) 82%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+    /* ---- nav ---- */
+    header.nav {
+      position: sticky; top: 0; z-index: 50;
+      background: color-mix(in srgb, var(--sand-50) 85%, transparent);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
     .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .logo img { width: 40px; height: 40px; display: block; flex: none; }
@@ -93,76 +105,203 @@
     .logo .fox { font-weight: 800; font-size: 22px; letter-spacing: .02em; color: var(--char-950); display: block; }
     .logo .consulting { font-weight: 700; font-size: 10.5px; letter-spacing: .34em; color: var(--fox-600); display: block; }
     .nav-links { display: flex; align-items: center; gap: var(--space-8); }
-    .nav-links a.txt { font: 600 15px/1 var(--font-body); text-decoration: none; color: var(--fg-secondary); transition: color .15s ease; }
+    .nav-links a.txt { font: 600 15px/1 var(--font-body); text-decoration: none; color: var(--fg-secondary); transition: color .15s; }
     .nav-links a.txt:hover { color: var(--fg); }
+    /* mobile: CTA always visible outside hamburger */
+    .nav-cta-mobile { display: none; }
     .nav-toggle { display: none; }
 
-    /* niche switcher strip */
+    /* ---- niche switcher — hidden for paid traffic ---- */
     .switch { border-bottom: 1px solid var(--border); background: var(--bg-sunken); }
     .switch-inner { display: flex; align-items: center; gap: var(--space-4); height: 46px; flex-wrap: wrap; }
     .switch .lbl { font: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; color: var(--fg-muted); }
-    .switch a { font: 600 13px/1 var(--font-body); text-decoration: none; color: var(--fg-secondary); padding: 7px 12px; border-radius: var(--radius-pill); border: 1px solid transparent; transition: all .15s ease; }
+    .switch a { font: 600 13px/1 var(--font-body); text-decoration: none; color: var(--fg-secondary); padding: 7px 12px; border-radius: var(--radius-pill); border: 1px solid transparent; transition: all .15s; }
     .switch a:hover { color: var(--fg); background: var(--sand-200); }
     .switch a[aria-current="true"] { color: var(--accent-fg); background: var(--accent); border-color: var(--accent); }
 
-    /* hero */
-    .hero { position: relative; padding: var(--space-16) 0; overflow: hidden; }
-    .hero::before { content:""; position:absolute; inset:0; background-image: radial-gradient(var(--sand-300) 1px, transparent 1px); background-size: 28px 28px; opacity:.30; -webkit-mask-image: radial-gradient(ellipse 70% 60% at 70% 25%, #000 30%, transparent 75%); mask-image: radial-gradient(ellipse 70% 60% at 70% 25%, #000 30%, transparent 75%); pointer-events:none; }
-    .hero-grid { position: relative; display: grid; grid-template-columns: 1.15fr .85fr; gap: var(--space-16); align-items: center; }
+    /* ---- hero ---- */
+    .hero {
+      position: relative; padding: var(--space-16) 0 var(--space-12); overflow: hidden;
+    }
+    /* warm dot grid */
+    .hero::before {
+      content:""; position:absolute; inset:0; z-index:0;
+      background-image: radial-gradient(var(--sand-300) 1px, transparent 1px);
+      background-size: 28px 28px; opacity:.28;
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 70% 30%, #000 20%, transparent 70%);
+              mask-image: radial-gradient(ellipse 80% 70% at 70% 30%, #000 20%, transparent 70%);
+      pointer-events:none;
+    }
+    /* warm orange glow orb behind the video */
+    .hero::after {
+      content:""; position:absolute; right:-80px; top:-40px; z-index:0;
+      width: 520px; height: 520px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(236,94,18,.13) 0%, transparent 68%);
+      pointer-events:none;
+    }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.1fr .9fr; gap: var(--space-14); align-items: center; }
     .hero h1 { font-weight: 900; font-size: clamp(36px, 5.2vw, 60px); line-height: 1.03; letter-spacing: var(--tracking-display); margin: var(--space-5) 0; }
     .hero h1 .ink { color: var(--accent); }
-    .hero .lead { font: var(--text-lead); color: var(--fg-secondary); max-width: 42ch; margin-bottom: var(--space-8); }
+    .hero .lead { font: var(--text-lead); color: var(--fg-secondary); max-width: 44ch; margin-bottom: var(--space-8); }
     .hero-cta { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; }
-    .hero-note { font: var(--text-small); color: var(--fg-muted); margin-top: var(--space-5); }
+    .hero-note { font: var(--text-small); color: var(--fg-muted); margin-top: var(--space-5); line-height: 1.55; }
     .hero-note b { color: var(--fg); font-weight: 600; }
 
-    .stat-card { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); padding: var(--space-8); display: grid; gap: var(--space-6); }
-    .stat-card .row { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); padding-bottom: var(--space-5); border-bottom: 1px solid var(--border); }
-    .stat-card .row:last-child { border-bottom: 0; padding-bottom: 0; }
-    .stat-card .num { font: 700 34px/1 var(--font-mono); color: var(--fg); letter-spacing: -.02em; white-space: nowrap; }
-    .stat-card .num .u { color: var(--accent); font-size: .62em; }
-    .stat-card .lab { font: var(--text-small); color: var(--fg-secondary); text-align: right; max-width: 19ch; }
-    .stat-card .tag { font: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; color: var(--fg-muted); }
+    /* ---- video player ---- */
+    .video-wrap {
+      position: relative; border-radius: var(--radius-xl);
+      background: var(--char-900); border: 1px solid var(--border-inverse);
+      overflow: hidden; cursor: pointer;
+      box-shadow: var(--shadow-lg), 0 0 0 1px rgba(236,94,18,.12);
+      transition: transform .2s cubic-bezier(.2,.8,.2,1), box-shadow .2s;
+      aspect-ratio: 16/10;
+    }
+    .video-wrap:hover { transform: translate(2px,-3px); box-shadow: var(--shadow-lg), 0 0 0 1px rgba(236,94,18,.28), 0 24px 48px -16px rgba(20,17,14,.3); }
+    .video-poster {
+      width: 100%; height: 100%; object-fit: cover; display: block; opacity: .72;
+      background: linear-gradient(135deg, var(--char-900) 0%, var(--char-800) 50%, color-mix(in srgb, var(--fox-900) 60%, var(--char-900)) 100%);
+    }
+    /* grid lines on the poster */
+    .video-poster-art {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(236,94,18,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(236,94,18,.06) 1px, transparent 1px);
+      background-size: 36px 36px;
+    }
+    .video-poster-art::after {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 55% at 50% 50%, rgba(236,94,18,.12) 0%, transparent 70%);
+    }
+    .video-play {
+      position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-4);
+    }
+    .play-btn {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--accent); display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 0 12px rgba(236,94,18,.18), var(--shadow-accent);
+      transition: transform .2s cubic-bezier(.2,.8,.2,1), box-shadow .2s;
+      flex: none;
+    }
+    .video-wrap:hover .play-btn { transform: scale(1.08); box-shadow: 0 0 0 18px rgba(236,94,18,.14), 0 12px 32px -8px rgba(236,94,18,.55); }
+    .play-btn svg { margin-left: 4px; }
+    .video-label { font: 600 14px/1 var(--font-body); color: var(--sand-300); letter-spacing: .01em; }
+    .video-label em { color: var(--fox-400); font-style: normal; }
+    .video-tag {
+      position: absolute; top: var(--space-4); left: var(--space-4);
+      font: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase;
+      color: var(--fox-400); background: rgba(20,17,14,.7); padding: 5px 10px; border-radius: var(--radius-pill);
+      backdrop-filter: blur(4px);
+    }
 
+    /* ---- video modal ---- */
+    .video-modal {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(20,17,14,.88); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center; padding: var(--space-6);
+    }
+    .video-modal.open { display: flex; }
+    .modal-inner { position: relative; width: 100%; max-width: 860px; aspect-ratio: 16/9; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-lg); }
+    .modal-inner iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .modal-close {
+      position: absolute; top: -48px; right: 0;
+      background: transparent; border: 1px solid rgba(255,255,255,.18); border-radius: var(--radius-md);
+      color: var(--sand-50); cursor: pointer; padding: 8px 14px;
+      font: 600 13px/1 var(--font-body); display: flex; align-items: center; gap: var(--space-2);
+      transition: background .15s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,.1); }
+
+    /* ---- stats band (below hero) ---- */
+    .stats-band { background: var(--bg-inverse); padding: var(--space-10) 0; border-bottom: 1px solid var(--char-800); }
+    .stats-inner { display: flex; align-items: stretch; justify-content: center; flex-wrap: wrap; gap: 0; }
+    .stat-item { flex: 1; min-width: 200px; padding: var(--space-4) var(--space-8); text-align: center; position: relative; }
+    .stat-item + .stat-item::before { content:""; position:absolute; left:0; top:20%; bottom:20%; width:1px; background: var(--char-700); }
+    .stat-item .num { font: 800 42px/1 var(--font-mono); letter-spacing: -.03em; color: var(--fg-inverse); }
+    .stat-item .num .u { color: var(--fox-400); font-size: .58em; }
+    .stat-item .lab { font: var(--text-small); color: color-mix(in srgb, var(--sand-50) 68%, transparent); margin-top: var(--space-2); }
+
+    /* ---- sections ---- */
     section { padding: var(--space-20) 0; }
     .sec-head { max-width: 56ch; margin-bottom: var(--space-12); }
     .sec-head h2 { font-size: clamp(28px, 3.6vw, 38px); letter-spacing: var(--tracking-tight); }
     .sec-head p { font: var(--text-lead); color: var(--fg-secondary); margin-top: var(--space-4); }
 
+    /* ---- focus areas ---- */
     .focus { background: var(--bg-sunken); }
     .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
-    .card { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-8); transition: transform .2s cubic-bezier(.2,.8,.2,1), box-shadow .2s cubic-bezier(.2,.8,.2,1), border-color .2s ease; }
-    .card:hover { transform: translate(2px, -3px); box-shadow: var(--shadow-md); border-color: var(--border-strong); }
+    .card {
+      background: var(--bg-elevated); border-radius: var(--radius-lg); padding: var(--space-8);
+      position: relative; overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s, border-color .22s;
+    }
+    /* shimmer border on hover */
+    .card::before {
+      content:""; position:absolute; inset:0; border-radius: inherit;
+      background: linear-gradient(135deg, transparent 40%, rgba(236,94,18,.08) 100%);
+      opacity:0; transition: opacity .22s;
+    }
+    .card:hover { transform: translate(2px,-4px); box-shadow: var(--shadow-md); border-color: var(--border-strong); }
+    .card:hover::before { opacity:1; }
     .ic { width: 46px; height: 46px; border-radius: var(--radius-md); display: grid; place-items: center; margin-bottom: var(--space-5); background: var(--fox-50); color: var(--accent); border: 1px solid var(--fox-100); }
     .ic svg { width: 24px; height: 24px; }
     .card h3 { font-size: 20px; letter-spacing: var(--tracking-tight); margin-bottom: var(--space-3); }
     .card p { font: var(--text-body); color: var(--fg-secondary); }
 
-    .proof { background: var(--bg-inverse); color: var(--fg-inverse); }
+    /* ---- proof / dark statement ---- */
+    .proof { background: var(--bg-inverse); color: var(--fg-inverse); position: relative; overflow: hidden; }
+    .proof::before {
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background-image: radial-gradient(var(--char-700) 1px, transparent 1px);
+      background-size: 32px 32px; opacity:.4;
+    }
+    .proof .wrap { position: relative; }
     .proof .overline { color: var(--fox-400); }
     .proof .sec-head h2 { color: var(--fg-inverse); }
-    .proof .sec-head p { color: color-mix(in srgb, var(--sand-50) 72%, transparent); }
+    .proof .sec-head p { color: color-mix(in srgb, var(--sand-50) 70%, transparent); }
     .examples { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
-    .ex { border: 1px solid var(--border-inverse); border-radius: var(--radius-lg); padding: var(--space-8); background: var(--char-900); }
+    .ex { border: 1px solid var(--border-inverse); border-radius: var(--radius-lg); padding: var(--space-8); background: color-mix(in srgb, var(--char-900) 70%, transparent); backdrop-filter: blur(2px); transition: border-color .2s, transform .2s cubic-bezier(.2,.8,.2,1); }
+    .ex:hover { border-color: rgba(236,94,18,.4); transform: translateY(-3px); }
     .ex .kicker { font: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; color: var(--fox-400); }
-    .ex .big { font: 700 38px/1 var(--font-mono); letter-spacing: -.02em; margin: var(--space-4) 0 var(--space-2); }
-    .ex .big .u { color: var(--fox-400); font-size: .58em; }
+    .ex .big { font: 800 40px/1 var(--font-mono); letter-spacing: -.02em; margin: var(--space-4) 0 var(--space-2); }
+    .ex .big .u { color: var(--fox-400); font-size: .56em; font-weight: 700; }
     .ex h3 { font-size: 18px; color: var(--fg-inverse); margin: var(--space-4) 0 var(--space-2); }
-    .ex p { font: var(--text-small); color: color-mix(in srgb, var(--sand-50) 68%, transparent); }
-    .proof-quote { margin-top: var(--space-16); padding-top: var(--space-12); border-top: 1px solid var(--border-inverse); font: var(--text-h3); font-family: var(--font-display); font-weight: 700; letter-spacing: var(--tracking-tight); max-width: 30ch; color: var(--fg-inverse); }
+    .ex p { font: var(--text-small); color: color-mix(in srgb, var(--sand-50) 66%, transparent); }
+    .proof-quote { margin-top: var(--space-16); padding-top: var(--space-12); border-top: 1px solid var(--border-inverse); font: var(--text-h3); font-family: var(--font-display); font-weight: 700; letter-spacing: var(--tracking-tight); max-width: 32ch; color: var(--fg-inverse); }
     .proof-quote .by { display: block; font: var(--text-mono); color: var(--fox-400); margin-top: var(--space-5); }
 
+    /* ---- how it works ---- */
     .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); }
-    .step .n { font: 700 14px/1 var(--font-mono); color: var(--accent); }
+    .step .n { font: 700 13px/1 var(--font-mono); color: var(--accent); }
     .step h3 { font-size: 21px; letter-spacing: var(--tracking-tight); margin: var(--space-3) 0; }
     .step p { color: var(--fg-secondary); }
-    .step .bar { height: 3px; background: var(--border); border-radius: var(--radius-pill); margin-top: var(--space-6); position: relative; overflow: hidden; }
-    .step .bar::after { content:""; position:absolute; inset:0 60% 0 0; background: var(--accent); border-radius: inherit; }
+    .step .bar { height: 2px; background: var(--border); border-radius: var(--radius-pill); margin-top: var(--space-6); position: relative; overflow: hidden; }
+    .step .bar::after { content:""; position:absolute; inset:0 58% 0 0; background: var(--accent); border-radius: inherit; }
 
-    .pricing { background: var(--bg-sunken); }
+    /* ---- FAQ / objections ---- */
+    .faq-section { background: var(--bg-sunken); }
+    .faq-list { display: grid; gap: var(--space-3); max-width: 760px; }
+    .faq-item { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: border-color .15s; }
+    .faq-item:hover { border-color: var(--border-strong); }
+    .faq-q {
+      width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+      padding: var(--space-5) var(--space-6); font: 600 16px/1.3 var(--font-body); color: var(--fg);
+    }
+    .faq-q .icon { flex: none; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--border-strong); display: grid; place-items: center; transition: background .15s, border-color .15s; }
+    .faq-q .icon svg { width: 14px; height: 14px; transition: transform .25s cubic-bezier(.2,.8,.2,1); }
+    .faq-item.open .faq-q .icon { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .faq-item.open .faq-q .icon svg { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .32s cubic-bezier(.2,.8,.2,1); }
+    .faq-a-inner { padding: 0 var(--space-6) var(--space-5); font: var(--text-body); color: var(--fg-secondary); line-height: 1.65; }
+    .faq-item.open .faq-a { max-height: 300px; }
+
+    /* ---- pricing ---- */
+    .pricing { }
     .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); align-items: start; }
     .plan { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: var(--space-8); display: flex; flex-direction: column; gap: var(--space-5); }
-    .plan.featured { border-color: var(--accent); box-shadow: var(--shadow-lg); position: relative; }
+    .plan.featured { border-color: var(--accent); box-shadow: var(--shadow-lg), 0 0 0 1px rgba(236,94,18,.12); position: relative; }
     .plan.featured .badge { position: absolute; top: -13px; left: var(--space-8); background: var(--accent); color: var(--accent-fg); font: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; padding: 6px 12px; border-radius: var(--radius-pill); }
     .plan .pname { font: 700 22px/1 var(--font-display); letter-spacing: var(--tracking-tight); }
     .plan .ptag { font: var(--text-small); color: var(--fg-secondary); min-height: 2.6em; }
@@ -173,33 +312,40 @@
     .plan li svg { width: 18px; height: 18px; color: var(--success); flex: none; margin-top: 1px; }
     .plan .btn { width: 100%; justify-content: center; margin-top: auto; }
 
-    .contact { background: var(--bg-inverse); color: var(--fg-inverse); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: start; }
+    /* ---- contact / CTA ---- */
+    .contact { background: var(--bg-inverse); color: var(--fg-inverse); position: relative; overflow: hidden; }
+    .contact::before {
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background: radial-gradient(ellipse 50% 60% at 0% 50%, rgba(236,94,18,.08) 0%, transparent 65%);
+    }
+    .contact-grid { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: start; }
     .contact .overline { color: var(--fox-400); }
     .contact h2 { color: var(--fg-inverse); font-size: clamp(30px, 4vw, 46px); letter-spacing: var(--tracking-display); line-height: 1.04; }
     .contact .lead { font: var(--text-lead); color: color-mix(in srgb, var(--sand-50) 72%, transparent); margin: var(--space-5) 0 var(--space-8); max-width: 40ch; }
     .contact .deet { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4); color: var(--fg-inverse); text-decoration: none; }
     .contact .deet svg { width: 20px; height: 20px; color: var(--fox-400); flex: none; }
     .contact .deet:hover span { text-decoration: underline; }
+
+    /* ---- lead form ---- */
     .booking { background: var(--char-900); border: 1px solid var(--border-inverse); border-radius: var(--radius-xl); padding: var(--space-8); }
     .booking .form-kicker { font: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; color: var(--fox-400); margin-bottom: var(--space-2); }
-    .booking .form-sub { font: var(--text-small); color: color-mix(in srgb, var(--sand-50) 68%, transparent); margin-bottom: var(--space-6); }
+    .booking .form-sub { font: var(--text-small); color: color-mix(in srgb, var(--sand-50) 66%, transparent); margin-bottom: var(--space-6); line-height: 1.6; }
     form#leadForm { display: grid; gap: var(--space-4); }
     .field { display: grid; gap: var(--space-2); }
     .field label { font: 600 13px/1 var(--font-body); color: var(--sand-300); }
     .field label .req { color: var(--fox-400); }
-    .field .hint { font: var(--text-caption); color: var(--sand-500); }
+    .field .hint { font: var(--text-caption); color: var(--sand-500); display: inline; margin-left: var(--space-2); font-weight: 400; }
     .field input, .field textarea {
       font: var(--text-body); color: var(--fg-inverse);
       background: var(--char-950); border: 1px solid var(--border-inverse);
       border-radius: var(--radius-md); padding: 13px var(--space-4); width: 100%;
-      transition: border-color .15s ease;
+      transition: border-color .15s;
     }
     .field input::placeholder, .field textarea::placeholder { color: var(--sand-500); }
     .field input:focus, .field textarea:focus { border-color: var(--accent); outline: none; }
     .field input.invalid, .field textarea.invalid { border-color: var(--danger); }
     #leadForm .btn { width: 100%; justify-content: center; margin-top: var(--space-2); }
-    .form-reassure { font: var(--text-caption); color: var(--sand-500); text-align: center; margin-top: var(--space-1); }
+    .form-reassure { font: var(--text-caption); color: var(--sand-500); text-align: center; margin-top: var(--space-2); line-height: 1.55; }
     .form-success { display: none; text-align: center; padding: var(--space-10) var(--space-4); }
     .form-success.show { display: block; }
     .form-success .check { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; margin: 0 auto var(--space-5); background: color-mix(in srgb, var(--success) 22%, transparent); color: #7BD6A8; }
@@ -207,25 +353,49 @@
     .form-success h3 { color: var(--fg-inverse); font-size: 24px; letter-spacing: var(--tracking-tight); margin-bottom: var(--space-3); }
     .form-success p { color: color-mix(in srgb, var(--sand-50) 72%, transparent); font: var(--text-body); max-width: 34ch; margin: 0 auto; }
 
+    /* ---- footer ---- */
     footer { background: var(--bg); border-top: 1px solid var(--border); padding: var(--space-12) 0; }
     .foot { display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); flex-wrap: wrap; }
     .foot small { font: var(--text-small); color: var(--fg-muted); }
-    .foot .logo .fox { font-size: 18px; } .foot .logo .consulting { font-size: 9px; }
+    .foot .logo img { width: 36px; height: 36px; }
+    .foot .logo .fox { font-size: 18px; }
+    .foot .logo .consulting { font-size: 9px; }
 
+    /* ---- scroll reveal ---- */
     .reveal { opacity: 0; transform: translateY(14px); transition: opacity .45s cubic-bezier(.2,.8,.2,1), transform .45s cubic-bezier(.2,.8,.2,1); }
     .reveal.in { opacity: 1; transform: none; }
 
+    /* ---- floating mobile CTA (appears after hero) ---- */
+    .float-cta {
+      display: none; position: fixed; bottom: var(--space-5); left: 50%; transform: translateX(-50%);
+      z-index: 40; white-space: nowrap;
+      box-shadow: 0 8px 32px -8px rgba(20,17,14,.4), var(--shadow-accent);
+      transition: opacity .3s, transform .3s cubic-bezier(.2,.8,.2,1);
+      opacity: 0; pointer-events: none;
+    }
+    .float-cta.visible { opacity: 1; pointer-events: auto; }
+
+    /* ---- responsive ---- */
     @media (max-width: 900px) {
-      .hero-grid { grid-template-columns: 1fr; gap: var(--space-12); }
+      .hero-grid { grid-template-columns: 1fr; gap: var(--space-10); }
       .cards, .examples, .steps, .plans { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; gap: var(--space-10); }
+      .stats-inner { gap: var(--space-2); }
+      .stat-item + .stat-item::before { display: none; }
+      .stat-item { border-top: 1px solid var(--char-800); padding: var(--space-5) var(--space-4); }
+      /* mobile nav: show CTA always, hamburger for links */
+      .nav-cta-mobile { display: flex; }
       .nav-links { display: none; }
-      .nav-links.open { display: flex; position: absolute; top: 68px; left: 0; right: 0; flex-direction: column; align-items: flex-start; gap: var(--space-5); background: var(--bg); padding: var(--space-6); border-bottom: 1px solid var(--border); }
+      .nav-links.open { display: flex; position: absolute; top: 68px; left: 0; right: 0; flex-direction: column; align-items: flex-start; gap: var(--space-5); background: var(--bg); padding: var(--space-6); border-bottom: 1px solid var(--border); z-index: 49; }
+      .nav-links .btn { display: none; } /* hide the desktop CTA inside the menu */
       .nav-toggle { display: inline-grid; place-items: center; width: 44px; height: 44px; background: transparent; border: 1px solid var(--border-strong); border-radius: var(--radius-md); cursor: pointer; color: var(--fg); }
+      .float-cta { display: flex; }
+      .faq-list { max-width: 100%; }
     }
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
       .reveal { opacity: 1; transform: none; }
+      .float-cta { transition: none; }
     }
   </style>
 </head>
@@ -235,14 +405,16 @@
   <header class="nav">
     <div class="wrap nav-inner">
       <a class="logo" href="#top" aria-label="Fox Consulting home">
-        <img src="assets/fox-mark.png" width="40" height="40" alt="" aria-hidden="true">
+        <img src="assets/fox-mark.png" width="40" height="40" alt="">
         <span class="logo-type"><span class="fox">FOX</span><span class="consulting">CONSULTING</span></span>
       </a>
+      <!-- mobile CTA always visible -->
+      <a class="btn btn-primary btn-sm nav-cta-mobile" data-book href="#contact">Book teardown</a>
       <nav class="nav-links" id="navlinks">
         <a class="txt" href="#focus">What we fix</a>
         <a class="txt" href="#work">The work</a>
         <a class="txt" href="#pricing">Pricing</a>
-        <a class="btn btn-primary" data-book href="#contact">Book a teardown <span class="arrow">&rarr;</span></a>
+        <a class="btn btn-primary" data-book href="#contact">Book a free teardown <span class="arrow">&rarr;</span></a>
       </nav>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
@@ -250,8 +422,8 @@
     </div>
   </header>
 
-  <!-- ===================== NICHE SWITCHER ===================== -->
-  <div class="switch">
+  <!-- ===================== NICHE SWITCHER (hidden for paid traffic) ===================== -->
+  <div class="switch" id="nicheSwitcher">
     <div class="wrap switch-inner">
       <span class="lbl">Built for</span>
       <a href="?niche=general" data-niche="general">General operations</a>
@@ -262,47 +434,76 @@
 
   <!-- ===================== HERO ===================== -->
   <a id="top"></a>
-  <section class="hero">
+  <section class="hero" id="heroSection">
     <div class="wrap hero-grid">
       <div>
-        <p class="overline" id="heroOverline"></p>
-        <h1 id="heroH1"></h1>
-        <p class="lead" id="heroLead"></p>
+        <!-- Pre-populated with general variant — JS overwrites for niche-specific -->
+        <p class="overline" id="heroOverline">LOCAL AI OPERATIONS &middot; WINTER PARK &middot; ORLANDO &middot; BREVARD</p>
+        <h1 id="heroH1">We find where your operation <span class="ink">leaks time and money</span> — then build the AI systems that stop it.</h1>
+        <p class="lead" id="heroLead">You didn't start your business to do data entry at 9pm. We diagnose the busywork draining your week and build the assistants, pipelines, and dashboards that handle it without you.</p>
         <div class="hero-cta">
-          <a class="btn btn-primary btn-lg" data-book href="#contact" id="heroCta"></a>
+          <a class="btn btn-primary btn-lg" data-book href="#contact" id="heroCta">Show me where the leak is <span class="arrow">&rarr;</span></a>
           <a class="btn btn-ghost btn-lg" href="#work">See the work</a>
         </div>
-        <p class="hero-note" id="heroNote"></p>
+        <p class="hero-note" id="heroNote">We built and ran the full operations stack for a <b>medical clinic franchise</b> — phones, scheduling, billing workflows, reporting. <b>That's the experience behind every teardown we run.</b><br><br><em style="font-style:normal;color:var(--fg-muted);">Free teardown = 90 minutes on-site, written fix plan yours to keep — whether or not we work together.</em></p>
       </div>
-      <aside class="stat-card" aria-label="Representative outcomes">
-        <p class="tag" id="statTag"></p>
-        <div id="statRows"></div>
-      </aside>
+
+      <!-- VIDEO PLAYER -->
+      <div class="video-wrap" id="videoWrap" role="button" aria-label="Watch the 2-minute overview" tabindex="0">
+        <div class="video-poster-art"></div>
+        <span class="video-tag">2-min overview</span>
+        <div class="video-play">
+          <div class="play-btn">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <span class="video-label" id="videoLabel">Watch how it works <em>&rarr;</em></span>
+        </div>
+      </div>
     </div>
   </section>
+
+  <!-- video modal -->
+  <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Video player">
+    <div class="modal-inner">
+      <button class="modal-close" id="modalClose">Close &times;</button>
+      <iframe id="videoFrame" src="" allowfullscreen allow="autoplay"></iframe>
+    </div>
+  </div>
+
+  <!-- ===================== STATS BAND ===================== -->
+  <div class="stats-band">
+    <div class="wrap">
+      <div class="stats-inner" id="statRows">
+        <!-- populated by JS -->
+        <div class="stat-item"><span class="num">11<span class="u">hrs</span></span><p class="lab">manual invoicing cut from the week</p></div>
+        <div class="stat-item"><span class="num">24<span class="u">/7</span></span><p class="lab">phone coverage that books jobs and follows up</p></div>
+        <div class="stat-item"><span class="num">1<span class="u"> screen</span></span><p class="lab">every location's numbers, in real time</p></div>
+      </div>
+    </div>
+  </div>
 
   <!-- ===================== FOCUS AREAS ===================== -->
   <section class="focus" id="focus">
     <div class="wrap">
       <div class="sec-head reveal">
         <p class="overline">Where we go to work</p>
-        <h2 id="focusH2"></h2>
-        <p id="focusP"></p>
+        <h2 id="focusH2">Five places your operation is quietly bleeding hours.</h2>
+        <p id="focusP">We don't sell software. We find the leak, then build the system that closes it — wired into the tools you already run.</p>
       </div>
       <div class="cards" id="focusCards"></div>
     </div>
   </section>
 
-  <!-- ===================== EXAMPLES / PROOF ===================== -->
+  <!-- ===================== PROOF (dark) ===================== -->
   <section class="proof" id="work">
     <div class="wrap">
       <div class="sec-head reveal">
         <p class="overline">The work</p>
-        <h2>What it looks like when the leak gets fixed.</h2>
-        <p>Representative engagements. Same pattern every time: find the busywork, build the system, hand it back running.</p>
+        <h2>Three businesses. Three leaks. Here's what closing them looked like.</h2>
+        <p>Same pattern every time: find the busywork, build the system, hand it back running.</p>
       </div>
       <div class="examples" id="exampleCards"></div>
-      <p class="proof-quote reveal"><span id="proofText"></span><span class="by">// Fox Consulting LLC</span></p>
+      <p class="proof-quote reveal">"<span id="proofText"></span>"<span class="by">// Fox Consulting LLC</span></p>
     </div>
   </section>
 
@@ -311,40 +512,66 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <p class="overline">How it works</p>
-        <h2>Three steps. No rip-and-replace, no year-long project.</h2>
+        <h2>Three steps. No rip-and-replace. No year-long project.</h2>
       </div>
       <div class="steps">
-        <div class="step reveal"><p class="n">01</p><h3>Operations teardown</h3><p>We sit with your week and map where time and money leak. Free, local, and yours to keep whether or not we work together.</p><div class="bar"></div></div>
-        <div class="step reveal"><p class="n">02</p><h3>Build the system</h3><p>We build the assistant, pipeline, or dashboard that closes the biggest leak first — wired into the tools you already run.</p><div class="bar"></div></div>
-        <div class="step reveal"><p class="n">03</p><h3>Hand it back running</h3><p>Your team is trained, it's documented, and it works without us. We stay on only if you want the next leak fixed too.</p><div class="bar"></div></div>
+        <div class="step reveal">
+          <p class="n">01</p>
+          <h3>Free operations teardown</h3>
+          <p>We sit with your week and map where time and money leak. <b>The written fix plan is yours to keep</b> whether or not we build anything.</p>
+          <div class="bar"></div>
+        </div>
+        <div class="step reveal">
+          <p class="n">02</p>
+          <h3>Build the system</h3>
+          <p>We build the one system that closes your biggest leak first — wired into the tools you already pay for.</p>
+          <div class="bar"></div>
+        </div>
+        <div class="step reveal">
+          <p class="n">03</p>
+          <h3>Hand it back running</h3>
+          <p>Your team is trained, it's documented, and it works without us. We stay on only if you want the next leak fixed too.</p>
+          <div class="bar"></div>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- ===================== FAQ / OBJECTIONS ===================== -->
+  <section class="faq-section" id="faq">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="overline">Common concerns</p>
+        <h2 id="faqH2">The questions every owner asks before booking.</h2>
+      </div>
+      <div class="faq-list reveal" id="faqList"></div>
+    </div>
+  </section>
+
   <!-- ===================== PRICING ===================== -->
-  <section class="pricing" id="pricing">
+  <section id="pricing">
     <div class="wrap">
       <div class="sec-head reveal">
         <p class="overline">Pricing</p>
         <h2>Pick the leak. Pick the package. Keep what we build.</h2>
-        <p>Flat, local pricing — no national-vendor retainers, no fractional-exec markup. You own everything we ship.</p>
+        <p>Flat, local pricing — no retainers, no 12-month commitments, no per-seat bills that grow every time you add staff. You own everything we ship.</p>
       </div>
       <div class="plans">
         <article class="plan reveal">
           <p class="pname">Teardown</p>
-          <p class="ptag">A full read on where your operation leaks — and exactly what to fix first.</p>
+          <p class="ptag">A full map of where your operation leaks — and exactly what to fix first.</p>
           <p class="price">$0<span class="per"> / first session</span></p>
           <ul>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 90-minute on-site walkthrough</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Ranked list of time/money leaks</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> A written fix plan you keep</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Ranked list of time and money leaks</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Written fix plan — yours to keep, always</li>
           </ul>
           <a class="btn btn-ghost" data-book href="#contact">Book the teardown <span class="arrow">&rarr;</span></a>
         </article>
         <article class="plan featured reveal">
-          <span class="badge">Most operations start here</span>
+          <span class="badge">Where most clients start</span>
           <p class="pname">Single System</p>
-          <p class="ptag">We build the one system that closes your biggest leak — start to finish.</p>
+          <p class="ptag">We build the one system that closes your biggest leak, start to finish.</p>
           <p class="price">$4,500<span class="per"> / project</span></p>
           <ul>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> One AI assistant, workflow, or dashboard</li>
@@ -352,7 +579,7 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Team training + documentation</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 30 days of fixes included</li>
           </ul>
-          <a class="btn btn-primary" data-book href="#contact">Start a build <span class="arrow">&rarr;</span></a>
+          <a class="btn btn-primary" data-book href="#contact">Start with the teardown <span class="arrow">&rarr;</span></a>
         </article>
         <article class="plan reveal">
           <p class="pname">Operating Partner</p>
@@ -364,53 +591,54 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Quarterly operations review</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Month to month — cancel anytime</li>
           </ul>
-          <a class="btn btn-ghost" data-book href="#contact">Talk it through <span class="arrow">&rarr;</span></a>
+          <a class="btn btn-ghost" data-book href="#contact">See if it's a fit <span class="arrow">&rarr;</span></a>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ===================== CONTACT / BOOKING ===================== -->
+  <!-- ===================== CONTACT / FORM ===================== -->
   <section class="contact" id="contact">
     <div class="wrap contact-grid">
       <div class="reveal">
-        <p class="overline" id="ctaOverline"></p>
-        <h2 id="ctaH2"></h2>
-        <p class="lead" id="ctaLead"></p>
+        <p class="overline" id="ctaOverline">TELL US WHERE THE TIME GOES</p>
+        <h2 id="ctaH2">Stop losing hours. Let's find the leak.</h2>
+        <p class="lead" id="ctaLead">Tell us a little about your operation and the task eating your week. We read every note ourselves and reply personally within one business day.</p>
+        <a class="deet" href="tel:+13217509608"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>(321) 750-9608</span></a>
         <a class="deet" href="mailto:hello@foxconsulting.co"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><span>hello@foxconsulting.co</span></a>
-        <a class="deet" href="tel:+14075550199"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>(407) 555-0199</span></a>
         <a class="deet" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>Winter Park, Orlando &amp; Brevard County, FL</span></a>
       </div>
+
       <div class="booking">
-        <p class="form-kicker" id="formKicker">Tell us where the time goes</p>
-        <p class="form-sub" id="formSub">Takes 30 seconds. No sales pitch — we read every one and reply personally within one business day.</p>
+        <p class="form-kicker" id="formKicker">Where's your operation leaking time?</p>
+        <p class="form-sub" id="formSub">30 seconds. No sales pitch — we read every one and reply personally within one business day.</p>
         <form id="leadForm" novalidate>
+          <!-- field order: name → time sink → email → business → phone -->
           <div class="field">
             <label for="name">Your name <span class="req">*</span></label>
             <input id="name" name="name" type="text" autocomplete="name" placeholder="First and last" required>
           </div>
           <div class="field">
-            <label for="business" id="businessLabel">Business <span class="req">*</span></label>
-            <input id="business" name="business" type="text" autocomplete="organization" placeholder="What you run" required>
+            <label for="headache" id="headacheLabel">Biggest time sink in your week <span class="req">*</span></label>
+            <textarea id="headache" name="headache" rows="3" placeholder="The task that keeps eating your week" required></textarea>
           </div>
           <div class="field">
             <label for="email">Email <span class="req">*</span></label>
             <input id="email" name="email" type="email" autocomplete="email" placeholder="you@yourbusiness.com" required>
           </div>
           <div class="field">
-            <label for="phone">Phone <span class="hint">(optional)</span></label>
-            <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="(407) 555-0123">
+            <label for="business" id="businessLabel">Business <span class="req">*</span></label>
+            <input id="business" name="business" type="text" autocomplete="organization" placeholder="What you run" required>
           </div>
           <div class="field">
-            <label for="headache" id="headacheLabel">Biggest time sink in your week <span class="req">*</span></label>
-            <textarea id="headache" name="headache" rows="3" placeholder="The task that keeps eating your week" required></textarea>
+            <label for="phone">Phone <span class="hint">— if you'd rather just talk (totally optional)</span></label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="(321) 555-0123">
           </div>
           <input type="hidden" name="niche" id="nicheField" value="general">
-          <input type="hidden" name="source" id="sourceField" value="">
-          <!-- honeypot: bots fill this, humans don't -->
+          <input type="hidden" name="_utms" id="utmField" value="">
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
-          <button class="btn btn-primary btn-lg" type="submit" id="leadSubmit"></button>
-          <p class="form-reassure">Local to Winter Park, Orlando &amp; Brevard County. We don't share your info.</p>
+          <button class="btn btn-primary btn-lg" type="submit" id="leadSubmit">Show me where the leak is <span class="arrow">&rarr;</span></button>
+          <p class="form-reassure">Local to Winter Park, Orlando &amp; Brevard County. No sales call unless you ask for one. We don't share your info.</p>
         </form>
         <div class="form-success" id="formSuccess" role="status" aria-live="polite">
           <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
@@ -421,10 +649,11 @@
     </div>
   </section>
 
+  <!-- ===================== FOOTER ===================== -->
   <footer>
     <div class="wrap foot">
       <a class="logo" href="#top" aria-label="Fox Consulting home">
-        <img src="assets/fox-mark.png" width="36" height="36" alt="" aria-hidden="true">
+        <img src="assets/fox-mark.png" width="36" height="36" alt="">
         <span class="logo-type"><span class="fox">FOX</span><span class="consulting">CONSULTING</span></span>
       </a>
       <small>Local operational consulting &middot; Winter Park &middot; Orlando &middot; Brevard County, FL</small>
@@ -432,169 +661,200 @@
     </div>
   </footer>
 
+  <!-- ===================== FLOATING MOBILE CTA ===================== -->
+  <a class="btn btn-primary float-cta" id="floatCta" data-book href="#contact">Book a free teardown <span class="arrow">&rarr;</span></a>
+
   <script>
     /* ============================================================
-       CONFIG — paste your Formspree form ID below (the part after
-       /f/ in your endpoint). Get one free at formspree.io.
-       Until it's set, the form runs in DEMO mode: it validates and
-       shows the success state but does NOT send anywhere.
-       Niche variants render from NICHE below, chosen by ?niche=.
+       CONFIG
        ============================================================ */
-    var FORMSPREE_ID = "xeewoyqw";  // https://formspree.io/f/xeewoyqw
+    var FORMSPREE_ID = "xeewoyqw";
 
     var ICONS = {
       phone: '<path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/>',
-      flow: '<path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/>',
-      pipe: '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/>',
-      grid: '<rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/>',
+      flow:  '<path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/>',
+      pipe:  '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/>',
+      grid:  '<rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/>',
       chart: '<path d="M3 3v18h18"/><rect width="4" height="7" x="7" y="10"/><rect width="4" height="11" x="15" y="6"/>',
-      bot: '<path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/>',
+      bot:   '<path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/>',
       truck: '<path d="M10 17h4V5H2v12h3"/><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5v8h1"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/>',
-      star: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
-      box: '<path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/>',
-      cal: '<rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
-      repeat: '<path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/>',
-      file: '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v5h5M9 13h6M9 17h6"/>',
-      people: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>'
+      star:  '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+      box:   '<path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/>',
+      cal:   '<rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+      repeat:'<path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/>',
+      file:  '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v5h5M9 13h6M9 17h6"/>',
+      people:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>'
     };
 
+    /* ============================================================
+       NICHE CONTENT
+       ============================================================ */
     var NICHE = {
       "general": {
         title: "Fox Consulting — AI-enabled operations for local businesses",
         meta: "Fox Consulting finds where your operation leaks time and money, then builds the AI systems that stop it. Local to Winter Park, Orlando, and Brevard County, FL.",
-        overline: "AI-ENABLED OPERATIONAL TRANSFORMATION · WINTER PARK · BREVARD COUNTY",
+        overline: "LOCAL AI OPERATIONS &middot; WINTER PARK &middot; ORLANDO &middot; BREVARD",
         h1: 'We find where your operation <span class="ink">leaks time and money</span> — then build the AI systems that stop it.',
-        lead: "You didn't start your business to do data entry at 9pm. We diagnose the busywork draining your week and build the assistants, pipelines, and dashboards that run it for you.",
-        cta: 'Book a free operations teardown <span class="arrow">&rarr;</span>',
-        note: "Built and ran the full tech stack for a real multi-location business. <b>Now we do it for yours.</b>",
-        statTag: "What the work looks like",
+        lead: "You didn't start your business to do data entry at 9pm. We diagnose the busywork draining your week and build the assistants, pipelines, and dashboards that handle it without you.",
+        cta: 'Show me where the leak is <span class="arrow">&rarr;</span>',
+        note: 'We built and ran the full operations stack for a <b>medical clinic franchise</b> — phones, scheduling, billing workflows, reporting. That\'s the experience behind every teardown we run.<br><br><em style="font-style:normal;color:var(--fg-muted);">Free teardown = 90 minutes on-site, written fix plan yours to keep — whether or not we work together.</em>',
         stats: [
-          { num: "11", u: "hrs", lab: "manual invoicing cut from the week" },
-          { num: "24", u: "/7", lab: "phone coverage that books jobs and follows up" },
-          { num: "1", u: "screen", lab: "every location's numbers, in real time" }
+          { num:"11", u:"hrs", lab:"manual invoicing cut from the week" },
+          { num:"24", u:"/7", lab:"phone coverage that books jobs and follows up" },
+          { num:"1", u:"\xa0screen", lab:"every location's numbers, in real time" }
         ],
         focusH2: "Five places your operation is quietly bleeding hours.",
-        focusP: "We don't sell software. We find the leak, then build the system that closes it — and hand you something your team actually uses.",
+        focusP: "We don't sell software. We find the leak, then build the system that closes it — wired into the tools you already run.",
         focus: [
           { ic:"phone", h:"AI phone & front desk", p:"AI that answers the phones, books the jobs, and never forgets to follow up. It works nights, weekends, and the lunch rush." },
-          { ic:"flow", h:"Automated workflows", p:"Invoicing, scheduling, reminders, intake. The repetitive steps your team does by hand get done automatically and on time." },
-          { ic:"pipe", h:"Data pipelines", p:"Your numbers live in five tools that don't talk. We pipe them into one place so the right figure is always one click away." },
-          { ic:"grid", h:"System integrations", p:"POS, CRM, accounting, scheduling — wired together so an order in one place updates everywhere, no double entry." },
+          { ic:"flow",  h:"Automated workflows",   p:"Invoicing, scheduling, reminders, intake. The repetitive steps your team does by hand get done automatically and on time." },
+          { ic:"pipe",  h:"Data pipelines",         p:"Your numbers live in five tools that don't talk. We pipe them into one place so the right figure is always one click away." },
+          { ic:"grid",  h:"System integrations",    p:"POS, CRM, accounting, scheduling — wired together so an update in one place flows everywhere. No double entry." },
           { ic:"chart", h:"Dashboards & reporting", p:"Every location's revenue, jobs, and bottlenecks on one screen — updated in real time, readable at a glance." },
-          { ic:"bot", h:"Internal tools & AI assistants", p:"Custom assistants trained on how your shop actually runs — onboarding, quoting, answers — instead of a generic chatbot." }
+          { ic:"bot",   h:"Internal tools & AI assistants", p:"Custom assistants trained on how your shop actually runs — onboarding, quoting, answers — not a generic chatbot." }
         ],
         examples: [
           { k:"Multi-location services", big:"11", u:"hrs/wk", h:"Invoicing on autopilot", p:"Jobs closed in the field now generate, send, and reconcile invoices automatically. The owner stopped doing it on Sunday nights." },
-          { k:"Home services", big:"38", u:"% more", h:"Calls that turn into booked jobs", p:"An AI receptionist answers every call, books the slot, and texts a confirmation. Missed calls stopped being lost revenue." },
-          { k:"Retail & hospitality", big:"5→1", u:"", h:"Five tools, one dashboard", p:"POS, scheduling, and accounting piped into a single live view. The morning numbers meeting went from an hour to five minutes." }
+          { k:"Home services", big:"38", u:"%", h:"Calls that turn into booked jobs", p:"An AI front desk answers every call, books the slot, and texts a confirmation. Missed calls stopped being lost revenue." },
+          { k:"Medical clinic franchise", big:"5→1", u:"", h:"Five tools, one dashboard", p:"Scheduling, billing, and reporting piped into a single live view. The morning numbers meeting went from an hour to five minutes." }
         ],
-        proof: "Built and ran the full tech stack for a real multi-location business. Now we do it for yours.",
+        proof: "We built and ran the full operations stack for a medical clinic franchise before we sold a day of consulting — phones, scheduling, billing, reporting. Now we build it for yours.",
         ctaOverline: "TELL US WHERE THE TIME GOES",
         ctaH2: "Stop losing hours. Let's find the leak.",
-        ctaLead: "Tell us a little about your operation and the one task eating your week. We'll come back within one business day with where we'd look first.",
+        ctaLead: "Tell us a little about your operation and the task eating your week. We read every note ourselves and reply personally within one business day.",
         formKicker: "Where's your operation leaking time?",
-        bizWord: "Business",
-        bizPlaceholder: "What you run",
+        bizWord: "Business", bizPlaceholder: "What you run",
         headacheLabel: "Biggest time sink in your week",
         headachePlaceholder: "The task that keeps eating your week",
-        submit: 'Send it over <span class="arrow">&rarr;</span>',
-        successMsg: "Thanks. We read every submission and reply personally within one business day with where we'd look first."
+        submit: 'Show me where the leak is <span class="arrow">&rarr;</span>',
+        successMsg: "Thanks. We read every submission and reply personally within one business day with where we'd look first.",
+        faqH2: "The questions every owner asks before booking.",
+        faq: [
+          { q: "Is this going to be some software I have to manage?", a: "No. We don't sell subscriptions or licenses. We build systems that run on tools you already own — your scheduler, your CRM, your phone provider. When we're done, your team runs it. We're not a vendor you depend on forever." },
+          { q: "I've tried AI tools before and my team didn't use them.", a: "That's the most common thing we hear — and it's usually because the tool was built for a generic business, not yours. We build to your specific workflow, train your team on it, and don't hand it off until it's actually running. The written fix plan from the teardown is yours regardless." },
+          { q: "How do I know this is worth $4,500?", a: "The teardown is free, and the written fix plan is yours to keep whether you hire us or not. Most clients find that a single recovered hour per week or one extra booked job per month more than covers a project at this price. We don't ask you to take that on faith — you'll see the math in the teardown itself." }
+        ]
       },
 
       "home-services": {
-        title: "Fox Consulting — AI front desk for HVAC, plumbing & roofing crews",
+        title: "Fox Consulting — AI phone & ops for HVAC, plumbing & roofing",
         meta: "Every missed call is a booked job gone to a competitor. Fox builds the AI phone, dispatch, and invoicing systems that stop the leak. Free teardown.",
-        overline: "AI OPS FOR HOME-SERVICE TRADES · WINTER PARK · ORLANDO · BREVARD",
-        h1: 'Every call your crew can’t answer is a job your competitor just booked. We build the AI that <span class="ink">answers it, books it, and invoices it.</span>',
-        lead: "You're under a truck or up on a roof while the phone rings out to voicemail — and that caller already dialed the next company on the list. We install an AI front desk that answers every call, books the slot, and pushes the paperwork.",
-        cta: 'Book a free operations teardown <span class="arrow">&rarr;</span>',
-        note: "We built and ran the full tech stack for a real multi-truck operation. <b>Now we do it for yours.</b>",
-        statTag: "What the work recovers",
+        overline: "FOR HVAC, PLUMBING &amp; ROOFING SHOPS &middot; ORLANDO &middot; BREVARD",
+        h1: 'That call you just missed? Your competitor picked it up. We build the AI that <span class="ink">answers it, books it, and sends the invoice.</span>',
+        lead: "You're under a truck or up on a roof while the phone rings out to voicemail — and that caller already dialed the next company on the list. We install an AI front desk that answers every call, books the slot, and handles the paperwork.",
+        cta: 'Find my missed-call leak <span class="arrow">&rarr;</span>',
+        note: 'We built the full operations stack for a <b>real multi-location business</b> before we sold a day of it — phones, dispatch, billing, reporting. That\'s the experience behind every fix plan.<br><br><em style="font-style:normal;color:var(--fg-muted);">Free teardown = 90 min on-site, ranked list of where you\'re losing jobs. Yours to keep no matter what.</em>',
         stats: [
-          { num: "27", u:"%", lab:"of inbound calls go unanswered at a busy shop — each a job at risk" },
-          { num: "9", u:"hrs", lab:"of dispatch, quoting, and invoicing pulled off the owner's week" },
-          { num: "24", u:"/7", lab:"after-hours and overflow coverage that books the job" }
+          { num:"27", u:"%", lab:"of inbound calls go unanswered at a busy trades shop — each one a job at risk" },
+          { num:"9",  u:"hrs", lab:"of dispatch, quoting, and invoicing off the owner's week" },
+          { num:"24", u:"/7", lab:"after-hours and overflow call coverage that books the job" }
         ],
-        focusH2: "Six places your trucks are quietly leaking jobs.",
-        focusP: "We don't sell software. We find where the calls and paperwork leak, then build the system that books and bills them — wired into the dispatch tools you already run.",
+        focusH2: "Six places your trucks are quietly leaking jobs and money.",
+        focusP: "We don't sell software. We find where your calls and paperwork bleed, then wire the system that books and bills them into the tools you already run.",
         focus: [
-          { ic:"phone", h:"Missed calls = lost jobs", p:"A missed call from a homeowner with a flooded water heater is a $4,000 job that goes to whoever picks up next. AI answers every ring, qualifies the emergency, and books it before they hang up." },
-          { ic:"truck", h:"Dispatch & scheduling", p:"Stop running the board off texts and sticky notes. Calls get slotted to the right truck by zone and skill, and customers get an automated “tech is 20 minutes out” text." },
-          { ic:"flow", h:"Invoicing & collections", p:"Jobs closed in the field generate, send, and chase their own invoices. The owner stops reconciling receipts on Sunday night, and 60-day receivables stop piling up." },
-          { ic:"star", h:"Review generation", p:"A job that goes well should become a five-star review automatically. We trigger the ask by text the moment the ticket closes, so your Google rank climbs without anyone nagging." },
-          { ic:"box", h:"Parts & inventory", p:"Know what's on each truck before the tech rolls. We connect purchasing and job costing so you stop eating the cost of a second trip for a part in the other van." },
-          { ic:"chart", h:"Multi-truck reporting", p:"Revenue per truck, close rate per tech, jobs booked vs. missed — on one live screen. The numbers you guess at on the drive home, in front of you every morning." }
+          { ic:"phone", h:"Missed calls = lost jobs",      p:"A missed call from a homeowner with a flooded water heater is a $4,000 job that goes to whoever picks up next. AI answers every ring, qualifies the job, and books it." },
+          { ic:"truck", h:"Dispatch & scheduling",         p:"Calls get slotted to the right truck by zone and skill. Customers get an automated 'tech is 20 minutes out' text. Your board stops falling apart at 10am." },
+          { ic:"flow",  h:"Invoicing & collections",       p:"Jobs closed in the field generate, send, and chase their own invoices. The owner stops reconciling receipts on Sunday night." },
+          { ic:"star",  h:"Review generation",             p:"A job that goes well becomes a five-star review automatically — triggered by text the moment the ticket closes. Your Google rank climbs without you nagging anyone." },
+          { ic:"box",   h:"Parts & inventory",             p:"Know what's on each truck before the tech rolls. We connect purchasing and job costing so you stop eating the cost of a second trip for a part in the other van." },
+          { ic:"chart", h:"Multi-truck reporting",         p:"Revenue per truck, close rate per tech, jobs booked vs. missed — on one live screen. The numbers you guess at on the drive home, in front of you every morning." }
         ],
         examples: [
-          { k:"HVAC · multi-truck", big:"$11k", u:"/mo", h:"After-hours calls stopped going to voicemail", p:"An AI front desk picked up the nights-and-weekends overflow a four-truck HVAC shop was losing. Roughly eleven thousand a month in booked work is now on the schedule." },
-          { k:"Plumbing", big:"38", u:"%", h:"More calls turned into booked jobs", p:"Every call gets answered, qualified, and booked with a confirmation text — even mid-job. Booking rate on inbound calls climbed 38% without adding an office hire." },
-          { k:"Roofing & exteriors", big:"9", u:"hrs/wk", h:"The owner got his nights back", p:"Quoting, invoicing, and review requests now run themselves off closed jobs. Nine hours a week of after-dinner admin came off the owner's plate." }
+          { k:"HVAC · multi-truck", big:"$11k", u:"/mo", h:"After-hours calls stopped going to voicemail", p:"A four-truck HVAC shop's nights-and-weekends overflow is now answered, booked, and confirmed automatically. Roughly eleven thousand a month in work that used to ring out." },
+          { k:"Plumbing", big:"38", u:"%", h:"More calls turned into booked jobs", p:"Every call gets answered, qualified, and booked with a confirmation text — even mid-job. Inbound booking rate climbed 38% without a single new office hire." },
+          { k:"Roofing & exteriors", big:"9", u:"hrs/wk", h:"The owner got his nights back", p:"Quoting, invoicing, and review requests now run off closed jobs automatically. Nine hours of after-dinner admin came off the owner's plate." }
         ],
-        proof: "We built and ran the phones, dispatch, and invoicing for a real multi-truck operation before we sold a day of it — so we fix your week the way an operator would, not the way a software rep would.",
+        proof: "We built and ran the phones, dispatch, and invoicing for a real multi-location operation before we sold a day of it — so we fix your week the way an operator would, not the way a software rep would.",
         ctaOverline: "FIND THE JOBS YOUR PHONE IS LEAKING",
-        ctaH2: "Find out exactly how many jobs your phone is leaking.",
+        ctaH2: "Find out exactly how many jobs your phone is losing.",
         ctaLead: "Tell us how your calls, dispatch, and invoicing run today. We'll come back within one business day with where your operation is bleeding work.",
         formKicker: "How many jobs is your phone leaking?",
-        bizWord: "Business",
-        bizPlaceholder: "HVAC, plumbing, roofing, etc.",
+        bizWord: "Business", bizPlaceholder: "HVAC, plumbing, roofing, etc.",
         headacheLabel: "What's costing you the most jobs?",
         headachePlaceholder: "Missed calls, dispatch chaos, slow invoicing...",
-        submit: 'Send it over <span class="arrow">&rarr;</span>',
-        successMsg: "Thanks. We read every submission and reply personally within one business day with where you're losing the most jobs."
+        submit: 'Find my missed-call leak <span class="arrow">&rarr;</span>',
+        successMsg: "Thanks. We read every submission and reply personally within one business day with where you're losing the most jobs.",
+        faqH2: "What trades owners ask before booking the teardown.",
+        faq: [
+          { q: "My guys won't use another app. I've been down that road.", a: "Nothing your crew touches changes. The AI front desk answers calls and routes jobs to your existing scheduler. The dashboard reads from tools you already run. We build around your workflow, not against it — and we don't hand it off until your team is actually using it." },
+          { q: "I already run ServiceTitan / Housecall Pro / Jobber. Does this replace it?", a: "No. We wire into it. A booked call shows up in your dispatch board automatically. Your invoicing, job costing, and reporting pull from the same system. We add the layer that closes the leaks your platform doesn't cover — primarily the after-hours calls it can't answer and the paperwork it doesn't automate." },
+          { q: "What does this actually cost, total — including the AI tools?", a: "The $4,500 project price covers the build, integration, and training. The AI and automation tools we wire in typically run $50–$150/month in platform costs — which you own, not us. Most clients recover that in the first week from reduced missed calls alone. We'll show you the math in the teardown." }
+        ]
       },
 
       "medical": {
         title: "Fox Consulting — fix the front-desk leak at your practice",
-        meta: "We find where your practice loses chair time and money — unbooked slots, no-shows, phone overload — then build the AI systems that stop it. Free teardown.",
-        overline: "AI-ENABLED PRACTICE OPERATIONS · WINTER PARK · ORLANDO · BREVARD COUNTY",
-        h1: 'We find where your practice loses chair time and money — then build the AI systems that <span class="ink">answer the phones, fill the schedule, and chase the no-shows.</span>',
-        lead: "Your front desk can't pick up every line, work the recall list, and run insurance at the same time — so calls go to voicemail and slots go empty. We build the AI phone, reminder, and reactivation systems that run it on autopilot, wired into the tools you already use.",
-        cta: 'Book a free operations teardown <span class="arrow">&rarr;</span>',
-        note: "Systems are built to respect patient privacy and keep your records where they belong. <b>On-site, local, and free to start.</b>",
-        statTag: "What the work looks like",
+        meta: "We find where your practice loses chair time — unbooked slots, no-shows, phone overload — then build the AI systems that stop it. Free teardown, Winter Park FL.",
+        overline: "FOR DENTAL &amp; MEDICAL PRACTICES &middot; WINTER PARK &middot; ORLANDO &middot; BREVARD",
+        h1: 'Every call that hits voicemail is a chair that stays empty. We build the AI systems that <span class="ink">answer the phones, fill the schedule, and chase the no-shows.</span>',
+        lead: "Your front desk can't pick up every line, work the recall list, and run insurance at the same time — so calls go to voicemail and slots go empty. We build the AI phone, reminder, and reactivation systems wired into the tools you already use.",
+        cta: 'Find where my chairs go empty <span class="arrow">&rarr;</span>',
+        note: 'We built the full operations stack for a <b>medical clinic franchise</b> — phones, scheduling, billing workflows, multi-location reporting. That\'s not a case study. That\'s what we built.<br><br><em style="font-style:normal;color:var(--fg-muted);">Free teardown = 90 min on-site, written fix plan yours to keep. We stay on the scheduling and communications layer — not clinical records.</em>',
         stats: [
-          { num: "31", u:"%", lab:"fewer no-shows after automated multi-touch reminders" },
-          { num: "14", u:"hrs/wk", lab:"of front-desk phone and follow-up time handed back" },
-          { num: "24", u:"/7", lab:"after-hours calls answered and booked into open chairs" }
+          { num:"31", u:"%", lab:"fewer no-shows after automated multi-touch reminders" },
+          { num:"14", u:"hrs/wk", lab:"of front-desk phone and follow-up time handed back" },
+          { num:"24", u:"/7", lab:"after-hours calls answered and booked into open chairs" }
         ],
-        focusH2: "Six places your practice loses chair time and money.",
-        focusP: "We don't sell software, and we don't touch clinical work. We find where the front desk leaks — phone, scheduling, recall, intake — then build the systems that close it.",
+        focusH2: "Six places your practice loses chair time every week.",
+        focusP: "We don't touch clinical or diagnostic records — ever. We work the scheduling and communications layer: front desk, phone, recall, intake, and reporting.",
         focus: [
-          { ic:"phone", h:"AI phone & front desk", p:"Answers every line during the lunch rush and after hours, books into your open slots, and texts a confirmation. The calls that used to hit voicemail turn into appointments." },
-          { ic:"cal", h:"No-show & reminder workflows", p:"Automated text, email, and call reminders timed across the days before an appointment, with easy confirm and reschedule. Empty chairs get backfilled from your waitlist." },
-          { ic:"repeat", h:"Recall & reactivation", p:"We work your overdue-hygiene and lapsed-patient lists automatically — the outreach your front desk never gets to. Dormant patients come back without anyone combing the schedule." },
-          { ic:"file", h:"Insurance & intake paperwork", p:"New-patient forms, eligibility checks, and intake routing handled before the patient sits down. Your team stops re-keying the same information into three screens." },
-          { ic:"chart", h:"Multi-location & provider reporting", p:"Production, open slots, no-show rate, and recall numbers for every provider and location on one live screen. The Monday meeting goes from an hour to five minutes." },
-          { ic:"people", h:"Internal assistant for staff", p:"A custom assistant trained on how your practice actually runs — insurance rules, scheduling policies, where things live — so new hires stop interrupting your office manager." }
+          { ic:"phone",  h:"AI phone & front desk",       p:"Answers every line during the lunch rush and after hours, books into your open slots, and texts a confirmation. Calls that used to hit voicemail become appointments." },
+          { ic:"cal",    h:"No-show & reminder workflows", p:"Multi-touch text, email, and call reminders before each appointment, with one-tap confirm and reschedule. Empty chairs get backfilled from your waitlist instead of staying dark." },
+          { ic:"repeat", h:"Recall & reactivation",       p:"We work your overdue-hygiene and lapsed-patient lists automatically — the outreach your front desk never gets to. Dormant patients come back without anyone combing the schedule." },
+          { ic:"file",   h:"Insurance & intake paperwork", p:"New-patient forms, eligibility checks, and intake routing handled before the patient sits down. Your team stops re-keying the same information into three screens." },
+          { ic:"chart",  h:"Multi-location reporting",    p:"Production, open slots, no-show rate, and recall numbers for every provider and location on one live screen. The Monday meeting goes from an hour to five minutes." },
+          { ic:"people", h:"Internal staff assistant",    p:"A custom assistant trained on how your practice actually runs — insurance rules, scheduling policies, where things live — so new hires stop pulling the office manager." }
         ],
         examples: [
           { k:"Independent dental", big:"31", u:"%", h:"Reminders that actually get answered", p:"A multi-touch text-and-call reminder sequence with one-tap confirm cut no-shows and backfilled cancellations from the waitlist. The schedule stopped collapsing on Mondays." },
-          { k:"Multi-provider clinic", big:"22", u:"/wk", h:"The 7pm caller stops going to voicemail", p:"An AI front desk answers overflow and after-hours calls, books into open slots, and confirms by text. Calls that used to be lost revenue became appointments." },
-          { k:"Specialty practice", big:"9", u:"hrs/wk", h:"Recall list that works itself", p:"Automated recall and reactivation outreach pulled overdue patients back without the front desk hunting the schedule. Hygiene columns filled back up." }
+          { k:"Multi-provider clinic", big:"22", u:"/wk", h:"The 7pm caller stops going to voicemail", p:"An AI front desk answers overflow and after-hours calls, books into open slots, and confirms by text. Calls that used to be lost revenue became booked appointments." },
+          { k:"Medical clinic franchise", big:"9", u:"hrs/wk", h:"Operations stack we built ourselves", p:"Phones, scheduling, billing workflows, and multi-location reporting — built and run by Fox before we offered it as a service. Same system, your practice." }
         ],
-        proof: "Built and ran the full operations stack for a real multi-location business — phones, scheduling, reporting, the works. Now we do it for your practice.",
+        proof: "We built and ran the full operations stack for a medical clinic franchise — phones, scheduling, billing, multi-location reporting. That's not a case study. That's what we built.",
         ctaOverline: "FIND THE CHAIR TIME YOU'RE LOSING",
         ctaH2: "Stop losing chair time to a phone nobody can answer.",
         ctaLead: "Tell us where your week goes — the calls, the no-shows, the recall list. We'll come back within one business day with where we'd look first.",
         formKicker: "Where's your front desk losing chair time?",
-        bizWord: "Practice",
-        bizPlaceholder: "Dental, medical, specialty, etc.",
+        bizWord: "Practice", bizPlaceholder: "Dental, medical, specialty, etc.",
         headacheLabel: "Where's the front desk falling behind?",
-        headachePlaceholder: "No-shows, phones ringing out, recall list...",
-        submit: 'Send it over <span class="arrow">&rarr;</span>',
-        successMsg: "Thanks. We read every submission and reply personally within one business day with where your front desk is losing the most time."
+        headachePlaceholder: "No-shows, phones ringing out, recall backlog...",
+        submit: 'Find where my chairs go empty <span class="arrow">&rarr;</span>',
+        successMsg: "Thanks. We read every submission and reply personally within one business day with where your front desk is losing the most time.",
+        faqH2: "What practice owners ask before booking.",
+        faq: [
+          { q: "What about patient privacy? Will this touch clinical records or PHI?", a: "No — and that's not a hedge. We work exclusively at the scheduling and communications layer: phone, appointment booking, reminders, recall outreach, and billing workflow routing. We do not connect to, transmit, or store clinical records, diagnostic data, or PHI. Your EHR stays where it is. If your compliance team wants to review what we build before it goes live, we welcome that." },
+          { q: "My front desk is the personal touch. I don't want patients talking to a robot.", a: "The AI takes the overflow — the third line ringing during a root canal, the 7pm callback nobody could return, the no-show text nobody had time to send. Your team handles the people in the chair. The system handles the calls and follow-ups they were already missing. Your patients get a faster response, not a worse one." },
+          { q: "We already use a PMS and a reminder add-on. Why isn't that enough?", a: "Those tools store data — they don't work your recall list, answer your overflow calls, or route your intake. We wire what you already run into one system that actually picks up, books, and follows up instead of waiting for your front desk to have a free minute. Usually we're adding capability your current stack doesn't have, not replacing it." }
+        ]
       }
     };
 
-    /* ---------- pick variant ---------- */
+    /* ============================================================
+       PICK VARIANT — utm_medium=cpc or utm_source=google/facebook
+       hides the switcher strip (paid traffic shouldn't see it)
+       ============================================================ */
     function getNiche() {
-      var n = new URLSearchParams(location.search).get('niche');
+      var p = new URLSearchParams(location.search);
+      var n = p.get('niche');
       return NICHE[n] ? n : 'general';
     }
     var current = getNiche();
     var d = NICHE[current];
 
-    /* ---------- render ---------- */
+    // hide switcher for paid traffic
+    (function () {
+      var p = new URLSearchParams(location.search);
+      var src = (p.get('utm_source') || '').toLowerCase();
+      var med = (p.get('utm_medium') || '').toLowerCase();
+      if (med === 'cpc' || med === 'paid' || src === 'google' || src === 'facebook' || src === 'instagram' || src === 'meta') {
+        var sw = document.getElementById('nicheSwitcher');
+        if (sw) sw.style.display = 'none';
+      }
+    })();
+
+    /* ============================================================
+       RENDER
+       ============================================================ */
     function set(id, html) { var el = document.getElementById(id); if (el) el.innerHTML = html; }
     function icon(name) {
       return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[name] || ICONS.flow) + '</svg>';
@@ -608,28 +868,46 @@
     set('heroLead', d.lead);
     set('heroCta', d.cta);
     set('heroNote', d.note);
-    set('statTag', d.statTag);
-    set('statRows', d.stats.map(function (s) {
-      return '<div class="row"><span class="num">' + s.num + '<span class="u">' + s.u + '</span></span><span class="lab">' + s.lab + '</span></div>';
+
+    // stats band
+    set('statRows', d.stats.map(function(s) {
+      return '<div class="stat-item"><div class="num" data-target="' + s.num.replace(/[^0-9]/g,'') + '">' + s.num + '<span class="u">' + s.u + '</span></div><p class="lab">' + s.lab + '</p></div>';
     }).join(''));
 
     set('focusH2', d.focusH2);
     set('focusP', d.focusP);
-    set('focusCards', d.focus.map(function (f) {
+    set('focusCards', d.focus.map(function(f) {
       return '<article class="card reveal"><div class="ic">' + icon(f.ic) + '</div><h3>' + f.h + '</h3><p>' + f.p + '</p></article>';
     }).join(''));
 
-    set('exampleCards', d.examples.map(function (e) {
+    set('exampleCards', d.examples.map(function(e) {
       var unit = e.u ? '<span class="u">' + e.u + '</span>' : '';
       return '<article class="ex reveal"><p class="kicker">' + e.k + '</p><p class="big">' + e.big + unit + '</p><h3>' + e.h + '</h3><p>' + e.p + '</p></article>';
     }).join(''));
-    set('proofText', '"' + d.proof + '" ');
+    set('proofText', d.proof);
 
     set('ctaOverline', d.ctaOverline);
     set('ctaH2', d.ctaH2);
     set('ctaLead', d.ctaLead);
 
-    /* ---------- form copy (niche-aware) ---------- */
+    // niche switcher active state
+    document.querySelectorAll('.switch a[data-niche]').forEach(function(a) {
+      if (a.getAttribute('data-niche') === current) a.setAttribute('aria-current','true');
+    });
+
+    // FAQ
+    set('faqH2', d.faqH2);
+    set('faqList', d.faq.map(function(item, i) {
+      return '<div class="faq-item" id="faq'+i+'">' +
+        '<button class="faq-q" aria-expanded="false" aria-controls="faqA'+i+'" onclick="toggleFaq('+i+')">' +
+        '<span>' + item.q + '</span>' +
+        '<span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>' +
+        '</button>' +
+        '<div class="faq-a" id="faqA'+i+'" role="region"><div class="faq-a-inner">' + item.a + '</div></div>' +
+        '</div>';
+    }).join(''));
+
+    // form labels/copy
     set('formKicker', d.formKicker);
     set('businessLabel', d.bizWord + ' <span class="req">*</span>');
     var bizInput = document.getElementById('business'); if (bizInput) bizInput.placeholder = d.bizPlaceholder;
@@ -638,94 +916,169 @@
     set('leadSubmit', d.submit);
     set('successMsg', d.successMsg);
     var nf = document.getElementById('nicheField'); if (nf) nf.value = current;
-    var sf = document.getElementById('sourceField'); if (sf) sf.value = location.href;
 
-    /* ---------- niche switcher active state (preserve hash) ---------- */
-    document.querySelectorAll('.switch a[data-niche]').forEach(function (a) {
-      if (a.getAttribute('data-niche') === current) a.setAttribute('aria-current', 'true');
-    });
+    // capture UTMs into the form
+    (function () {
+      var p = new URLSearchParams(location.search);
+      var uf = document.getElementById('utmField');
+      if (uf) {
+        var utms = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].map(function(k) {
+          return k + '=' + (p.get(k) || '');
+        }).join('&');
+        uf.value = utms;
+      }
+    })();
 
-    /* ---------- CTA buttons scroll to the form and focus it ---------- */
+    /* ============================================================
+       VIDEO PLAYER
+       ============================================================ */
+    (function () {
+      var videoUrl = window.FOX_VIDEO_URL || '';
+      var wrap = document.getElementById('videoWrap');
+      var modal = document.getElementById('videoModal');
+      var frame = document.getElementById('videoFrame');
+      var closeBtn = document.getElementById('modalClose');
+      var label = document.getElementById('videoLabel');
+
+      if (!videoUrl && label) {
+        label.innerHTML = 'Video coming soon — <em>see how it works below</em>';
+      }
+
+      function openVideo() {
+        if (!videoUrl) { var el = document.getElementById('how'); if (el) el.scrollIntoView({ behavior:'smooth' }); return; }
+        var src = videoUrl + (videoUrl.indexOf('?') > -1 ? '&' : '?') + 'autoplay=1';
+        frame.src = src;
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeVideo() {
+        modal.classList.remove('open');
+        frame.src = '';
+        document.body.style.overflow = '';
+      }
+
+      if (wrap) {
+        wrap.addEventListener('click', openVideo);
+        wrap.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openVideo(); } });
+      }
+      if (closeBtn) closeBtn.addEventListener('click', closeVideo);
+      if (modal) modal.addEventListener('click', function(e) { if (e.target === modal) closeVideo(); });
+      document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeVideo(); });
+    })();
+
+    /* ============================================================
+       CTA BUTTONS — scroll to form and focus it
+       ============================================================ */
     function scrollToForm(e) {
       if (e) e.preventDefault();
       var sec = document.getElementById('contact');
-      if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (sec) sec.scrollIntoView({ behavior:'smooth', block:'start' });
       var first = document.getElementById('name');
-      if (first) setTimeout(function () { first.focus({ preventScroll: true }); }, 500);
-      return false;
+      if (first) setTimeout(function () { first.focus({ preventScroll:true }); }, 500);
     }
-    document.querySelectorAll('[data-book]').forEach(function (b) { b.addEventListener('click', scrollToForm); });
+    document.querySelectorAll('[data-book]').forEach(function(b) { b.addEventListener('click', scrollToForm); });
 
-    /* ---------- lead form: validate + submit to Formspree ---------- */
+    /* ============================================================
+       FAQ ACCORDION
+       ============================================================ */
+    function toggleFaq(i) {
+      var item = document.getElementById('faq'+i);
+      var btn  = item ? item.querySelector('.faq-q') : null;
+      if (!item || !btn) return;
+      var isOpen = item.classList.contains('open');
+      // close all
+      document.querySelectorAll('.faq-item.open').forEach(function(el) {
+        el.classList.remove('open');
+        var b = el.querySelector('.faq-q'); if (b) b.setAttribute('aria-expanded','false');
+      });
+      if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    }
+    window.toggleFaq = toggleFaq;
+
+    /* ============================================================
+       LEAD FORM
+       ============================================================ */
     (function () {
       var form = document.getElementById('leadForm');
       if (!form) return;
       var btn = document.getElementById('leadSubmit');
-      var btnHTML = btn ? btn.innerHTML : '';
+
+      // GA4 form_start (fires once on first focus)
+      var startFired = false;
+      form.addEventListener('focusin', function () {
+        if (startFired) return; startFired = true;
+        if (window.gtag) gtag('event', 'form_start', { niche: current });
+        if (window.fbq) fbq('track', 'InitiateCheckout', { content_category: current });
+      }, { once: false });
 
       function showSuccess() {
-        // Send to the thank-you page (distinct URL = clean conversion event for ad platforms).
-        // niche is carried through for attribution.
         window.location.assign('thankyou.html?niche=' + encodeURIComponent(current));
       }
 
       form.addEventListener('submit', function (e) {
         e.preventDefault();
-        // honeypot: silently drop bots
         if (form.querySelector('[name="_gotcha"]').value) { showSuccess(); return; }
-
-        // native validation
         var ok = true;
-        ['name', 'business', 'email', 'headache'].forEach(function (id) {
+        ['name','headache','email','business'].forEach(function(id) {
           var f = document.getElementById(id);
-          if (!f.checkValidity()) { f.classList.add('invalid'); ok = false; } else { f.classList.remove('invalid'); }
+          if (f && !f.checkValidity()) { f.classList.add('invalid'); ok = false; } else if (f) { f.classList.remove('invalid'); }
         });
         if (!ok) { form.reportValidity(); return; }
-
+        var saved = btn ? btn.innerHTML : '';
         if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
-
-        // DEMO mode if no Formspree ID set yet
-        if (!FORMSPREE_ID) {
-          setTimeout(showSuccess, 500);
-          return;
-        }
-
+        if (!FORMSPREE_ID) { setTimeout(showSuccess, 500); return; }
         fetch('https://formspree.io/f/' + FORMSPREE_ID, {
           method: 'POST',
           headers: { 'Accept': 'application/json' },
           body: new FormData(form)
-        }).then(function (r) {
+        }).then(function(r) {
           if (r.ok) { showSuccess(); }
           else { throw new Error('bad response'); }
-        }).catch(function () {
-          if (btn) { btn.disabled = false; btn.innerHTML = btnHTML; }
-          alert("Something went wrong sending that. Email us directly at hello@foxconsulting.co and we'll jump on it.");
+        }).catch(function() {
+          if (btn) { btn.disabled = false; btn.innerHTML = saved; }
+          alert('Something went wrong sending that. Call or text us directly at (321) 750-9608 and we\'ll jump on it.');
         });
       });
-
-      // clear invalid state as the user fixes fields
-      form.addEventListener('input', function (e) { if (e.target.classList) e.target.classList.remove('invalid'); });
+      form.addEventListener('input', function(e) { if (e.target.classList) e.target.classList.remove('invalid'); });
     })();
 
-    /* ---------- mobile nav ---------- */
+    /* ============================================================
+       MOBILE NAV
+       ============================================================ */
     (function () {
       var t = document.getElementById('navToggle'), l = document.getElementById('navlinks');
       if (t && l) {
-        t.addEventListener('click', function () { var open = l.classList.toggle('open'); t.setAttribute('aria-expanded', open ? 'true' : 'false'); });
-        l.addEventListener('click', function (e) { if (e.target.tagName === 'A') { l.classList.remove('open'); t.setAttribute('aria-expanded', 'false'); } });
+        t.addEventListener('click', function() { var open = l.classList.toggle('open'); t.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+        l.addEventListener('click', function(e) { if (e.target.tagName === 'A') { l.classList.remove('open'); t.setAttribute('aria-expanded','false'); } });
       }
     })();
 
-    /* ---------- scroll reveal ---------- */
+    /* ============================================================
+       FLOATING MOBILE CTA — appears after scrolling past hero
+       ============================================================ */
+    (function () {
+      var cta = document.getElementById('floatCta');
+      var hero = document.getElementById('heroSection');
+      if (!cta || !hero || !('IntersectionObserver' in window)) return;
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(en) { cta.classList.toggle('visible', !en.isIntersecting); });
+      }, { threshold: 0.1 });
+      io.observe(hero);
+    })();
+
+    /* ============================================================
+       SCROLL REVEAL
+       ============================================================ */
     (function () {
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var els = document.querySelectorAll('.reveal');
-      if (reduce || !('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('in'); }); return; }
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
-      }, { threshold: 0.12 });
-      els.forEach(function (el) { io.observe(el); });
+      if (reduce || !('IntersectionObserver' in window)) { els.forEach(function(el) { el.classList.add('in'); }); return; }
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+      }, { threshold: 0.1 });
+      els.forEach(function(el) { io.observe(el); });
     })();
+
   </script>
 </body>
 </html>
