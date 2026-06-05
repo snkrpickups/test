@@ -129,7 +129,7 @@
     @media (prefers-reduced-motion: reduce) { #hero-bg { opacity: 0.4; } }
 
     .hero-grid { position: relative; z-index: 1; max-width: 680px; }
-    .hero h1 { font-weight: 900; font-size: clamp(36px, 5.2vw, 60px); line-height: 1.03; letter-spacing: var(--tracking-display); margin: var(--space-5) 0; }
+    .hero h1 { font-weight: 900; font-size: clamp(32px, 4.4vw, 52px); line-height: 1.06; letter-spacing: var(--tracking-display); margin: var(--space-5) 0; }
     .hero h1 .ink { color: var(--accent); }
     .hero .lead { font: var(--text-lead); color: var(--fg-secondary); max-width: 44ch; margin-bottom: var(--space-8); }
     .hero-cta { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; }
@@ -246,12 +246,46 @@
     .faq-a-inner { padding: 0 var(--space-6) var(--space-5); font: var(--text-body); color: var(--fg-secondary); line-height: 1.65; }
     .faq-item.open .faq-a { max-height: 300px; }
 
+    /* ---- time leak calculator ---- */
+    .calc-section { background: var(--bg-sunken); }
+    .calc-wrap { max-width: 700px; }
+    .calc-body { display: grid; gap: var(--space-8); }
+    .calc-sliders { display: grid; gap: var(--space-7); }
+    .calc-label { display: grid; gap: var(--space-3); cursor: default; }
+    .calc-lbl-text { font: 600 14px/1.3 var(--font-body); color: var(--fg-secondary); }
+    .calc-label input[type=range] {
+      -webkit-appearance: none; appearance: none;
+      width: 100%; height: 6px; border-radius: var(--radius-pill);
+      background: var(--border-strong); cursor: pointer; outline: none;
+      accent-color: var(--accent);
+    }
+    .calc-label input[type=range]:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .calc-output { font: 700 15px/1 var(--font-mono); color: var(--accent); display: block; margin-top: var(--space-2); }
+    .calc-result {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      border-radius: var(--radius-xl); padding: var(--space-8);
+      text-align: center;
+    }
+    .calc-stat strong { display: block; font: 800 36px/1 var(--font-mono); letter-spacing: -.03em; color: var(--accent); }
+    .calc-stat span { font: var(--text-small); color: var(--fg-muted); margin-top: var(--space-2); display: block; }
+
+    /* ---- focus area cards — interactive expand ---- */
+    .card { cursor: pointer; }
+    .card .card-expand { display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-4); font: 600 12px/1 var(--font-mono); color: var(--accent); letter-spacing: .04em; text-transform: uppercase; }
+    .card .card-expand svg { width: 14px; height: 14px; transition: transform .2s; flex: none; }
+    .card.open .card-expand svg { transform: rotate(45deg); }
+    .card .card-detail { max-height: 0; overflow: hidden; transition: max-height .3s cubic-bezier(.2,.8,.2,1); }
+    .card.open .card-detail { max-height: 200px; }
+    .card.open { border-color: rgba(236,94,18,.35); box-shadow: var(--shadow-md); }
+
     /* ---- pricing ---- */
     .pricing { }
-    .plans { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-6); align-items: start; }
-    .plan { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: var(--space-8); display: flex; flex-direction: column; gap: var(--space-5); }
-    .plan.featured { border-color: var(--accent); box-shadow: var(--shadow-lg), 0 0 0 1px rgba(236,94,18,.12); position: relative; }
-    .plan.featured .badge { position: absolute; top: -13px; left: var(--space-8); background: var(--accent); color: var(--accent-fg); font: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; padding: 6px 12px; border-radius: var(--radius-pill); }
+    .plans { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-5); align-items: start; }
+    .plan { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); }
+    .plan.featured { border-color: var(--accent); box-shadow: var(--shadow-lg), 0 0 0 1px rgba(236,94,18,.12); position: relative; margin-top: var(--space-4); }
+    .plan.featured .badge { position: absolute; top: -13px; left: var(--space-6); background: var(--accent); color: var(--accent-fg); font: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; padding: 6px 12px; border-radius: var(--radius-pill); }
     .plan .pname { font: 700 22px/1 var(--font-display); letter-spacing: var(--tracking-tight); }
     .plan .ptag { font: var(--text-small); color: var(--fg-secondary); min-height: 2.6em; }
     .plan .price { font: 800 40px/1 var(--font-mono); letter-spacing: -.03em; }
@@ -322,8 +356,11 @@
     .plan .bonus-li svg { color: var(--fox-500); }
     .bonus-tag { font: 700 10px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .08em; background: var(--fox-50); color: var(--fox-600); border: 1px solid var(--fox-100); border-radius: var(--radius-pill); padding: 3px 7px; margin-right: 4px; flex: none; }
 
+    /* ---- hero trust strip ---- */
+    .hero-trust { font: 600 12px/1.3 var(--font-mono); color: var(--fg-muted); margin-top: var(--space-4); letter-spacing: .03em; }
+
     /* ---- hero proof strip + scarcity ---- */
-    .hero-proof-strip { font: var(--text-small); color: var(--fg-muted); margin-top: var(--space-4); }
+    .hero-proof-strip { font: var(--text-small); color: var(--fg-muted); margin-top: var(--space-3); }
     .scarcity { font: 600 13px/1.4 var(--font-mono); color: var(--fg-muted); margin-top: var(--space-3); }
     .scarcity .slots { color: var(--accent); }
     .contact-scarcity { font: 600 13px/1.4 var(--font-mono); color: color-mix(in srgb, var(--sand-50) 56%, transparent); margin-top: var(--space-5); }
@@ -358,10 +395,15 @@
     .float-cta.visible { opacity: 1; pointer-events: auto; }
 
     /* ---- responsive ---- */
+    @media (max-width: 1100px) {
+      .plans { grid-template-columns: repeat(2, 1fr); gap: var(--space-6); }
+      .plan.featured { margin-top: 0; }
+    }
     @media (max-width: 900px) {
       .hero-grid { grid-template-columns: 1fr; gap: var(--space-10); }
       .cards, .examples, .steps, .plans, .cmd-grid, .cmd-features, .case-fields { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; gap: var(--space-10); }
+      .calc-result { grid-template-columns: 1fr; gap: var(--space-4); }
       .stats-inner { gap: var(--space-2); }
       .stat-item + .stat-item::before { display: none; }
       .stat-item { border-top: 1px solid var(--char-800); padding: var(--space-5) var(--space-4); }
@@ -426,6 +468,7 @@
         <a class="btn btn-primary btn-lg" data-book href="#contact" id="heroCta">Show me where the leak is <span class="arrow">&rarr;</span></a>
         <a class="btn btn-ghost btn-lg" href="#work">See the work</a>
       </div>
+      <p class="hero-trust" id="heroTrust">Trusted by operators in Brevard and Orange County, FL.</p>
       <p class="hero-proof-strip" id="heroNote">Built and ran the full operations stack for a medical clinic franchise. That's the experience behind every teardown.</p>
       <p class="scarcity" id="heroScarcity"></p>
     </div>
@@ -443,12 +486,54 @@
     </div>
   </div>
 
+  <!-- ===================== TIME LEAK CALCULATOR ===================== -->
+  <section id="leak-calc" class="calc-section">
+    <div class="wrap">
+      <div class="calc-wrap reveal">
+        <div class="sec-head" style="margin-bottom:var(--space-10)">
+          <p class="overline">How much is it costing you?</p>
+          <h2>See your leak in hours and dollars.</h2>
+          <p>Move the sliders. The numbers are yours to keep.</p>
+        </div>
+        <div class="calc-body">
+          <div class="calc-sliders">
+            <label class="calc-label">
+              <span class="calc-lbl-text">Hours your team loses to manual work each week</span>
+              <input type="range" id="lc-hours" min="2" max="40" value="10" step="1" aria-label="Hours per week on manual work">
+              <output id="lc-hours-out" class="calc-output">10 hrs/week</output>
+            </label>
+            <label class="calc-label">
+              <span class="calc-lbl-text">What an hour of that work costs you (loaded rate)</span>
+              <input type="range" id="lc-rate" min="20" max="120" value="45" step="5" aria-label="Hourly cost of manual work">
+              <output id="lc-rate-out" class="calc-output">$45/hr</output>
+            </label>
+          </div>
+          <div class="calc-result">
+            <div class="calc-stat">
+              <strong id="lc-year-hours">500</strong>
+              <span>hours a year</span>
+            </div>
+            <div class="calc-stat">
+              <strong id="lc-year-cost">$22,500</strong>
+              <span>leaking annually</span>
+            </div>
+            <div class="calc-stat">
+              <strong id="lc-weeks">12</strong>
+              <span>work weeks back</span>
+            </div>
+          </div>
+          <a href="#contact" class="btn btn-primary" id="lc-cta">Stop this leak. Book a free teardown <span class="arrow">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===================== FOCUS AREAS ===================== -->
   <section class="focus" id="focus">
     <div class="wrap">
       <div class="sec-head reveal">
         <p class="overline">Where we go to work</p>
-        <h2 id="focusH2">Five places your operation is quietly bleeding hours.</h2>
+        <h2 id="focusH2">Six places your operation is quietly bleeding hours.</h2>
         <p id="focusP">We don't sell software. We find the leak, then build the system that closes it — wired into the tools you already run.</p>
       </div>
       <div class="cards" id="focusCards"></div>
@@ -722,7 +807,7 @@
         title: "Fox Consulting — AI-enabled operations for local businesses",
         meta: "Fox Consulting finds where your operation leaks time and money, then builds the AI systems that stop it. Local to Winter Park, Orlando, and Brevard County, FL.",
         overline: "LOCAL AI OPERATIONS &middot; WINTER PARK &middot; ORLANDO &middot; BREVARD",
-        h1: 'We find the busywork stealing <span class="ink">10+ hours a week</span> from your business, then build the AI system that does it for you, for good.',
+        h1: 'We find the busywork stealing <span class="ink">10+ hours a week</span> from your operation, then build the AI that kills it for good.',
         lead: "You didn't start your business to do data entry at 9pm. We diagnose the busywork draining your week and build the assistants, pipelines, and dashboards that handle it without you. That's up to 13 weeks of your year back.",
         cta: 'Show me where the leak is <span class="arrow">&rarr;</span>',
         note: 'Built and ran the full operations stack for a medical clinic franchise. That\'s the experience behind every teardown.',
@@ -731,7 +816,7 @@
           { num:"24", u:"/7", lab:"phone coverage that books jobs and follows up" },
           { num:"1", u:"\xa0screen", lab:"every location's numbers, in real time" }
         ],
-        focusH2: "Five places your operation is quietly bleeding hours.",
+        focusH2: "Six places your operation is quietly bleeding hours.",
         focusP: "We don't sell software. We find the leak, then build the system that closes it — wired into the tools you already run.",
         focus: [
           { ic:"phone", h:"AI phone & front desk", p:"AI that answers the phones, books the jobs, and never forgets to follow up. It works nights, weekends, and the lunch rush." },
@@ -789,7 +874,7 @@
           { num:"9",  u:"hrs", lab:"of dispatch, quoting, and invoicing off the owner's week" },
           { num:"24", u:"/7", lab:"after-hours and overflow call coverage that books the job" }
         ],
-        focusH2: "Six places your trucks are quietly leaking jobs and money.",
+        focusH2: "Six places your trucks are leaking jobs and money.",
         focusP: "We don't sell software. We find where your calls and paperwork bleed, then wire the system that books and bills them into the tools you already run.",
         focus: [
           { ic:"phone", h:"Missed calls = lost jobs",      p:"A missed call from a homeowner with a flooded water heater is a $4,000 job that goes to whoever picks up next. AI answers every ring, qualifies the job, and books it." },
@@ -902,8 +987,6 @@
       var n = p.get('niche');
       return NICHE[n] ? n : 'general';
     }
-    var current = getNiche();
-    var d = NICHE[current];
 
     // hide switcher for paid traffic
     (function () {
@@ -917,63 +1000,99 @@
     })();
 
     /* ============================================================
-       RENDER
+       RENDER — callable on load and on niche tab switch
        ============================================================ */
     function set(id, html) { var el = document.getElementById(id); if (el) el.innerHTML = html; }
     function icon(name) {
       return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[name] || ICONS.flow) + '</svg>';
     }
 
-    document.title = d.title;
-    var md = document.getElementById('metaDesc'); if (md) md.setAttribute('content', d.meta);
+    function renderNiche(niche) {
+      var d = NICHE[niche] || NICHE['general'];
 
-    set('heroOverline', d.overline);
-    set('heroH1', d.h1);
-    set('heroLead', d.lead);
-    set('heroCta', d.cta);
-    set('heroNote', d.note);
+      document.title = d.title;
+      var md = document.getElementById('metaDesc'); if (md) md.setAttribute('content', d.meta);
 
-    // stats band
-    set('statRows', d.stats.map(function(s) {
-      return '<div class="stat-item"><div class="num" data-target="' + s.num.replace(/[^0-9]/g,'') + '">' + s.num + '<span class="u">' + s.u + '</span></div><p class="lab">' + s.lab + '</p></div>';
-    }).join(''));
+      set('heroOverline', d.overline);
+      set('heroH1', d.h1);
+      set('heroLead', d.lead);
+      set('heroCta', d.cta);
+      set('heroNote', d.note);
 
-    set('focusH2', d.focusH2);
-    set('focusP', d.focusP);
-    set('focusCards', d.focus.map(function(f) {
-      return '<article class="card reveal"><div class="ic">' + icon(f.ic) + '</div><h3>' + f.h + '</h3><p>' + f.p + '</p></article>';
-    }).join(''));
-
-    set('ctaOverline', d.ctaOverline);
-    set('ctaH2', d.ctaH2);
-    set('ctaLead', d.ctaLead);
-
-    // niche switcher active state
-    document.querySelectorAll('.switch a[data-niche]').forEach(function(a) {
-      if (a.getAttribute('data-niche') === current) a.setAttribute('aria-current','true');
-    });
-
-    // FAQ
-    set('faqH2', d.faqH2);
-    set('faqList', d.faq.map(function(item, i) {
-      return '<div class="faq-item" id="faq'+i+'">' +
-        '<button class="faq-q" aria-expanded="false" aria-controls="faqA'+i+'" onclick="toggleFaq('+i+')">' +
-        '<span>' + item.q + '</span>' +
-        '<span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>' +
-        '</button>' +
-        '<div class="faq-a" id="faqA'+i+'" role="region"><div class="faq-a-inner">' + item.a + '</div></div>' +
-        '</div>';
-    }).join(''));
-
-    // command center section
-    if (d.cmdCenter) {
-      set('cmdLead', d.cmdCenter.lead);
-      set('cmdFeatGrid', d.cmdCenter.features.map(function(f) {
-        return '<div class="cmd-feat reveal"><p class="feat-h">' + f.h + '</p><p class="feat-p">' + f.p + '</p></div>';
+      // stats band
+      set('statRows', d.stats.map(function(s) {
+        return '<div class="stat-item"><div class="num" data-target="' + s.num.replace(/[^0-9]/g,'') + '">' + s.num + '<span class="u">' + s.u + '</span></div><p class="lab">' + s.lab + '</p></div>';
       }).join(''));
+
+      set('focusH2', d.focusH2);
+      set('focusP', d.focusP);
+      set('focusCards', d.focus.map(function(f) {
+        return '<article class="card reveal"><div class="ic">' + icon(f.ic) + '</div>' +
+          '<h3>' + f.h + '</h3>' +
+          '<div class="card-detail"><p>' + f.p + '</p></div>' +
+          '<span class="card-expand" aria-hidden="true">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>' +
+            'Detail' +
+          '</span>' +
+          '</article>';
+      }).join(''));
+
+      // wire card expand after render
+      setTimeout(function () {
+        document.querySelectorAll('#focusCards .card').forEach(function(card) {
+          if (!card.dataset.expandBound) {
+            card.dataset.expandBound = '1';
+            card.addEventListener('click', function () { card.classList.toggle('open'); });
+            card.addEventListener('keydown', function (e) {
+              if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.classList.toggle('open'); }
+            });
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('role', 'button');
+          }
+        });
+      }, 0);
+
+      set('ctaOverline', d.ctaOverline);
+      set('ctaH2', d.ctaH2);
+      set('ctaLead', d.ctaLead);
+
+      // niche switcher active state
+      document.querySelectorAll('.switch a[data-niche]').forEach(function(a) {
+        if (a.getAttribute('data-niche') === niche) {
+          a.setAttribute('aria-current', 'true');
+        } else {
+          a.removeAttribute('aria-current');
+        }
+      });
+
+      // FAQ
+      set('faqH2', d.faqH2);
+      set('faqList', d.faq.map(function(item, i) {
+        return '<div class="faq-item" id="faq'+i+'">' +
+          '<button class="faq-q" aria-expanded="false" aria-controls="faqA'+i+'" onclick="toggleFaq('+i+')">' +
+          '<span>' + item.q + '</span>' +
+          '<span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>' +
+          '</button>' +
+          '<div class="faq-a" id="faqA'+i+'" role="region"><div class="faq-a-inner">' + item.a + '</div></div>' +
+          '</div>';
+      }).join(''));
+
+      // command center section
+      if (d.cmdCenter) {
+        set('cmdLead', d.cmdCenter.lead);
+        set('cmdFeatGrid', d.cmdCenter.features.map(function(f) {
+          return '<div class="cmd-feat reveal"><p class="feat-h">' + f.h + '</p><p class="feat-p">' + f.p + '</p></div>';
+        }).join(''));
+      }
+
+      // form copy
+      set('formKicker', d.formKicker);
+      set('leadSubmit', d.submit);
+      set('successMsg', d.successMsg);
+      var nf = document.getElementById('nicheField'); if (nf) nf.value = niche;
     }
 
-    // case studies
+    // case studies — rendered once (not niche-specific)
     (function () {
       var ck = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;color:var(--success);flex:none;margin-top:1px"><polyline points="20 6 9 17 4 12"/></svg>';
       var html = CASES.map(function(c) {
@@ -991,18 +1110,16 @@
       set('caseGrid', html);
     })();
 
-    // scarcity lines
+    // scarcity lines — rendered once
     (function () {
       var txt = 'I run every teardown myself, so I take four per month. <span class="slots">' + SCARCITY.n + ' slots left</span> for ' + SCARCITY.month + '.';
       set('heroScarcity', txt);
       set('contactScarcity', txt);
     })();
 
-    // form copy
-    set('formKicker', d.formKicker);
-    set('leadSubmit', d.submit);
-    set('successMsg', d.successMsg);
-    var nf = document.getElementById('nicheField'); if (nf) nf.value = current;
+    // initial render
+    var current = getNiche();
+    renderNiche(current);
 
     // capture UTMs into the form
     (function () {
@@ -1015,6 +1132,17 @@
         uf.value = utms;
       }
     })();
+
+    // niche tab SPA switching — update content without full page reload
+    document.querySelectorAll('.switch a[data-niche]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var n = a.getAttribute('data-niche');
+        history.pushState({ niche: n }, '', '?niche=' + n);
+        renderNiche(n);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
 
     /* ============================================================
        CTA BUTTONS — scroll to form and focus it
@@ -1129,6 +1257,34 @@
       els.forEach(function(el) { io.observe(el); });
     })();
 
+  </script>
+  <script>
+  /* ---- Time Leak Calculator ---- */
+  (function () {
+    var h = document.getElementById('lc-hours');
+    var r = document.getElementById('lc-rate');
+    if (!h || !r) return;
+    var fmt = function (n) { return '$' + Math.round(n).toLocaleString(); };
+    function update() {
+      var hrs = +h.value, rate = +r.value;
+      var yearHours = hrs * 50;
+      var yearCost = yearHours * rate;
+      var weeks = Math.round(yearHours / 40);
+      document.getElementById('lc-hours-out').textContent = hrs + ' hrs/week';
+      document.getElementById('lc-rate-out').textContent = '$' + rate + '/hr';
+      document.getElementById('lc-year-hours').textContent = yearHours.toLocaleString();
+      document.getElementById('lc-year-cost').textContent = fmt(yearCost);
+      document.getElementById('lc-weeks').textContent = weeks;
+      var note = document.querySelector('#contact textarea');
+      if (note && !note.dataset.touched) {
+        note.value = 'About ' + hrs + ' hrs/week on manual work (~' + fmt(yearCost) + '/yr). Where is my biggest leak?';
+      }
+    }
+    [h, r].forEach(function (el) { el.addEventListener('input', update); });
+    var note = document.querySelector('#contact textarea');
+    if (note) note.addEventListener('input', function () { note.dataset.touched = '1'; });
+    update();
+  })();
   </script>
   <script>
   (function () {
