@@ -619,9 +619,9 @@
       var btnHTML = btn ? btn.innerHTML : '';
 
       function showSuccess() {
-        form.style.display = 'none';
-        var ok = document.getElementById('formSuccess');
-        if (ok) ok.classList.add('show');
+        // Send to the thank-you page (distinct URL = clean conversion event for ad platforms).
+        // niche is carried through for attribution.
+        window.location.assign('thankyou.html?niche=' + encodeURIComponent(current));
       }
 
       form.addEventListener('submit', function (e) {

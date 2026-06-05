@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thanks — we'll be in touch | Fox Consulting</title>
+  <meta name="description" content="Your operations teardown request is in. Fox Consulting will reply personally within one business day.">
+  <meta name="robots" content="noindex">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="colors_and_type.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; background: var(--bg-inverse); color: var(--fg-inverse);
+      font: var(--text-body); -webkit-font-smoothing: antialiased;
+      display: grid; place-items: center; padding: var(--space-8);
+      position: relative; overflow: hidden;
+    }
+    body::before {
+      content:""; position:absolute; inset:0;
+      background-image: radial-gradient(var(--char-700) 1px, transparent 1px);
+      background-size: 30px 30px; opacity:.5;
+      -webkit-mask-image: radial-gradient(ellipse 60% 55% at 50% 35%, #000 30%, transparent 72%);
+              mask-image: radial-gradient(ellipse 60% 55% at 50% 35%, #000 30%, transparent 72%);
+      pointer-events:none;
+    }
+    .card { position: relative; max-width: 560px; text-align: center; }
+    .logo { font-family: var(--font-logo); line-height: .92; text-decoration: none; display: inline-block; margin-bottom: var(--space-12); }
+    .logo .fox { font-weight: 800; font-size: 22px; letter-spacing: .02em; color: var(--sand-50); display: block; }
+    .logo .consulting { font-weight: 700; font-size: 10.5px; letter-spacing: .34em; color: var(--fox-400); display: block; }
+    .check {
+      width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; margin: 0 auto var(--space-8);
+      background: color-mix(in srgb, var(--success) 22%, transparent); color: #7BD6A8;
+      animation: pop .45s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .check svg { width: 36px; height: 36px; }
+    @keyframes pop { from { transform: scale(.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .eyebrow { font: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; color: var(--fox-400); margin: 0 0 var(--space-4); }
+    h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(32px, 6vw, 48px); letter-spacing: var(--tracking-display); line-height: 1.05; margin: 0 0 var(--space-5); }
+    .lead { font: var(--text-lead); color: color-mix(in srgb, var(--sand-50) 74%, transparent); margin: 0 auto var(--space-8); max-width: 42ch; }
+    .next {
+      display: inline-grid; gap: var(--space-3); text-align: left;
+      background: var(--char-900); border: 1px solid var(--border-inverse);
+      border-radius: var(--radius-lg); padding: var(--space-6) var(--space-8); margin-bottom: var(--space-10);
+    }
+    .next .row { display: flex; gap: var(--space-3); align-items: center; font: var(--text-small); color: color-mix(in srgb, var(--sand-50) 78%, transparent); }
+    .next .row .n { font: 700 12px/1 var(--font-mono); color: var(--fox-400); border: 1px solid var(--border-inverse); border-radius: var(--radius-pill); padding: 5px 8px; flex: none; }
+    .btn {
+      display: inline-flex; align-items: center; gap: var(--space-2);
+      font: 700 16px/1 var(--font-body); padding: 15px var(--space-8);
+      border-radius: var(--radius-lg); border: 1px solid var(--border-inverse);
+      background: transparent; color: var(--fg-inverse); text-decoration: none;
+      transition: background .18s cubic-bezier(.2,.8,.2,1), transform .18s cubic-bezier(.2,.8,.2,1);
+    }
+    .btn:hover { background: var(--char-900); transform: translate(2px,-2px); }
+    .btn .arrow { font-family: var(--font-mono); }
+    .sig { display: block; margin-top: var(--space-10); font: var(--text-mono); color: var(--fox-400); }
+    @media (prefers-reduced-motion: reduce) { .check { animation: none; } }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <a class="logo" href="index.html" aria-label="Fox Consulting home"><span class="fox">FOX</span><span class="consulting">CONSULTING</span></a>
+
+    <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+
+    <p class="eyebrow">Request received</p>
+    <h1>Got it. We're already looking.</h1>
+    <p class="lead">Thanks for telling us where the time goes. We read every one ourselves — no auto-responder, no sales floor.</p>
+
+    <div class="next">
+      <div class="row"><span class="n">01</span> We read your note and find where we'd look first.</div>
+      <div class="row"><span class="n">02</span> You get a personal reply within one business day.</div>
+      <div class="row"><span class="n">03</span> If it's a fit, we book your free on-site teardown.</div>
+    </div>
+
+    <div>
+      <a class="btn" href="index.html">Back to the site <span class="arrow">&rarr;</span></a>
+    </div>
+
+    <span class="sig">// Built local. Run sharp.</span>
+  </main>
+</body>
+</html>
