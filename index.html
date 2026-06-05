@@ -526,26 +526,11 @@
         <div class="reveal">
           <p class="overline">The Command Center</p>
           <h2>One screen. Every number that runs your operation — pulled live from tools you already pay for.</h2>
-          <p class="lead">We connect your scheduler, payment processor, and spreadsheets into a single dashboard your whole team reads every morning. Built inside Google Workspace — no new software to buy, no new monthly bill, no login nobody uses.</p>
-          <a class="btn btn-primary" data-book href="#contact">Get a command center <span class="arrow">&rarr;</span></a>
+          <p class="lead" id="cmdLead">We connect your scheduler, payment processor, and spreadsheets into a single dashboard your whole team reads every morning. Built inside Google Workspace — no new software to buy, no new monthly bill, no login nobody uses.</p>
+          <a class="btn btn-primary" data-book href="#contact" id="cmdCta">Get a command center <span class="arrow">&rarr;</span></a>
         </div>
-        <div class="cmd-features">
-          <div class="cmd-feat reveal">
-            <p class="feat-h">Acuity Scheduling</p>
-            <p class="feat-p">Live appointment counts, cancellations, and open-slot alerts pulled straight into your dashboard — no manual export.</p>
-          </div>
-          <div class="cmd-feat reveal">
-            <p class="feat-h">Authorize.net</p>
-            <p class="feat-p">Today's revenue, transaction volume, and pending batches — visible on the dashboard without opening another tab.</p>
-          </div>
-          <div class="cmd-feat reveal">
-            <p class="feat-h">Google Sheets & Docs</p>
-            <p class="feat-p">New patients, team KPIs, anything your team tracks manually — read live into the dashboard the moment someone updates the sheet.</p>
-          </div>
-          <div class="cmd-feat reveal">
-            <p class="feat-h">Social, financial, and more</p>
-            <p class="feat-p">Spotify podcast metrics, social media feedback, financial statements from .csv or .xlsx — we've built them all into Google Workspace dashboards.</p>
-          </div>
+        <div class="cmd-features" id="cmdFeatGrid">
+          <!-- populated by JS -->
         </div>
       </div>
       <div class="cmd-no-software reveal">
@@ -637,7 +622,7 @@
           <p class="ptag">Your appointments, revenue, and KPIs from every system — live on one screen your whole team actually reads.</p>
           <p class="price">$3,500<span class="per"> / project</span></p>
           <ul>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Connects Acuity, Authorize.net, Sheets &amp; more</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Connects your scheduler, payments, and tracking tools</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Built inside Google Workspace — $0 new software</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Real-time data, readable at a glance</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Team walkthrough + 30 days of tweaks</li>
@@ -786,13 +771,13 @@
           { ic:"flow",  h:"Automated workflows",   p:"Invoicing, scheduling, reminders, intake. The repetitive steps your team does by hand get done automatically and on time." },
           { ic:"pipe",  h:"Data pipelines",         p:"Your numbers live in five tools that don't talk. We pipe them into one place so the right figure is always one click away." },
           { ic:"grid",  h:"System integrations",    p:"POS, CRM, accounting, scheduling — wired together so an update in one place flows everywhere. No double entry." },
-          { ic:"grid",  h:"Command Center dashboard",  p:"Your appointments, revenue, and KPIs piped from Acuity, Authorize.net, Google Sheets — into one live screen. Built inside Google Workspace. No new software bill." },
+          { ic:"grid",  h:"Command Center dashboard",  p:"Your appointments, revenue, and KPIs pulled from your existing tools — into one live screen your whole team reads every morning. Built inside Google Workspace. No new software." },
           { ic:"bot",   h:"Internal tools & AI assistants", p:"Custom assistants trained on how your shop actually runs — onboarding, quoting, answers — not a generic chatbot." }
         ],
         examples: [
           { k:"Multi-location services", big:"11", u:"hrs/wk", h:"Invoicing on autopilot", p:"Jobs closed in the field now generate, send, and reconcile invoices automatically. The owner stopped doing it on Sunday nights." },
           { k:"Home services", big:"38", u:"%", h:"Calls that turn into booked jobs", p:"An AI front desk answers every call, books the slot, and texts a confirmation. Missed calls stopped being lost revenue." },
-          { k:"Medical clinic franchise", big:"1", u:"\xa0screen", h:"Acuity + Authorize.net + Google Sheets, live", p:"Appointments, daily revenue, and new-patient numbers pulled from three systems into one dashboard — built free inside Google Workspace. The morning meeting went from an hour to five minutes." }
+          { k:"Medical clinic franchise", big:"1", u:"\xa0screen", h:"Every number from every system — live", p:"Appointments, daily revenue, and new-patient counts pulled from three separate platforms into one dashboard — built inside Google Workspace at zero new software cost. The morning meeting went from an hour to five minutes." }
         ],
         proof: "We built and ran the full operations stack for a medical clinic franchise before we sold a day of consulting — phones, scheduling, billing, reporting. Now we build it for yours.",
         ctaOverline: "TELL US WHERE THE TIME GOES",
@@ -809,7 +794,16 @@
           { q: "Is this going to be some software I have to manage?", a: "No. We don't sell subscriptions or licenses. We build systems that run on tools you already own — your scheduler, your CRM, your phone provider. When we're done, your team runs it. We're not a vendor you depend on forever." },
           { q: "I've tried AI tools before and my team didn't use them.", a: "That's the most common thing we hear — and it's usually because the tool was built for a generic business, not yours. We build to your specific workflow, train your team on it, and don't hand it off until it's actually running. The written fix plan from the teardown is yours regardless." },
           { q: "How do I know this is worth $4,500?", a: "The teardown is free, and the written fix plan is yours to keep whether you hire us or not. Most clients find that a single recovered hour per week or one extra booked job per month more than covers a project at this price. We don't ask you to take that on faith — you'll see the math in the teardown itself." }
-        ]
+        ],
+        cmdCenter: {
+          lead: "We connect your scheduling tool, payment processor, and spreadsheets into a single dashboard your whole team reads every morning. Built inside Google Workspace — no new software, no new monthly bill, no login nobody uses.",
+          features: [
+            { h: "Scheduling & booking platforms", p: "Live appointment counts, open slots, and cancellations from tools like Calendly, Square Appointments, or whichever platform your bookings run on." },
+            { h: "Payment processors", p: "Today's revenue, transaction volume, and batch settlements from Stripe, Square, or your payment gateway — no manual export, no switching tabs." },
+            { h: "Google Sheets & Docs", p: "KPIs your team already tracks manually, read live into the dashboard the moment someone updates the sheet. No migration, no new tool." },
+            { h: "Social, financial, and more", p: "Social media feedback, financial statements from .csv or .xlsx, review scores — connected and readable in one place." }
+          ]
+        }
       },
 
       "home-services": {
@@ -833,7 +827,7 @@
           { ic:"flow",  h:"Invoicing & collections",       p:"Jobs closed in the field generate, send, and chase their own invoices. The owner stops reconciling receipts on Sunday night." },
           { ic:"star",  h:"Review generation",             p:"A job that goes well becomes a five-star review automatically — triggered by text the moment the ticket closes. Your Google rank climbs without you nagging anyone." },
           { ic:"box",   h:"Parts & inventory",             p:"Know what's on each truck before the tech rolls. We connect purchasing and job costing so you stop eating the cost of a second trip for a part in the other van." },
-          { ic:"chart", h:"Multi-truck reporting",         p:"Revenue per truck, close rate per tech, jobs booked vs. missed — on one live screen. The numbers you guess at on the drive home, in front of you every morning." }
+          { ic:"grid",  h:"Command Center dashboard",        p:"Revenue per truck, close rate per tech, and jobs booked vs. missed — pulled from your field service platform into one live screen. Built inside Google Workspace. No new software." }
         ],
         examples: [
           { k:"HVAC · multi-truck", big:"$11k", u:"/mo", h:"After-hours calls stopped going to voicemail", p:"A four-truck HVAC shop's nights-and-weekends overflow is now answered, booked, and confirmed automatically. Roughly eleven thousand a month in work that used to ring out." },
@@ -855,7 +849,16 @@
           { q: "My guys won't use another app. I've been down that road.", a: "Nothing your crew touches changes. The AI front desk answers calls and routes jobs to your existing scheduler. The dashboard reads from tools you already run. We build around your workflow, not against it — and we don't hand it off until your team is actually using it." },
           { q: "I already run ServiceTitan / Housecall Pro / Jobber. Does this replace it?", a: "No. We wire into it. A booked call shows up in your dispatch board automatically. Your invoicing, job costing, and reporting pull from the same system. We add the layer that closes the leaks your platform doesn't cover — primarily the after-hours calls it can't answer and the paperwork it doesn't automate." },
           { q: "What does this actually cost, total — including the AI tools?", a: "The $4,500 project price covers the build, integration, and training. The AI and automation tools we wire in typically run $50–$150/month in platform costs — which you own, not us. Most clients recover that in the first week from reduced missed calls alone. We'll show you the math in the teardown." }
-        ]
+        ],
+        cmdCenter: {
+          lead: "We connect your field service platform, payment system, and job tracking into a single screen every dispatcher and owner reads every morning. Built inside Google Workspace — nothing new to buy, nothing new to log into.",
+          features: [
+            { h: "Field service platforms", p: "Live job counts, open slots, and tech utilization from ServiceTitan, Housecall Pro, Jobber, or whichever platform your dispatch runs on." },
+            { h: "Payment & invoicing", p: "Revenue collected today, open invoices, and aging receivables from Stripe, Square, or QuickBooks — without opening another tab." },
+            { h: "Google Sheets job tracking", p: "Parts inventory, lead sources, or any custom metric your team tracks in a sheet — pulled live into the dashboard automatically." },
+            { h: "Review & call analytics", p: "Google Business profile reviews, missed-call counts, and booking conversion rates — one screen, updated daily." }
+          ]
+        }
       },
 
       "medical": {
@@ -878,7 +881,7 @@
           { ic:"cal",    h:"No-show & reminder workflows", p:"Multi-touch text, email, and call reminders before each appointment, with one-tap confirm and reschedule. Empty chairs get backfilled from your waitlist instead of staying dark." },
           { ic:"repeat", h:"Recall & reactivation",       p:"We work your overdue-hygiene and lapsed-patient lists automatically — the outreach your front desk never gets to. Dormant patients come back without anyone combing the schedule." },
           { ic:"file",   h:"Insurance & intake paperwork", p:"New-patient forms, eligibility checks, and intake routing handled before the patient sits down. Your team stops re-keying the same information into three screens." },
-          { ic:"chart",  h:"Multi-location reporting",    p:"Production, open slots, no-show rate, and recall numbers for every provider and location on one live screen. The Monday meeting goes from an hour to five minutes." },
+          { ic:"grid",   h:"Command Center dashboard",     p:"Production, open slots, no-show rate, and recall numbers for every provider and location — pulled from your practice management system into one live screen. Built inside Google Workspace. No new software." },
           { ic:"people", h:"Internal staff assistant",    p:"A custom assistant trained on how your practice actually runs — insurance rules, scheduling policies, where things live — so new hires stop pulling the office manager." }
         ],
         examples: [
@@ -901,7 +904,16 @@
           { q: "What about patient privacy? Will this touch clinical records or PHI?", a: "No — and that's not a hedge. We work exclusively at the scheduling and communications layer: phone, appointment booking, reminders, recall outreach, and billing workflow routing. We do not connect to, transmit, or store clinical records, diagnostic data, or PHI. Your EHR stays where it is. If your compliance team wants to review what we build before it goes live, we welcome that." },
           { q: "My front desk is the personal touch. I don't want patients talking to a robot.", a: "The AI takes the overflow — the third line ringing during a root canal, the 7pm callback nobody could return, the no-show text nobody had time to send. Your team handles the people in the chair. The system handles the calls and follow-ups they were already missing. Your patients get a faster response, not a worse one." },
           { q: "We already use a PMS and a reminder add-on. Why isn't that enough?", a: "Those tools store data — they don't work your recall list, answer your overflow calls, or route your intake. We wire what you already run into one system that actually picks up, books, and follows up instead of waiting for your front desk to have a free minute. Usually we're adding capability your current stack doesn't have, not replacing it." }
-        ]
+        ],
+        cmdCenter: {
+          lead: "We connect your practice management system, billing platform, and tracking sheets into a single screen your front desk and office manager read every morning. Built inside Google Workspace — no new software, no new login, no new monthly bill.",
+          features: [
+            { h: "Practice management systems", p: "Appointments booked, open slots, no-show rate, and provider production from platforms like Jane, NexHealth, Kareo, or your existing PMS." },
+            { h: "Billing & collections", p: "Charges posted, payments collected, and outstanding claims — pulled from your billing system or payment processor without a manual report." },
+            { h: "Google Sheets & intake data", p: "New patient counts, referral sources, or recall lists your team tracks manually — read live into the dashboard the moment the sheet updates." },
+            { h: "Multi-location rollups", p: "Production, open capacity, and no-show rate for every provider and location on one screen — no more pulling separate reports from separate tabs." }
+          ]
+        }
       }
     };
 
@@ -982,6 +994,14 @@
         '<div class="faq-a" id="faqA'+i+'" role="region"><div class="faq-a-inner">' + item.a + '</div></div>' +
         '</div>';
     }).join(''));
+
+    // command center section
+    if (d.cmdCenter) {
+      set('cmdLead', d.cmdCenter.lead);
+      set('cmdFeatGrid', d.cmdCenter.features.map(function(f) {
+        return '<div class="cmd-feat reveal"><p class="feat-h">' + f.h + '</p><p class="feat-p">' + f.p + '</p></div>';
+      }).join(''));
+    }
 
     // form labels/copy
     set('formKicker', d.formKicker);
