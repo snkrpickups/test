@@ -271,6 +271,31 @@
     .proof-quote { margin-top: var(--space-16); padding-top: var(--space-12); border-top: 1px solid var(--border-inverse); font: var(--text-h3); font-family: var(--font-display); font-weight: 700; letter-spacing: var(--tracking-tight); max-width: 32ch; color: var(--fg-inverse); }
     .proof-quote .by { display: block; font: var(--text-mono); color: var(--fox-400); margin-top: var(--space-5); }
 
+    /* ---- command center section ---- */
+    .cmd-ctr { background: var(--bg-inverse); color: var(--fg-inverse); position: relative; overflow: hidden; }
+    .cmd-ctr::before {
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background-image: radial-gradient(var(--char-700) 1px, transparent 1px);
+      background-size: 32px 32px; opacity:.4;
+    }
+    .cmd-ctr .wrap { position: relative; }
+    .cmd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: start; }
+    .cmd-ctr .overline { color: var(--fox-400); }
+    .cmd-ctr h2 { color: var(--fg-inverse); font-size: clamp(28px, 3.6vw, 40px); letter-spacing: var(--tracking-tight); margin: var(--space-4) 0 var(--space-5); }
+    .cmd-ctr .lead { font: var(--text-lead); color: color-mix(in srgb, var(--sand-50) 70%, transparent); max-width: 44ch; margin-bottom: var(--space-8); }
+    .cmd-features { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+    .cmd-feat { border-left: 2px solid var(--fox-500); padding-left: var(--space-5); }
+    .cmd-feat .feat-h { font: 600 16px/1.3 var(--font-body); color: var(--fg-inverse); margin: 0 0 var(--space-2); }
+    .cmd-feat .feat-p { font: var(--text-small); color: color-mix(in srgb, var(--sand-50) 66%, transparent); margin: 0; }
+    .cmd-no-software {
+      margin-top: var(--space-12); border-top: 1px solid var(--char-800); padding-top: var(--space-10);
+      display: flex; align-items: center; gap: var(--space-8); flex-wrap: wrap;
+    }
+    .cmd-zero { text-align: center; }
+    .cmd-zero .big { font: 800 52px/1 var(--font-mono); letter-spacing: -.03em; color: var(--fox-400); }
+    .cmd-zero .lab { font: 700 12px/1 var(--font-mono); color: var(--fox-400); text-transform: uppercase; letter-spacing: .1em; margin-top: var(--space-2); }
+    .cmd-no-software .body { font: var(--text-lead); color: color-mix(in srgb, var(--sand-50) 72%, transparent); max-width: 48ch; }
+
     /* ---- how it works ---- */
     .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); }
     .step .n { font: 700 13px/1 var(--font-mono); color: var(--accent); }
@@ -299,7 +324,7 @@
 
     /* ---- pricing ---- */
     .pricing { }
-    .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); align-items: start; }
+    .plans { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-6); align-items: start; }
     .plan { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: var(--space-8); display: flex; flex-direction: column; gap: var(--space-5); }
     .plan.featured { border-color: var(--accent); box-shadow: var(--shadow-lg), 0 0 0 1px rgba(236,94,18,.12); position: relative; }
     .plan.featured .badge { position: absolute; top: -13px; left: var(--space-8); background: var(--accent); color: var(--accent-fg); font: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; padding: 6px 12px; border-radius: var(--radius-pill); }
@@ -378,7 +403,7 @@
     /* ---- responsive ---- */
     @media (max-width: 900px) {
       .hero-grid { grid-template-columns: 1fr; gap: var(--space-10); }
-      .cards, .examples, .steps, .plans { grid-template-columns: 1fr; }
+      .cards, .examples, .steps, .plans, .cmd-grid, .cmd-features { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; gap: var(--space-10); }
       .stats-inner { gap: var(--space-2); }
       .stat-item + .stat-item::before { display: none; }
@@ -494,6 +519,45 @@
     </div>
   </section>
 
+  <!-- ===================== COMMAND CENTER ===================== -->
+  <section class="cmd-ctr">
+    <div class="wrap">
+      <div class="cmd-grid">
+        <div class="reveal">
+          <p class="overline">The Command Center</p>
+          <h2>One screen. Every number that runs your operation — pulled live from tools you already pay for.</h2>
+          <p class="lead">We connect your scheduler, payment processor, and spreadsheets into a single dashboard your whole team reads every morning. Built inside Google Workspace — no new software to buy, no new monthly bill, no login nobody uses.</p>
+          <a class="btn btn-primary" data-book href="#contact">Get a command center <span class="arrow">&rarr;</span></a>
+        </div>
+        <div class="cmd-features">
+          <div class="cmd-feat reveal">
+            <p class="feat-h">Acuity Scheduling</p>
+            <p class="feat-p">Live appointment counts, cancellations, and open-slot alerts pulled straight into your dashboard — no manual export.</p>
+          </div>
+          <div class="cmd-feat reveal">
+            <p class="feat-h">Authorize.net</p>
+            <p class="feat-p">Today's revenue, transaction volume, and pending batches — visible on the dashboard without opening another tab.</p>
+          </div>
+          <div class="cmd-feat reveal">
+            <p class="feat-h">Google Sheets & Docs</p>
+            <p class="feat-p">New patients, team KPIs, anything your team tracks manually — read live into the dashboard the moment someone updates the sheet.</p>
+          </div>
+          <div class="cmd-feat reveal">
+            <p class="feat-h">Social, financial, and more</p>
+            <p class="feat-p">Spotify podcast metrics, social media feedback, financial statements from .csv or .xlsx — we've built them all into Google Workspace dashboards.</p>
+          </div>
+        </div>
+      </div>
+      <div class="cmd-no-software reveal">
+        <div class="cmd-zero">
+          <p class="big">$0</p>
+          <p class="lab">new software</p>
+        </div>
+        <p class="body">Your team already logs into Google every morning. We build the dashboard there — so it gets used, not ignored. No new vendor. No new password. No subscription you'll forget to cancel.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ===================== PROOF (dark) ===================== -->
   <section class="proof" id="work">
     <div class="wrap">
@@ -567,6 +631,18 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Written fix plan — yours to keep, always</li>
           </ul>
           <a class="btn btn-ghost" data-book href="#contact">Book the teardown <span class="arrow">&rarr;</span></a>
+        </article>
+        <article class="plan reveal">
+          <p class="pname">Command Center</p>
+          <p class="ptag">Your appointments, revenue, and KPIs from every system — live on one screen your whole team actually reads.</p>
+          <p class="price">$3,500<span class="per"> / project</span></p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Connects Acuity, Authorize.net, Sheets &amp; more</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Built inside Google Workspace — $0 new software</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Real-time data, readable at a glance</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Team walkthrough + 30 days of tweaks</li>
+          </ul>
+          <a class="btn btn-ghost" data-book href="#contact">Get a command center <span class="arrow">&rarr;</span></a>
         </article>
         <article class="plan featured reveal">
           <span class="badge">Where most clients start</span>
@@ -710,13 +786,13 @@
           { ic:"flow",  h:"Automated workflows",   p:"Invoicing, scheduling, reminders, intake. The repetitive steps your team does by hand get done automatically and on time." },
           { ic:"pipe",  h:"Data pipelines",         p:"Your numbers live in five tools that don't talk. We pipe them into one place so the right figure is always one click away." },
           { ic:"grid",  h:"System integrations",    p:"POS, CRM, accounting, scheduling — wired together so an update in one place flows everywhere. No double entry." },
-          { ic:"chart", h:"Dashboards & reporting", p:"Every location's revenue, jobs, and bottlenecks on one screen — updated in real time, readable at a glance." },
+          { ic:"grid",  h:"Command Center dashboard",  p:"Your appointments, revenue, and KPIs piped from Acuity, Authorize.net, Google Sheets — into one live screen. Built inside Google Workspace. No new software bill." },
           { ic:"bot",   h:"Internal tools & AI assistants", p:"Custom assistants trained on how your shop actually runs — onboarding, quoting, answers — not a generic chatbot." }
         ],
         examples: [
           { k:"Multi-location services", big:"11", u:"hrs/wk", h:"Invoicing on autopilot", p:"Jobs closed in the field now generate, send, and reconcile invoices automatically. The owner stopped doing it on Sunday nights." },
           { k:"Home services", big:"38", u:"%", h:"Calls that turn into booked jobs", p:"An AI front desk answers every call, books the slot, and texts a confirmation. Missed calls stopped being lost revenue." },
-          { k:"Medical clinic franchise", big:"5→1", u:"", h:"Five tools, one dashboard", p:"Scheduling, billing, and reporting piped into a single live view. The morning numbers meeting went from an hour to five minutes." }
+          { k:"Medical clinic franchise", big:"1", u:"\xa0screen", h:"Acuity + Authorize.net + Google Sheets, live", p:"Appointments, daily revenue, and new-patient numbers pulled from three systems into one dashboard — built free inside Google Workspace. The morning meeting went from an hour to five minutes." }
         ],
         proof: "We built and ran the full operations stack for a medical clinic franchise before we sold a day of consulting — phones, scheduling, billing, reporting. Now we build it for yours.",
         ctaOverline: "TELL US WHERE THE TIME GOES",
