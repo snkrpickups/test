@@ -3,13 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fox Consulting — AI-enabled operations for local businesses</title>
-  <meta name="description" content="Fox Consulting finds where your operation leaks time and money, then builds the AI systems that stop it. Local to Winter Park, Orlando, and Brevard County, FL.">
-
-  <!-- Open Graph / social preview -->
+  <title id="pageTitle">Fox Consulting — AI-enabled operations for local businesses</title>
+  <meta id="metaDesc" name="description" content="Fox Consulting finds where your operation leaks time and money, then builds the AI systems that stop it. Local to Winter Park, Orlando, and Brevard County, FL.">
   <meta property="og:title" content="Fox Consulting — stop losing hours to manual work">
   <meta property="og:description" content="We find where your operation leaks time and money, then build the AI systems that stop it. Book a free operations teardown.">
   <meta property="og:type" content="website">
+
+  <!-- ============================================================
+       ANALYTICS — paste your IDs to activate. See README at bottom
+       of this file for how to get your GA4 and Meta Pixel IDs.
+       ============================================================ -->
+  <script>
+    window.FOX_ANALYTICS = {
+      GA4_ID: "",            // e.g. "G-XXXXXXXXXX"
+      META_PIXEL_ID: ""      // e.g. "1234567890123456"
+    };
+  </script>
+  <script>
+    (function () {
+      var cfg = window.FOX_ANALYTICS || {};
+      var params = new URLSearchParams(location.search);
+      // ---- Google Analytics 4 ----
+      if (cfg.GA4_ID) {
+        var s = document.createElement('script'); s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + cfg.GA4_ID;
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { dataLayer.push(arguments); };
+        gtag('js', new Date());
+        gtag('config', cfg.GA4_ID);
+      }
+      // ---- Meta (Facebook) Pixel ----
+      if (cfg.META_PIXEL_ID) {
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', cfg.META_PIXEL_ID);
+        fbq('track', 'PageView');
+      }
+    })();
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,113 +50,102 @@
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--fg);
-      font: var(--text-body);
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
+      margin: 0; background: var(--bg); color: var(--fg); font: var(--text-body);
+      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+      overflow-x: hidden;
     }
     a { color: inherit; }
     img { max-width: 100%; display: block; }
     .wrap { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 var(--space-6); }
 
-    /* ---- shared type ---- */
-    .overline {
-      font: var(--text-overline);
-      letter-spacing: var(--tracking-overline);
-      text-transform: uppercase;
-      color: var(--accent);
-      margin: 0 0 var(--space-4);
-    }
+    .overline { font: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; color: var(--accent); margin: 0 0 var(--space-4); }
     h1, h2, h3 { font-family: var(--font-display); margin: 0; }
     p { margin: 0; }
 
     /* ---- buttons ---- */
     .btn {
       display: inline-flex; align-items: center; gap: var(--space-2);
-      font: 700 16px/1 var(--font-body);
-      padding: 15px var(--space-6);
-      border-radius: var(--radius-lg);
-      border: 1px solid transparent;
+      font: 700 16px/1 var(--font-body); padding: 15px var(--space-6);
+      border-radius: var(--radius-lg); border: 1px solid transparent;
       cursor: pointer; text-decoration: none;
-      transition: transform .18s cubic-bezier(.2,.8,.2,1),
-                  background .18s cubic-bezier(.2,.8,.2,1),
-                  box-shadow .18s cubic-bezier(.2,.8,.2,1);
+      transition: transform .18s cubic-bezier(.2,.8,.2,1), background .18s, box-shadow .18s;
     }
-    .btn-primary {
-      background: var(--accent); color: var(--accent-fg);
-      box-shadow: var(--shadow-accent);
-    }
-    .btn-primary:hover { background: var(--accent-hover); transform: translate(2px, -2px); }
+    .btn-primary { background: #C44A0C; color: var(--accent-fg); box-shadow: 0 8px 24px -8px rgba(196,74,12,.45); } /* 4.7:1 on white, WCAG AA */
+    .btn-primary:hover { background: #A83A08; transform: translate(2px,-2px); box-shadow: 0 12px 32px -8px rgba(196,74,12,.55); }
     .btn-primary:active { transform: scale(.98); box-shadow: var(--shadow-sm); }
-    .btn-ghost {
-      background: transparent; color: var(--fg);
-      border-color: var(--border-strong);
-    }
+    .btn-ghost { background: transparent; color: var(--fg); border-color: var(--border-strong); }
     .btn-ghost:hover { background: var(--sand-100); }
     .btn-lg { padding: 18px var(--space-8); font-size: 17px; }
+    .btn-sm { padding: 10px 18px; font-size: 14px; }
     .btn .arrow { font-family: var(--font-mono); transition: transform .18s cubic-bezier(.2,.8,.2,1); }
     .btn:hover .arrow { transform: translateX(3px); }
 
-    :where(a, button, input, textarea, select):focus-visible {
-      outline: 3px solid var(--ring); outline-offset: 2px; border-radius: var(--radius-sm);
-    }
+    :where(a,button,input,textarea,select):focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; border-radius: var(--radius-sm); }
 
     /* ---- nav ---- */
     header.nav {
       position: sticky; top: 0; z-index: 50;
-      background: color-mix(in srgb, var(--sand-50) 82%, transparent);
-      backdrop-filter: blur(10px);
+      background: color-mix(in srgb, var(--sand-50) 85%, transparent);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
-    .logo { font-family: var(--font-logo); line-height: .92; text-decoration: none; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo img { width: 40px; height: 40px; display: block; flex: none; }
+    .logo-type { font-family: var(--font-logo); line-height: .92; }
     .logo .fox { font-weight: 800; font-size: 22px; letter-spacing: .02em; color: var(--char-950); display: block; }
     .logo .consulting { font-weight: 700; font-size: 10.5px; letter-spacing: .34em; color: var(--fox-600); display: block; }
     .nav-links { display: flex; align-items: center; gap: var(--space-8); }
-    .nav-links a.txt { font: 600 15px/1 var(--font-body); text-decoration: none; color: var(--fg-secondary); transition: color .15s ease; }
+    .nav-links a.txt { font: 600 15px/1 var(--font-body); text-decoration: none; color: var(--fg-secondary); transition: color .15s; }
     .nav-links a.txt:hover { color: var(--fg); }
+    /* mobile: CTA always visible outside hamburger */
+    .nav-cta-mobile { display: none; }
     .nav-toggle { display: none; }
 
+    /* ---- niche switcher — hidden for paid traffic ---- */
+    .switch { border-bottom: 1px solid var(--border); background: var(--bg-sunken); }
+    .switch-inner { display: flex; align-items: center; gap: var(--space-4); height: 46px; flex-wrap: wrap; }
+    .switch .lbl { font: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; color: var(--fg-muted); }
+    .switch a { font: 600 13px/1 var(--font-body); text-decoration: none; color: var(--fg-secondary); padding: 7px 12px; border-radius: var(--radius-pill); border: 1px solid transparent; transition: all .15s; }
+    .switch a:hover { color: var(--fg); background: var(--sand-200); }
+    .switch a[aria-current="true"] { color: var(--accent-fg); background: var(--accent); border-color: var(--accent); }
+
     /* ---- hero ---- */
-    .hero { position: relative; padding: var(--space-20) 0 var(--space-16); overflow: hidden; }
+    .hero {
+      position: relative; padding: var(--space-16) 0 var(--space-12); overflow: hidden;
+    }
+    /* warm dot grid */
     .hero::before {
-      content:""; position:absolute; inset:0;
+      content:""; position:absolute; inset:0; z-index:0;
       background-image: radial-gradient(var(--sand-300) 1px, transparent 1px);
-      background-size: 28px 28px; opacity:.30;
-      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 70% 25%, #000 30%, transparent 75%);
-              mask-image: radial-gradient(ellipse 70% 60% at 70% 25%, #000 30%, transparent 75%);
+      background-size: 28px 28px; opacity:.28;
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 70% 30%, #000 20%, transparent 70%);
+              mask-image: radial-gradient(ellipse 80% 70% at 70% 30%, #000 20%, transparent 70%);
       pointer-events:none;
     }
-    .hero-grid { position: relative; display: grid; grid-template-columns: 1.15fr .85fr; gap: var(--space-16); align-items: center; }
-    .hero h1 {
-      font-weight: 900; font-size: clamp(40px, 6vw, 66px); line-height: 1.02;
-      letter-spacing: var(--tracking-display); margin: var(--space-5) 0;
-    }
+    /* canvas particle background */
+    #hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+    .hero > *:not(#hero-bg) { position: relative; z-index: 1; }
+    @media (prefers-reduced-motion: reduce) { #hero-bg { opacity: 0.4; } }
+
+    .hero-grid { position: relative; z-index: 1; max-width: 680px; }
+    .hero h1 { font-weight: 900; font-size: clamp(32px, 4.4vw, 52px); line-height: 1.06; letter-spacing: var(--tracking-display); margin: var(--space-5) 0; }
     .hero h1 .ink { color: var(--accent); }
-    .hero .lead { font: var(--text-lead); color: var(--fg-secondary); max-width: 38ch; margin-bottom: var(--space-8); }
+    .hero .lead { font: var(--text-lead); color: var(--fg-secondary); max-width: 44ch; margin-bottom: var(--space-8); }
     .hero-cta { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; }
-    .hero-note { font: var(--text-small); color: var(--fg-muted); margin-top: var(--space-5); }
+    .hero-note { font: var(--text-small); color: var(--fg-muted); margin-top: var(--space-5); line-height: 1.55; }
     .hero-note b { color: var(--fg); font-weight: 600; }
 
-    /* hero stat card */
-    .stat-card {
-      background: var(--bg-elevated); border: 1px solid var(--border);
-      border-radius: var(--radius-xl); box-shadow: var(--shadow-lg);
-      padding: var(--space-8); display: grid; gap: var(--space-6);
-    }
-    .stat-card .row { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); padding-bottom: var(--space-5); border-bottom: 1px solid var(--border); }
-    .stat-card .row:last-child { border-bottom: 0; padding-bottom: 0; }
-    .stat-card .num { font: 700 38px/1 var(--font-mono); color: var(--fg); letter-spacing: -.02em; }
-    .stat-card .num .u { color: var(--accent); }
-    .stat-card .lab { font: var(--text-small); color: var(--fg-secondary); text-align: right; max-width: 18ch; }
-    .stat-card .tag {
-      font: var(--text-overline); letter-spacing: var(--tracking-overline);
-      text-transform: uppercase; color: var(--fg-muted);
-    }
+    /* ---- stats band (below hero) ---- */
+    .stats-band { background: var(--bg-inverse); padding: var(--space-10) 0; border-bottom: 1px solid var(--char-800); }
+    .stats-inner { display: flex; align-items: stretch; justify-content: center; flex-wrap: wrap; gap: 0; }
+    .stat-item { flex: 1; min-width: 200px; padding: var(--space-4) var(--space-8); text-align: center; position: relative; }
+    .stat-item + .stat-item::before { content:""; position:absolute; left:0; top:20%; bottom:20%; width:1px; background: var(--char-700); }
+    .stat-item .num { font: 800 42px/1 var(--font-mono); letter-spacing: -.03em; color: var(--fg-inverse); }
+    .stat-item .num .u { color: var(--fox-400); font-size: .58em; }
+    .stat-item .lab { font: var(--text-small); color: color-mix(in srgb, var(--sand-50) 68%, transparent); margin-top: var(--space-2); }
 
-    /* ---- section scaffolding ---- */
+    /* ---- sections ---- */
     section { padding: var(--space-20) 0; }
     .sec-head { max-width: 56ch; margin-bottom: var(--space-12); }
     .sec-head h2 { font-size: clamp(28px, 3.6vw, 38px); letter-spacing: var(--tracking-tight); }
@@ -135,66 +155,155 @@
     .focus { background: var(--bg-sunken); }
     .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
     .card {
-      background: var(--bg-elevated); border: 1px solid var(--border);
-      border-radius: var(--radius-lg); padding: var(--space-8);
-      transition: transform .2s cubic-bezier(.2,.8,.2,1), box-shadow .2s cubic-bezier(.2,.8,.2,1), border-color .2s ease;
+      background: var(--bg-elevated); border-radius: var(--radius-lg); padding: var(--space-8);
+      position: relative; overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .22s, border-color .22s;
     }
-    .card:hover { transform: translate(2px, -3px); box-shadow: var(--shadow-md); border-color: var(--border-strong); }
-    .ic {
-      width: 46px; height: 46px; border-radius: var(--radius-md);
-      display: grid; place-items: center; margin-bottom: var(--space-5);
-      background: var(--fox-50); color: var(--accent); border: 1px solid var(--fox-100);
+    /* shimmer border on hover */
+    .card::before {
+      content:""; position:absolute; inset:0; border-radius: inherit;
+      background: linear-gradient(135deg, transparent 40%, rgba(236,94,18,.08) 100%);
+      opacity:0; transition: opacity .22s;
     }
+    .card:hover { transform: translate(2px,-4px); box-shadow: var(--shadow-md); border-color: var(--border-strong); }
+    .card:hover::before { opacity:1; }
+    .ic { width: 46px; height: 46px; border-radius: var(--radius-md); display: grid; place-items: center; margin-bottom: var(--space-5); background: var(--fox-50); color: var(--accent); border: 1px solid var(--fox-100); }
     .ic svg { width: 24px; height: 24px; }
     .card h3 { font-size: 20px; letter-spacing: var(--tracking-tight); margin-bottom: var(--space-3); }
     .card p { font: var(--text-body); color: var(--fg-secondary); }
 
-    /* ---- examples / proof (dark statement) ---- */
-    .proof { background: var(--bg-inverse); color: var(--fg-inverse); }
+    /* ---- proof / dark statement ---- */
+    .proof { background: var(--bg-inverse); color: var(--fg-inverse); position: relative; overflow: hidden; }
+    .proof::before {
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background-image: radial-gradient(var(--char-700) 1px, transparent 1px);
+      background-size: 32px 32px; opacity:.4;
+    }
+    .proof .wrap { position: relative; }
     .proof .overline { color: var(--fox-400); }
     .proof .sec-head h2 { color: var(--fg-inverse); }
-    .proof .sec-head p { color: color-mix(in srgb, var(--sand-50) 72%, transparent); }
+    .proof .sec-head p { color: color-mix(in srgb, var(--sand-50) 70%, transparent); }
     .examples { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
-    .ex {
-      border: 1px solid var(--border-inverse); border-radius: var(--radius-lg);
-      padding: var(--space-8); background: var(--char-900);
-    }
+    .ex { border: 1px solid var(--border-inverse); border-radius: var(--radius-lg); padding: var(--space-8); background: color-mix(in srgb, var(--char-900) 70%, transparent); backdrop-filter: blur(2px); transition: border-color .2s, transform .2s cubic-bezier(.2,.8,.2,1); }
+    .ex:hover { border-color: rgba(236,94,18,.4); transform: translateY(-3px); }
     .ex .kicker { font: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; color: var(--fox-400); }
-    .ex .big { font: 700 40px/1 var(--font-mono); letter-spacing: -.02em; margin: var(--space-4) 0 var(--space-2); }
-    .ex .big .u { color: var(--fox-400); font-size: 22px; }
+    .ex .big { font: 800 40px/1 var(--font-mono); letter-spacing: -.02em; margin: var(--space-4) 0 var(--space-2); }
+    .ex .big .u { color: var(--fox-400); font-size: .56em; font-weight: 700; }
     .ex h3 { font-size: 18px; color: var(--fg-inverse); margin: var(--space-4) 0 var(--space-2); }
-    .ex p { font: var(--text-small); color: color-mix(in srgb, var(--sand-50) 68%, transparent); }
-    .proof-quote {
-      margin-top: var(--space-16); padding-top: var(--space-12);
-      border-top: 1px solid var(--border-inverse);
-      font: var(--text-h3); font-family: var(--font-display); font-weight: 700;
-      letter-spacing: var(--tracking-tight); max-width: 24ch; color: var(--fg-inverse);
-    }
+    .ex p { font: var(--text-small); color: color-mix(in srgb, var(--sand-50) 66%, transparent); }
+    .proof-quote { margin-top: var(--space-16); padding-top: var(--space-12); border-top: 1px solid var(--border-inverse); font: var(--text-h3); font-family: var(--font-display); font-weight: 700; letter-spacing: var(--tracking-tight); max-width: 32ch; color: var(--fg-inverse); }
     .proof-quote .by { display: block; font: var(--text-mono); color: var(--fox-400); margin-top: var(--space-5); }
+
+    /* ---- command center section ---- */
+    .cmd-ctr { background: var(--bg-inverse); color: var(--fg-inverse); position: relative; overflow: hidden; }
+    .cmd-ctr::before {
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background-image: radial-gradient(var(--char-700) 1px, transparent 1px);
+      background-size: 32px 32px; opacity:.4;
+    }
+    .cmd-ctr .wrap { position: relative; }
+    .cmd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: start; }
+    .cmd-ctr .overline { color: var(--fox-400); }
+    .cmd-ctr h2 { color: var(--fg-inverse); font-size: clamp(28px, 3.6vw, 40px); letter-spacing: var(--tracking-tight); margin: var(--space-4) 0 var(--space-5); }
+    .cmd-ctr .lead { font: var(--text-lead); color: color-mix(in srgb, var(--sand-50) 70%, transparent); max-width: 44ch; margin-bottom: var(--space-8); }
+    .cmd-features { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+    .cmd-feat { border-left: 2px solid var(--fox-500); padding-left: var(--space-5); }
+    .cmd-feat .feat-h { font: 600 16px/1.3 var(--font-body); color: var(--fg-inverse); margin: 0 0 var(--space-2); }
+    .cmd-feat .feat-p { font: var(--text-small); color: color-mix(in srgb, var(--sand-50) 66%, transparent); margin: 0; }
+    .cmd-no-software {
+      margin-top: var(--space-12); border-top: 1px solid var(--char-800); padding-top: var(--space-10);
+      display: flex; align-items: center; gap: var(--space-8); flex-wrap: wrap;
+    }
+    .cmd-zero { text-align: center; }
+    .cmd-zero .big { font: 800 52px/1 var(--font-mono); letter-spacing: -.03em; color: var(--fox-400); }
+    .cmd-zero .lab { font: 700 12px/1 var(--font-mono); color: var(--fox-400); text-transform: uppercase; letter-spacing: .1em; margin-top: var(--space-2); }
+    .cmd-no-software .body { font: var(--text-lead); color: color-mix(in srgb, var(--sand-50) 72%, transparent); max-width: 48ch; }
 
     /* ---- how it works ---- */
     .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); }
-    .step .n { font: 700 14px/1 var(--font-mono); color: var(--accent); }
+    .step .n { font: 700 13px/1 var(--font-mono); color: var(--accent); }
     .step h3 { font-size: 21px; letter-spacing: var(--tracking-tight); margin: var(--space-3) 0; }
     .step p { color: var(--fg-secondary); }
-    .step .bar { height: 3px; background: var(--border); border-radius: var(--radius-pill); margin-top: var(--space-6); position: relative; overflow: hidden; }
-    .step .bar::after { content:""; position:absolute; inset:0 60% 0 0; background: var(--accent); border-radius: inherit; }
+    .step .bar { height: 2px; background: var(--border); border-radius: var(--radius-pill); margin-top: var(--space-6); position: relative; overflow: hidden; }
+    .step .bar::after { content:""; position:absolute; inset:0 58% 0 0; background: var(--accent); border-radius: inherit; }
 
-    /* ---- pricing ---- */
-    .pricing { background: var(--bg-sunken); }
-    .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); align-items: start; }
-    .plan {
+    /* ---- FAQ / objections ---- */
+    .faq-section { background: var(--bg-sunken); }
+    .faq-list { display: grid; gap: var(--space-3); max-width: 760px; }
+    .faq-item { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: border-color .15s; }
+    .faq-item:hover { border-color: var(--border-strong); }
+    .faq-q {
+      width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+      padding: var(--space-5) var(--space-6); font: 600 16px/1.3 var(--font-body); color: var(--fg);
+    }
+    .faq-q .icon { flex: none; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--border-strong); display: grid; place-items: center; transition: background .15s, border-color .15s; }
+    .faq-q .icon svg { width: 14px; height: 14px; transition: transform .25s cubic-bezier(.2,.8,.2,1); }
+    .faq-item.open .faq-q .icon { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .faq-item.open .faq-q .icon svg { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .32s cubic-bezier(.2,.8,.2,1); }
+    .faq-a-inner { padding: 0 var(--space-6) var(--space-5); font: var(--text-body); color: var(--fg-secondary); line-height: 1.65; }
+    .faq-item.open .faq-a { max-height: 300px; }
+
+    /* ---- time leak calculator ---- */
+    .calc-section { background: var(--bg-sunken); }
+    .calc-wrap { max-width: 700px; }
+    .calc-body { display: grid; gap: var(--space-8); }
+    .calc-sliders { display: grid; gap: var(--space-7); }
+    .calc-label { display: grid; gap: var(--space-3); cursor: default; }
+    .calc-lbl-text { font: 600 14px/1.3 var(--font-body); color: var(--fg-secondary); }
+    .calc-label input[type=range] {
+      -webkit-appearance: none; appearance: none;
+      width: 100%; height: 6px; border-radius: var(--radius-pill);
+      background: var(--border-strong); cursor: pointer; outline: none;
+      accent-color: var(--accent);
+    }
+    .calc-label input[type=range]:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .calc-output { font: 700 15px/1 var(--font-mono); color: var(--accent); display: block; margin-top: var(--space-2); }
+    .calc-result {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
       background: var(--bg-elevated); border: 1px solid var(--border);
       border-radius: var(--radius-xl); padding: var(--space-8);
-      display: flex; flex-direction: column; gap: var(--space-5);
+      text-align: center;
     }
-    .plan.featured { border-color: var(--accent); box-shadow: var(--shadow-lg); position: relative; }
-    .plan.featured .badge {
-      position: absolute; top: -13px; left: var(--space-8);
-      background: var(--accent); color: var(--accent-fg);
-      font: var(--text-overline); letter-spacing: var(--tracking-overline);
-      text-transform: uppercase; padding: 6px 12px; border-radius: var(--radius-pill);
+    .calc-stat strong { display: block; font: 800 36px/1 var(--font-mono); letter-spacing: -.03em; color: var(--accent); }
+    .calc-stat span { font: var(--text-small); color: var(--fg-muted); margin-top: var(--space-2); display: block; }
+
+    /* ---- calculator email gate ---- */
+    .calc-gate { border-top: 1px solid var(--border); padding-top: var(--space-8); }
+    .calc-gate-lbl { font: 600 15px/1.4 var(--font-body); color: var(--fg); margin-bottom: var(--space-4); }
+    .calc-email-row { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+    .calc-email-row input[type=email] {
+      flex: 1; min-width: 220px; font: var(--text-body); color: var(--fg);
+      background: var(--bg-elevated); border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md); padding: 13px var(--space-4);
+      transition: border-color .15s;
     }
+    .calc-email-row input[type=email]::placeholder { color: var(--fg-muted); }
+    .calc-email-row input[type=email]:focus { border-color: var(--accent); outline: none; }
+    .calc-email-row input[type=email].invalid { border-color: var(--danger); }
+    .calc-gate-reassure { font: var(--text-caption); color: var(--fg-muted); margin-top: var(--space-3); }
+    .calc-gate-sent { display: none; font: 600 14px/1.4 var(--font-body); color: var(--success); padding: var(--space-4) 0; }
+    .calc-gate-sent.show { display: block; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+    /* ---- focus area cards — interactive expand ---- */
+    .card { cursor: pointer; }
+    .card .card-expand { display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-4); font: 600 12px/1 var(--font-mono); color: var(--accent); letter-spacing: .04em; text-transform: uppercase; }
+    .card .card-expand svg { width: 14px; height: 14px; transition: transform .2s; flex: none; }
+    .card.open .card-expand svg { transform: rotate(45deg); }
+    .card .card-detail { max-height: 0; overflow: hidden; transition: max-height .3s cubic-bezier(.2,.8,.2,1); }
+    .card.open .card-detail { max-height: 200px; }
+    .card.open { border-color: rgba(236,94,18,.35); box-shadow: var(--shadow-md); }
+
+    /* ---- pricing ---- */
+    .pricing { }
+    .plans { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-5); align-items: start; }
+    .plan { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); }
+    .plan.featured { border-color: var(--accent); box-shadow: var(--shadow-lg), 0 0 0 1px rgba(236,94,18,.12); position: relative; margin-top: var(--space-4); }
+    .plan.featured .badge { position: absolute; top: -13px; left: var(--space-6); background: var(--accent); color: var(--accent-fg); font: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; padding: 6px 12px; border-radius: var(--radius-pill); }
     .plan .pname { font: 700 22px/1 var(--font-display); letter-spacing: var(--tracking-tight); }
     .plan .ptag { font: var(--text-small); color: var(--fg-secondary); min-height: 2.6em; }
     .plan .price { font: 800 40px/1 var(--font-mono); letter-spacing: -.03em; }
@@ -204,48 +313,130 @@
     .plan li svg { width: 18px; height: 18px; color: var(--success); flex: none; margin-top: 1px; }
     .plan .btn { width: 100%; justify-content: center; margin-top: auto; }
 
-    /* ---- contact / final CTA ---- */
-    .contact { background: var(--bg-inverse); color: var(--fg-inverse); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: start; }
+    /* ---- contact / CTA ---- */
+    .contact { background: var(--bg-inverse); color: var(--fg-inverse); position: relative; overflow: hidden; }
+    .contact::before {
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background: radial-gradient(ellipse 50% 60% at 0% 50%, rgba(236,94,18,.08) 0%, transparent 65%);
+    }
+    .contact-grid { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: start; }
     .contact .overline { color: var(--fox-400); }
     .contact h2 { color: var(--fg-inverse); font-size: clamp(30px, 4vw, 46px); letter-spacing: var(--tracking-display); line-height: 1.04; }
     .contact .lead { font: var(--text-lead); color: color-mix(in srgb, var(--sand-50) 72%, transparent); margin: var(--space-5) 0 var(--space-8); max-width: 40ch; }
     .contact .deet { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4); color: var(--fg-inverse); text-decoration: none; }
     .contact .deet svg { width: 20px; height: 20px; color: var(--fox-400); flex: none; }
     .contact .deet:hover span { text-decoration: underline; }
-    form { display: grid; gap: var(--space-4); background: var(--char-900); border: 1px solid var(--border-inverse); border-radius: var(--radius-xl); padding: var(--space-8); }
+
+    /* ---- lead form ---- */
+    .booking { background: var(--char-900); border: 1px solid var(--border-inverse); border-radius: var(--radius-xl); padding: var(--space-8); }
+    .booking .form-kicker { font: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; color: var(--fox-400); margin-bottom: var(--space-2); }
+    .booking .form-sub { font: var(--text-small); color: color-mix(in srgb, var(--sand-50) 66%, transparent); margin-bottom: var(--space-6); line-height: 1.6; }
+    form#leadForm { display: grid; gap: var(--space-4); }
     .field { display: grid; gap: var(--space-2); }
-    .field label { font: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; color: var(--fox-400); }
-    .field input, .field textarea, .field select {
+    .field label { font: 600 13px/1 var(--font-body); color: var(--sand-300); }
+    .field label .req { color: var(--fox-400); }
+    .field .hint { font: var(--text-caption); color: var(--sand-500); display: inline; margin-left: var(--space-2); font-weight: 400; }
+    .field input, .field textarea {
       font: var(--text-body); color: var(--fg-inverse);
       background: var(--char-950); border: 1px solid var(--border-inverse);
       border-radius: var(--radius-md); padding: 13px var(--space-4); width: 100%;
+      transition: border-color .15s;
     }
     .field input::placeholder, .field textarea::placeholder { color: var(--sand-500); }
-    .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--accent); }
+    .field input:focus, .field textarea:focus { border-color: var(--accent); outline: none; }
+    .field input.invalid, .field textarea.invalid { border-color: var(--danger); }
+    #leadForm .btn { width: 100%; justify-content: center; margin-top: var(--space-2); }
+    .form-reassure { font: var(--text-caption); color: var(--sand-500); text-align: center; margin-top: var(--space-2); line-height: 1.55; }
+    .form-success { display: none; text-align: center; padding: var(--space-10) var(--space-4); }
+    .form-success.show { display: block; }
+    .form-success .check { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; margin: 0 auto var(--space-5); background: color-mix(in srgb, var(--success) 22%, transparent); color: #7BD6A8; }
+    .form-success .check svg { width: 28px; height: 28px; }
+    .form-success h3 { color: var(--fg-inverse); font-size: 24px; letter-spacing: var(--tracking-tight); margin-bottom: var(--space-3); }
+    .form-success p { color: color-mix(in srgb, var(--sand-50) 72%, transparent); font: var(--text-body); max-width: 34ch; margin: 0 auto; }
+
+    /* ---- case study cards ---- */
+    #caseGrid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+    .case-card { border: 1px solid var(--border-inverse); border-radius: var(--radius-lg); padding: var(--space-8); background: color-mix(in srgb, var(--char-900) 70%, transparent); transition: border-color .2s; }
+    .case-card:hover { border-color: rgba(236,94,18,.4); }
+    .case-industry { font: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; color: var(--fox-400); display: block; margin-bottom: var(--space-8); }
+    .case-fields { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); margin-bottom: var(--space-8); }
+    .case-label { font: 700 11px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .12em; color: var(--fox-400); margin: 0 0 var(--space-3); }
+    .case-value { font: var(--text-body); color: color-mix(in srgb, var(--sand-50) 80%, transparent); margin: 0; line-height: 1.6; }
+    .case-result { border-top: 1px solid var(--border-inverse); padding-top: var(--space-8); margin-top: var(--space-2); }
+    .case-result-num { font: 800 22px/1.4 var(--font-display); color: var(--fg-inverse); margin: var(--space-3) 0 0; letter-spacing: var(--tracking-tight); }
+    .case-quote { border-left: 2px solid var(--fox-500); margin: var(--space-8) 0 0; padding-left: var(--space-6); font: var(--text-lead); color: color-mix(in srgb, var(--sand-50) 78%, transparent); font-style: normal; }
+    .case-quote cite { display: block; font: var(--text-mono); color: var(--fox-400); margin-top: var(--space-3); font-style: normal; }
+
+    /* ---- guarantee ---- */
+    .guarantee-banner { background: color-mix(in srgb, var(--fox-50) 55%, transparent); border: 1px solid var(--fox-100); border-radius: var(--radius-lg); padding: var(--space-5) var(--space-6); margin-bottom: var(--space-8); }
+    .guarantee-banner p { font: 600 15px/1.5 var(--font-body); color: var(--fg); margin: 0; }
+    .plan .guarantee-line { color: var(--success); font-weight: 700; }
+    .plan .bonus-li { color: var(--fox-600); }
+    .plan .bonus-li svg { color: var(--fox-500); }
+    .bonus-tag { font: 700 10px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .08em; background: var(--fox-50); color: var(--fox-600); border: 1px solid var(--fox-100); border-radius: var(--radius-pill); padding: 3px 7px; margin-right: 4px; flex: none; }
+
+    /* ---- hero guarantee + proof strip ---- */
+    .hero-guarantee { font: 600 13px/1.5 var(--font-body); color: var(--fg-secondary); margin-top: var(--space-5); padding: var(--space-3) var(--space-5); background: color-mix(in srgb, var(--fox-50) 60%, transparent); border: 1px solid var(--fox-100); border-radius: var(--radius-md); max-width: 44ch; }
+    .hero-proof-strip { font: var(--text-small); color: var(--fg-muted); margin-top: var(--space-3); }
+    .scarcity { font: 600 13px/1.4 var(--font-mono); color: var(--fg-muted); margin-top: var(--space-3); }
+    .scarcity .slots { color: var(--accent); }
+    .contact-scarcity { font: 600 13px/1.4 var(--font-mono); color: color-mix(in srgb, var(--sand-50) 56%, transparent); margin-top: var(--space-5); }
+    .contact-scarcity .slots { color: var(--fox-400); }
+
+    /* ---- optional form fields ---- */
+    .form-optional { margin-top: var(--space-2); border: none; padding: 0; }
+    .form-optional summary { font: 600 13px/1 var(--font-body); color: var(--fox-400); cursor: pointer; padding: var(--space-3) 0; list-style: none; }
+    .form-optional summary::-webkit-details-marker { display: none; }
+    .form-optional-body { display: grid; gap: var(--space-4); padding-top: var(--space-3); }
 
     /* ---- footer ---- */
     footer { background: var(--bg); border-top: 1px solid var(--border); padding: var(--space-12) 0; }
     .foot { display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); flex-wrap: wrap; }
     .foot small { font: var(--text-small); color: var(--fg-muted); }
-    .foot .logo .fox { font-size: 18px; } .foot .logo .consulting { font-size: 9px; }
+    .foot .logo img { width: 36px; height: 36px; }
+    .foot .logo .fox { font-size: 18px; }
+    .foot .logo .consulting { font-size: 9px; }
 
-    /* ---- reveal animation ---- */
+    /* ---- scroll reveal ---- */
     .reveal { opacity: 0; transform: translateY(14px); transition: opacity .45s cubic-bezier(.2,.8,.2,1), transform .45s cubic-bezier(.2,.8,.2,1); }
     .reveal.in { opacity: 1; transform: none; }
 
+    /* ---- floating mobile CTA (appears after hero) ---- */
+    .float-cta {
+      display: none; position: fixed; bottom: var(--space-5); left: 50%; transform: translateX(-50%);
+      z-index: 40; white-space: nowrap;
+      box-shadow: 0 8px 32px -8px rgba(20,17,14,.4), var(--shadow-accent);
+      transition: opacity .3s, transform .3s cubic-bezier(.2,.8,.2,1);
+      opacity: 0; pointer-events: none;
+    }
+    .float-cta.visible { opacity: 1; pointer-events: auto; }
+
     /* ---- responsive ---- */
+    @media (max-width: 1100px) {
+      .plans { grid-template-columns: repeat(2, 1fr); gap: var(--space-6); }
+      .plan.featured { margin-top: 0; }
+    }
     @media (max-width: 900px) {
-      .hero-grid { grid-template-columns: 1fr; gap: var(--space-12); }
-      .cards, .examples, .steps, .plans { grid-template-columns: 1fr; }
+      .hero-grid { grid-template-columns: 1fr; gap: var(--space-10); }
+      .cards, .examples, .steps, .plans, .cmd-grid, .cmd-features, .case-fields, #caseGrid { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; gap: var(--space-10); }
+      .calc-result { grid-template-columns: 1fr; gap: var(--space-4); }
+      .stats-inner { gap: var(--space-2); }
+      .stat-item + .stat-item::before { display: none; }
+      .stat-item { border-top: 1px solid var(--char-800); padding: var(--space-5) var(--space-4); }
+      /* mobile nav: show CTA always, hamburger for links */
+      .nav-cta-mobile { display: flex; }
       .nav-links { display: none; }
-      .nav-links.open { display: flex; position: absolute; top: 68px; left: 0; right: 0; flex-direction: column; align-items: flex-start; gap: var(--space-5); background: var(--bg); padding: var(--space-6); border-bottom: 1px solid var(--border); }
+      .nav-links.open { display: flex; position: absolute; top: 68px; left: 0; right: 0; flex-direction: column; align-items: flex-start; gap: var(--space-5); background: var(--bg); padding: var(--space-6); border-bottom: 1px solid var(--border); z-index: 49; }
+      .nav-links .btn { display: none; } /* hide the desktop CTA inside the menu */
       .nav-toggle { display: inline-grid; place-items: center; width: 44px; height: 44px; background: transparent; border: 1px solid var(--border-strong); border-radius: var(--radius-md); cursor: pointer; color: var(--fg); }
+      .float-cta { display: flex; }
+      .faq-list { max-width: 100%; }
     }
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
       .reveal { opacity: 1; transform: none; }
+      .float-cta { transition: none; }
     }
   </style>
 </head>
@@ -255,14 +446,16 @@
   <header class="nav">
     <div class="wrap nav-inner">
       <a class="logo" href="#top" aria-label="Fox Consulting home">
-        <span class="fox">FOX</span>
-        <span class="consulting">CONSULTING</span>
+        <img src="assets/fox-mark.png" width="40" height="40" alt="">
+        <span class="logo-type"><span class="fox">FOX</span><span class="consulting">CONSULTING</span></span>
       </a>
+      <!-- mobile CTA always visible -->
+      <a class="btn btn-primary btn-sm nav-cta-mobile" data-book href="#contact">Book teardown</a>
       <nav class="nav-links" id="navlinks">
         <a class="txt" href="#focus">What we fix</a>
         <a class="txt" href="#work">The work</a>
         <a class="txt" href="#pricing">Pricing</a>
-        <a class="btn btn-primary" href="#contact">Book a teardown <span class="arrow">&rarr;</span></a>
+        <a class="btn btn-primary" data-book href="#contact">Book a free teardown <span class="arrow">&rarr;</span></a>
       </nav>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
@@ -270,36 +463,95 @@
     </div>
   </header>
 
+  <!-- ===================== NICHE SWITCHER (hidden for paid traffic) ===================== -->
+  <div class="switch" id="nicheSwitcher">
+    <div class="wrap switch-inner">
+      <span class="lbl">Built for</span>
+      <a href="?niche=general" data-niche="general">General operations</a>
+      <a href="?niche=home-services" data-niche="home-services">Home services &amp; trades</a>
+      <a href="?niche=medical" data-niche="medical">Medical &amp; dental</a>
+    </div>
+  </div>
+
   <!-- ===================== HERO ===================== -->
   <a id="top"></a>
-  <section class="hero">
+  <section class="hero" id="heroSection">
+    <canvas id="hero-bg" aria-hidden="true"></canvas>
     <div class="wrap hero-grid">
-      <div>
-        <p class="overline">AI-enabled operational transformation &middot; Winter Park &middot; Brevard County</p>
-        <h1>We find where your operation <span class="ink">leaks time and money</span> — then build the AI systems that stop it.</h1>
-        <p class="lead">You didn't start your business to do data entry at 9pm. We diagnose the busywork draining your week and build the assistants, pipelines, and dashboards that run it for you.</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary btn-lg" href="#contact">Book a free operations teardown <span class="arrow">&rarr;</span></a>
-          <a class="btn btn-ghost btn-lg" href="#work">See the work</a>
-        </div>
-        <p class="hero-note">Built and ran the full tech stack for a real multi-location business. <b>Now we do it for yours.</b></p>
+      <p class="overline" id="heroOverline">LOCAL AI OPERATIONS &middot; WINTER PARK &middot; ORLANDO &middot; BREVARD</p>
+      <h1 id="heroH1">We find the busywork stealing <span class="ink">10+ hours a week</span> from your business, then build the AI system that does it for you, for good.</h1>
+      <p class="lead" id="heroLead">You didn't start your business to do data entry at 9pm. We diagnose the busywork draining your week and build the assistants, pipelines, and dashboards that handle it without you. That's up to 13 weeks of your year back.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary btn-lg" data-book href="#contact" id="heroCta">Book a free teardown <span class="arrow">&rarr;</span></a>
+        <a class="btn btn-ghost btn-lg" href="#leak-calc">See how much it costs you</a>
       </div>
+      <p class="hero-guarantee">You pay nothing until the system is running. If it doesn't close the leak, we keep building free until it does.</p>
+      <p class="hero-proof-strip" id="heroNote">Biggest leak mapped in 90 minutes. First system live in about two weeks. Built and run the operations stack for a medical clinic franchise personally.</p>
+    </div>
+  </section>
 
-      <aside class="stat-card" aria-label="Representative outcomes">
-        <p class="tag">What the work looks like</p>
-        <div class="row">
-          <span class="num">11<span class="u">hrs</span></span>
-          <span class="lab">manual invoicing cut from the week</span>
+  <!-- ===================== STATS BAND ===================== -->
+  <div class="stats-band">
+    <div class="wrap">
+      <div class="stats-inner" id="statRows">
+        <!-- populated by JS -->
+        <div class="stat-item"><span class="num">11<span class="u">hrs</span></span><p class="lab">manual invoicing cut from the week</p></div>
+        <div class="stat-item"><span class="num">24<span class="u">/7</span></span><p class="lab">phone coverage that books jobs and follows up</p></div>
+        <div class="stat-item"><span class="num">1<span class="u"> screen</span></span><p class="lab">every location's numbers, in real time</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TIME LEAK CALCULATOR ===================== -->
+  <section id="leak-calc" class="calc-section">
+    <div class="wrap">
+      <div class="calc-wrap reveal">
+        <div class="sec-head" style="margin-bottom:var(--space-10)">
+          <p class="overline">How much is it costing you?</p>
+          <h2>See your leak in hours and dollars.</h2>
+          <p>Move the sliders. The numbers are yours to keep.</p>
         </div>
-        <div class="row">
-          <span class="num">24<span class="u">/7</span></span>
-          <span class="lab">phone coverage that books jobs and follows up</span>
+        <div class="calc-body">
+          <div class="calc-sliders">
+            <label class="calc-label">
+              <span class="calc-lbl-text">Hours your team loses to manual work each week</span>
+              <input type="range" id="lc-hours" min="2" max="40" value="10" step="1" aria-label="Hours per week on manual work">
+              <output id="lc-hours-out" class="calc-output">10 hrs/week</output>
+            </label>
+            <label class="calc-label">
+              <span class="calc-lbl-text">What an hour of that work costs you (loaded rate)</span>
+              <input type="range" id="lc-rate" min="20" max="120" value="45" step="5" aria-label="Hourly cost of manual work">
+              <output id="lc-rate-out" class="calc-output">$45/hr</output>
+            </label>
+          </div>
+          <div class="calc-result">
+            <div class="calc-stat">
+              <strong id="lc-year-hours">500</strong>
+              <span>hours a year</span>
+            </div>
+            <div class="calc-stat">
+              <strong id="lc-year-cost">$22,500</strong>
+              <span>leaking annually</span>
+            </div>
+            <div class="calc-stat">
+              <strong id="lc-weeks">12</strong>
+              <span>work weeks back</span>
+            </div>
+          </div>
+          <div class="calc-gate" id="calcGate">
+            <p class="calc-gate-lbl">Send this breakdown to your inbox with a free fix-plan outline.</p>
+            <form class="calc-email-form" id="calcEmailForm" novalidate>
+              <div class="calc-email-row">
+                <label for="calcEmail" class="sr-only">Your email</label>
+                <input type="email" id="calcEmail" name="email" placeholder="your@email.com" autocomplete="email" required>
+                <button type="submit" class="btn btn-primary">Email my report <span class="arrow">&rarr;</span></button>
+              </div>
+              <p class="calc-gate-reassure">No sales pitch. One email with your numbers and where we'd look first.</p>
+            </form>
+            <p class="calc-gate-sent" id="calcGateSent" aria-live="polite">On its way. Check your inbox shortly.</p>
+          </div>
         </div>
-        <div class="row">
-          <span class="num">1<span class="u">screen</span></span>
-          <span class="lab">every location's numbers, in real time</span>
-        </div>
-      </aside>
+      </div>
     </div>
   </section>
 
@@ -308,76 +560,46 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <p class="overline">Where we go to work</p>
-        <h2>Five places your operation is quietly bleeding hours.</h2>
-        <p>We don't sell software. We find the leak, then build the system that closes it — and hand you something your team actually uses.</p>
+        <h2 id="focusH2">Six places your operation is quietly bleeding hours.</h2>
+        <p id="focusP">We don't sell software. We find the leak, then build the system that closes it — wired into the tools you already run.</p>
       </div>
-      <div class="cards">
-        <article class="card reveal">
-          <div class="ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></svg></div>
-          <h3>AI phone &amp; front desk</h3>
-          <p>AI that answers the phones, books the jobs, and never forgets to follow up. It works nights, weekends, and the lunch rush.</p>
-        </article>
-        <article class="card reveal">
-          <div class="ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
-          <h3>Automated workflows</h3>
-          <p>Invoicing, scheduling, reminders, intake. The repetitive steps your team does by hand get done automatically and on time.</p>
-        </article>
-        <article class="card reveal">
-          <div class="ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></div>
-          <h3>Data pipelines</h3>
-          <p>Your numbers live in five tools that don't talk. We pipe them into one place so the right figure is always one click away.</p>
-        </article>
-        <article class="card reveal">
-          <div class="ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
-          <h3>System integrations</h3>
-          <p>POS, CRM, accounting, scheduling — wired together so an order in one place updates everywhere, no double entry.</p>
-        </article>
-        <article class="card reveal">
-          <div class="ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect width="4" height="7" x="7" y="10"/><rect width="4" height="11" x="15" y="6"/></svg></div>
-          <h3>Dashboards &amp; reporting</h3>
-          <p>Every location's revenue, jobs, and bottlenecks on one screen — updated in real time, readable at a glance.</p>
-        </article>
-        <article class="card reveal">
-          <div class="ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/></svg></div>
-          <h3>Internal tools &amp; AI assistants</h3>
-          <p>Custom assistants trained on how your shop actually runs — onboarding, quoting, answers — instead of a generic chatbot.</p>
-        </article>
+      <div class="cards" id="focusCards"></div>
+    </div>
+  </section>
+
+  <!-- ===================== COMMAND CENTER ===================== -->
+  <section class="cmd-ctr">
+    <div class="wrap">
+      <div class="cmd-grid">
+        <div class="reveal">
+          <p class="overline">The Command Center</p>
+          <h2>One screen. Every number that runs your operation — pulled live from tools you already pay for.</h2>
+          <p class="lead" id="cmdLead">We connect your scheduler, payment processor, and spreadsheets into a single dashboard your whole team reads every morning. Built into the tools you already use — no new software to buy, no new monthly bill, no login nobody uses.</p>
+          <a class="btn btn-primary" data-book href="#contact" id="cmdCta">Build mine <span class="arrow">&rarr;</span></a>
+        </div>
+        <div class="cmd-features" id="cmdFeatGrid">
+          <!-- populated by JS -->
+        </div>
+      </div>
+      <div class="cmd-no-software reveal">
+        <div class="cmd-zero">
+          <p class="big">$0</p>
+          <p class="lab">new software</p>
+        </div>
+        <p class="body">We build into the tools your team already uses every day — so it gets used, not ignored. If you're already on Google Workspace, most clients need zero new software. No new vendor. No new password. No subscription you'll forget to cancel.</p>
       </div>
     </div>
   </section>
 
-  <!-- ===================== EXAMPLES / PROOF ===================== -->
+  <!-- ===================== PROOF (dark) ===================== -->
   <section class="proof" id="work">
     <div class="wrap">
       <div class="sec-head reveal">
         <p class="overline">The work</p>
-        <h2>What it looks like when the leak gets fixed.</h2>
-        <p>Representative engagements. Same pattern every time: find the busywork, build the system, hand it back running.</p>
+        <h2>We've been in the operation. Here's what we built.</h2>
+        <p>Same pattern every time: find the leak, build the fix, hand it back running.</p>
       </div>
-      <div class="examples">
-        <article class="ex reveal">
-          <p class="kicker">Multi-location services</p>
-          <p class="big">11<span class="u">hrs/wk</span></p>
-          <h3>Invoicing on autopilot</h3>
-          <p>Jobs closed in the field now generate, send, and reconcile invoices automatically. The owner stopped doing it on Sunday nights.</p>
-        </article>
-        <article class="ex reveal">
-          <p class="kicker">Home services</p>
-          <p class="big">38<span class="u">% more</span></p>
-          <h3>Calls that turn into booked jobs</h3>
-          <p>An AI receptionist answers every call, books the slot, and texts a confirmation. Missed calls stopped being lost revenue.</p>
-        </article>
-        <article class="ex reveal">
-          <p class="kicker">Retail &amp; hospitality</p>
-          <p class="big">5&rarr;1</p>
-          <h3>Five tools, one dashboard</h3>
-          <p>POS, scheduling, and accounting piped into a single live view. The morning numbers meeting went from an hour to five minutes.</p>
-        </article>
-      </div>
-      <p class="proof-quote reveal">
-        "Built and ran the full tech stack for a real multi-location business. Now we do it for yours."
-        <span class="by">// Fox Consulting LLC</span>
-      </p>
+      <div id="caseGrid"></div>
     </div>
   </section>
 
@@ -386,19 +608,19 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <p class="overline">How it works</p>
-        <h2>Three steps. No rip-and-replace, no year-long project.</h2>
+        <h2>Three steps. No rip-and-replace. No year-long project.</h2>
       </div>
       <div class="steps">
         <div class="step reveal">
           <p class="n">01</p>
-          <h3>Operations teardown</h3>
-          <p>We sit with your week and map where time and money leak. Free, local, and yours to keep whether or not we work together.</p>
+          <h3>Free operations teardown</h3>
+          <p>We sit with your week and map where time and money leak. <b>The written fix plan is yours to keep</b> whether or not we build anything.</p>
           <div class="bar"></div>
         </div>
         <div class="step reveal">
           <p class="n">02</p>
           <h3>Build the system</h3>
-          <p>We build the assistant, pipeline, or dashboard that closes the biggest leak first — wired into the tools you already run.</p>
+          <p>We build the one system that closes your biggest leak first — wired into the tools you already pay for.</p>
           <div class="bar"></div>
         </div>
         <div class="step reveal">
@@ -411,41 +633,69 @@
     </div>
   </section>
 
+  <!-- ===================== FAQ / OBJECTIONS ===================== -->
+  <section class="faq-section" id="faq">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="overline">Common concerns</p>
+        <h2 id="faqH2">The questions every owner asks before booking.</h2>
+      </div>
+      <div class="faq-list reveal" id="faqList"></div>
+    </div>
+  </section>
+
   <!-- ===================== PRICING ===================== -->
-  <section class="pricing" id="pricing">
+  <section id="pricing">
     <div class="wrap">
       <div class="sec-head reveal">
         <p class="overline">Pricing</p>
         <h2>Pick the leak. Pick the package. Keep what we build.</h2>
-        <p>Flat, local pricing — no national-vendor retainers, no fractional-exec markup. You own everything we ship.</p>
+        <p>Flat, local pricing. No retainers, no 12-month commitments, no per-seat bills. You own everything we ship. And you don't pay for a build until it's running.</p>
+      </div>
+      <div class="guarantee-banner reveal">
+        <p>Every build comes with a guarantee. You don't pay until it's running. If it doesn't close the leak, we keep building free until it does.</p>
       </div>
       <div class="plans">
         <article class="plan reveal">
           <p class="pname">Teardown</p>
-          <p class="ptag">A full read on where your operation leaks — and exactly what to fix first.</p>
+          <p class="ptag">A full map of where your operation leaks — and exactly what to fix first.</p>
           <p class="price">$0<span class="per"> / first session</span></p>
           <ul>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 90-minute on-site walkthrough</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Ranked list of time/money leaks</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> A written fix plan you keep</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Ranked list of time and money leaks</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Written fix plan — yours to keep, always</li>
           </ul>
-          <a class="btn btn-ghost" href="#contact">Book the teardown <span class="arrow">&rarr;</span></a>
+          <a class="btn btn-ghost" data-book href="#contact">Book the teardown <span class="arrow">&rarr;</span></a>
         </article>
-
+        <article class="plan reveal">
+          <p class="pname">Command Center</p>
+          <p class="ptag">Your appointments, revenue, and KPIs from every system — live on one screen your whole team actually reads.</p>
+          <p class="price">$3,500<span class="per"> / project</span></p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Connects your scheduler, payments, and tracking tools</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Wired into your existing tools — often $0 in new software</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Real-time data, readable at a glance</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Team walkthrough + 30 days of tweaks</li>
+            <li class="bonus-li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span><span class="bonus-tag">Bonus</span> Morning Pulse: a one-page daily summary auto-sent to your inbox</span></li>
+            <li class="bonus-li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span><span class="bonus-tag">Bonus</span> 10-minute walkthrough video so your team reads the dashboard from day one</span></li>
+            <li class="guarantee-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Guarantee: you don't pay until it's built, tested, and running in your business.</li>
+          </ul>
+          <a class="btn btn-ghost" data-book href="#contact">Get a command center <span class="arrow">&rarr;</span></a>
+        </article>
         <article class="plan featured reveal">
-          <span class="badge">Most operations start here</span>
+          <span class="badge">Where most clients start</span>
           <p class="pname">Single System</p>
-          <p class="ptag">We build the one system that closes your biggest leak — start to finish.</p>
+          <p class="ptag">We build the one system that closes your biggest leak, start to finish.</p>
           <p class="price">$4,500<span class="per"> / project</span></p>
           <ul>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> One AI assistant, workflow, or dashboard</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Wired into your existing tools</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Team training + documentation</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 30 days of fixes included</li>
+            <li class="guarantee-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Guarantee: if it doesn't close the leak, we keep building free until it does.</li>
           </ul>
-          <a class="btn btn-primary" href="#contact">Start a build <span class="arrow">&rarr;</span></a>
+          <a class="btn btn-primary" data-book href="#contact">Start with the teardown <span class="arrow">&rarr;</span></a>
         </article>
-
         <article class="plan reveal">
           <p class="pname">Operating Partner</p>
           <p class="ptag">We keep finding and closing leaks across your whole operation, month over month.</p>
@@ -454,45 +704,65 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Ongoing builds and integrations</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Priority support and monitoring</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Quarterly operations review</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Month to month — cancel anytime</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Month to month, cancel anytime</li>
+            <li class="guarantee-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Guarantee: cancel any month you don't see value. No penalty, no clawback.</li>
           </ul>
-          <a class="btn btn-ghost" href="#contact">Talk it through <span class="arrow">&rarr;</span></a>
+          <a class="btn btn-ghost" data-book href="#contact">See if it's a fit <span class="arrow">&rarr;</span></a>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ===================== CONTACT / FINAL CTA ===================== -->
+  <!-- ===================== CONTACT / FORM ===================== -->
   <section class="contact" id="contact">
     <div class="wrap contact-grid">
       <div class="reveal">
-        <p class="overline">Book a free operations teardown</p>
-        <h2>Stop losing hours. Let's find the leak.</h2>
-        <p class="lead">Tell us a little about your operation. We'll come back within one business day to set up your teardown — on-site, local, and free.</p>
+        <p class="overline" id="ctaOverline">TELL US WHERE THE TIME GOES</p>
+        <h2 id="ctaH2">Stop losing hours. Let's find the leak.</h2>
+        <p class="lead" id="ctaLead">Tell us a little about your operation and the task eating your week. We read every note ourselves and reply personally within one business day.</p>
+        <a class="deet" href="tel:+13217509608"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>(321) 750-9608</span></a>
         <a class="deet" href="mailto:hello@foxconsulting.co"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><span>hello@foxconsulting.co</span></a>
-        <a class="deet" href="tel:+14075550199"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>(407) 555-0199</span></a>
         <a class="deet" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>Winter Park, Orlando &amp; Brevard County, FL</span></a>
+        <p class="contact-scarcity" id="contactScarcity"></p>
       </div>
 
-      <form id="teardownForm" novalidate>
-        <div class="field">
-          <label for="name">Your name</label>
-          <input id="name" name="name" type="text" placeholder="First and last" required>
+      <div class="booking">
+        <p class="form-kicker" id="formKicker">Where's your operation leaking time?</p>
+        <p class="form-sub" id="formSub">30 seconds. No sales pitch — we read every one and reply personally within one business day.</p>
+        <form id="leadForm" novalidate>
+          <div class="field">
+            <label for="timesink">What's the one task eating the most time in your week? <span class="req">*</span></label>
+            <textarea id="timesink" name="timesink" rows="3" placeholder="The task that keeps eating your week" required></textarea>
+          </div>
+          <div class="field">
+            <label for="contact">Best email or phone to send your fix plan <span class="req">*</span></label>
+            <input id="contact" name="contact" type="text" autocomplete="email" placeholder="email@yourbusiness.com or (321) 555-0123" required>
+          </div>
+          <details class="form-optional">
+            <summary>Add your name and business (optional)</summary>
+            <div class="form-optional-body">
+              <div class="field">
+                <label for="name">Your name</label>
+                <input id="name" name="name" type="text" autocomplete="name" placeholder="First and last">
+              </div>
+              <div class="field">
+                <label for="business">Business</label>
+                <input id="business" name="business" type="text" autocomplete="organization" placeholder="What you run">
+              </div>
+            </div>
+          </details>
+          <input type="hidden" name="niche" id="nicheField" value="general">
+          <input type="hidden" name="_utms" id="utmField" value="">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+          <button class="btn btn-primary btn-lg" type="submit" id="leadSubmit">Show me where the leak is <span class="arrow">&rarr;</span></button>
+          <p class="form-reassure">30 seconds. No sales call unless you ask for one. We read every one ourselves and reply within one business day. We don't share your info.</p>
+        </form>
+        <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+          <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h3>Got it — we'll be in touch.</h3>
+          <p id="successMsg">Thanks. We read every submission and reply personally within one business day.</p>
         </div>
-        <div class="field">
-          <label for="business">Business</label>
-          <input id="business" name="business" type="text" placeholder="What you run" required>
-        </div>
-        <div class="field">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" placeholder="you@yourbusiness.com" required>
-        </div>
-        <div class="field">
-          <label for="leak">Where's the time going?</label>
-          <textarea id="leak" name="leak" rows="3" placeholder="The task that keeps eating your week"></textarea>
-        </div>
-        <button class="btn btn-primary btn-lg" type="submit">Book my teardown <span class="arrow">&rarr;</span></button>
-      </form>
+      </div>
     </div>
   </section>
 
@@ -500,58 +770,707 @@
   <footer>
     <div class="wrap foot">
       <a class="logo" href="#top" aria-label="Fox Consulting home">
-        <span class="fox">FOX</span>
-        <span class="consulting">CONSULTING</span>
+        <img src="assets/fox-mark.png" width="36" height="36" alt="">
+        <span class="logo-type"><span class="fox">FOX</span><span class="consulting">CONSULTING</span></span>
       </a>
       <small>Local operational consulting &middot; Winter Park &middot; Orlando &middot; Brevard County, FL</small>
       <small>&copy; 2026 Fox Consulting LLC &middot; Built local. Run sharp.</small>
     </div>
   </footer>
 
+  <!-- ===================== FLOATING MOBILE CTA ===================== -->
+  <a class="btn btn-primary float-cta" id="floatCta" data-book href="#contact">Book a free teardown <span class="arrow">&rarr;</span></a>
+
   <script>
-    // mobile nav
+    /* ============================================================
+       CONFIG
+       ============================================================ */
+    var FORMSPREE_ID = "xeewoyqw";
+
+    /* ============================================================
+       CASE STUDIES — add quote/quoteName when you have them.
+       Leave those fields as "" to hide them.
+       ============================================================ */
+    var CASES = [
+      {
+        industry: "Healthcare operations team",
+        leak: "Staff logged into six separate payment processor accounts multiple times a day to hunt for specific transactions. Repetitive, easy to miss, and a constant source of delayed handoffs.",
+        build: "Automated system that scans all six accounts, detects relevant transactions, and routes them into one centralized work queue. Status tracking, ownership, follow-up timing, and performance analytics built in.",
+        result: "Six manual portal checks replaced by one automated queue. Fewer missed transactions, faster handoffs, zero repeated logins.",
+        quote: "",
+        quoteName: ""
+      },
+      {
+        industry: "Sales team — revenue attribution",
+        leak: "CRM tracked every call, email, and text rep activity. But actual revenue lived outside the CRM. Leadership could see how busy reps were, not how much revenue their activity created.",
+        build: "Connected external transaction revenue to the responsible rep and combined it with CRM activity data in one dashboard. Rep and admin views show daily sales, products sold, revenue per touchpoint, and transaction-level drill-down.",
+        result: "Manual attribution eliminated. Leadership now sees which outreach produces revenue without stitching together separate exports.",
+        quote: "",
+        quoteName: ""
+      },
+      {
+        industry: "Multi-location service business",
+        leak: "Revenue, appointments, and location performance lived in separate spreadsheets. Leadership could not spot problems until they had grown. Daily huddle prep meant pulling and calculating numbers by hand every morning.",
+        build: "Live executive dashboard consolidating daily operating data: KPIs, period-over-period trends, location scorecards, goal progress, daily pace needed, and risk alerts. TV-ready for team huddles. Role-based access limits visibility by position.",
+        result: "Manual huddle prep eliminated. Leadership sees the full business from one screen and walks into every meeting knowing exactly where they stand.",
+        quote: "",
+        quoteName: ""
+      },
+      {
+        industry: "Growing operations team",
+        leak: "Staff relied on scattered bookmarks and manual instructions to access tools used every day. Onboarding a new hire required constant back-and-forth. Managers had no clear view of who had access to what.",
+        build: "Centralized app hub with role-based access for 20-plus internal and external tools. Users see only the tools their role allows. Managers control access from a simple admin panel with no code changes required.",
+        result: "Faster tool access across every department. Cleaner onboarding, fewer permission headaches, and a foundation for adding new tools without adding clutter.",
+        quote: "",
+        quoteName: ""
+      }
+    ];
+
+    /* ============================================================
+       SCARCITY — update N and Month each month. No auto-countdown.
+       ============================================================ */
+    var SCARCITY = {
+      n: "4",          // slots remaining this month
+      month: "July"    // current month name
+    };
+
+    var ICONS = {
+      phone: '<path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/>',
+      flow:  '<path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/>',
+      pipe:  '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/>',
+      grid:  '<rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/>',
+      chart: '<path d="M3 3v18h18"/><rect width="4" height="7" x="7" y="10"/><rect width="4" height="11" x="15" y="6"/>',
+      bot:   '<path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/>',
+      truck: '<path d="M10 17h4V5H2v12h3"/><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5v8h1"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/>',
+      star:  '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+      box:   '<path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/>',
+      cal:   '<rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+      repeat:'<path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/>',
+      file:  '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v5h5M9 13h6M9 17h6"/>',
+      people:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>'
+    };
+
+    /* ============================================================
+       NICHE CONTENT
+       ============================================================ */
+    var NICHE = {
+      "general": {
+        title: "Fox Consulting — AI-enabled operations for local businesses",
+        meta: "Fox Consulting finds where your operation leaks time and money, then builds the AI systems that stop it. Local to Winter Park, Orlando, and Brevard County, FL.",
+        overline: "LOCAL AI OPERATIONS &middot; WINTER PARK &middot; ORLANDO &middot; BREVARD",
+        h1: 'We find the busywork stealing <span class="ink">10+ hours a week</span> from your operation, then build the AI that kills it for good.',
+        lead: "You didn't start your business to do data entry at 9pm. We diagnose the busywork draining your week and build the assistants, pipelines, and dashboards that handle it without you. That's up to 13 weeks of your year back.",
+        cta: 'Show me where the leak is <span class="arrow">&rarr;</span>',
+        note: 'Built and ran the full operations stack for a medical clinic franchise. That\'s the experience behind every teardown.',
+        stats: [
+          { num:"11", u:"hrs", lab:"manual invoicing cut from the week" },
+          { num:"24", u:"/7", lab:"phone coverage that books jobs and follows up" },
+          { num:"1", u:"\xa0screen", lab:"every location's numbers, in real time" }
+        ],
+        focusH2: "Six places your operation is quietly bleeding hours.",
+        focusP: "We don't sell software. We find the leak, then build the system that closes it — wired into the tools you already run.",
+        focus: [
+          { ic:"phone", h:"AI phone & front desk", p:"AI that answers the phones, books the jobs, and never forgets to follow up. It works nights, weekends, and the lunch rush." },
+          { ic:"flow",  h:"Automated workflows",   p:"Invoicing, scheduling, reminders, intake. The repetitive steps your team does by hand get done automatically and on time." },
+          { ic:"pipe",  h:"Data pipelines",         p:"Your numbers live in five tools that don't talk. We pipe them into one place so the right figure is always one click away." },
+          { ic:"grid",  h:"System integrations",    p:"POS, CRM, accounting, scheduling — wired together so an update in one place flows everywhere. No double entry." },
+          { ic:"grid",  h:"Command Center dashboard",  p:"Your appointments, revenue, and KPIs pulled from your existing tools — into one live screen your whole team reads every morning. Built into what you already use. No new software required." },
+          { ic:"bot",   h:"Internal tools & AI assistants", p:"Custom assistants trained on how your shop actually runs — onboarding, quoting, answers — not a generic chatbot." }
+        ],
+        examples: [
+          { k:"Multi-location services", big:"11", u:"hrs/wk", h:"Invoicing on autopilot", p:"Jobs closed in the field now generate, send, and reconcile invoices automatically. The owner stopped doing it on Sunday nights." },
+          { k:"Home services", big:"38", u:"%", h:"Calls that turn into booked jobs", p:"An AI front desk answers every call, books the slot, and texts a confirmation. Missed calls stopped being lost revenue." },
+          { k:"Medical clinic franchise", big:"1", u:"\xa0screen", h:"Every number from every system — live", p:"Appointments, daily revenue, and new-patient counts pulled from three separate platforms into one dashboard — wired into their existing tools at zero new software cost. The morning meeting went from an hour to five minutes." }
+        ],
+        proof: "We built and ran the full operations stack for a medical clinic franchise before we sold a day of consulting — phones, scheduling, billing, reporting. Now we build it for yours.",
+        ctaOverline: "TELL US WHERE THE TIME GOES",
+        ctaH2: "Stop losing hours. Let's find the leak.",
+        ctaLead: "Tell us a little about your operation and the task eating your week. We read every note ourselves and reply personally within one business day.",
+        formKicker: "Where's your operation leaking time?",
+        bizWord: "Business", bizPlaceholder: "What you run",
+        headacheLabel: "Biggest time sink in your week",
+        headachePlaceholder: "The task that keeps eating your week",
+        submit: 'Show me where the leak is <span class="arrow">&rarr;</span>',
+        successMsg: "Thanks. We read every submission and reply personally within one business day with where we'd look first.",
+        faqH2: "The questions every owner asks before booking.",
+        faq: [
+          { q: "I've been burned by agencies before. How is this different?", a: "Fair. Three differences: you don't pay for a build until it's running, you own everything we ship (no lock-in), and we're local and accountable. If it doesn't close the leak, we keep working until it does." },
+          { q: "Do I have to buy new software?", a: "Usually not. We build into the tools your team already uses. If you're on Google Workspace, most clients need zero new software or subscriptions. Either way, we start with what you have." },
+          { q: "What if my team won't use it?", a: "We build it where your team already logs in every morning, and we train them on it. If it doesn't get used, it doesn't count as done." },
+          { q: "How long does it take?", a: "Most single systems are live in about two weeks. The teardown itself is 90 minutes, and you leave with the written fix plan that day." },
+          { q: "What does it actually cost?", a: "Flat project pricing, no retainers. Command Center is $3,500, a Single System is $4,500, ongoing partnership is $3,200/month. See pricing below." },
+          { q: "What happens after you build it?", a: "It's documented and runs without us. Your team owns it. We only stay on if you want the next leak fixed too." }
+        ],
+        cmdCenter: {
+          lead: "We connect your scheduling tool, payment processor, and spreadsheets into a single dashboard your whole team reads every morning. Built into the tools you already use — no new software, no new monthly bill, no login nobody uses.",
+          features: [
+            { h: "Scheduling & booking platforms", p: "Live appointment counts, open slots, and cancellations from tools like Calendly, Square Appointments, or whichever platform your bookings run on." },
+            { h: "Payment processors", p: "Today's revenue, transaction volume, and batch settlements from Stripe, Square, or your payment gateway — no manual export, no switching tabs." },
+            { h: "Google Sheets & Docs", p: "KPIs your team already tracks manually, read live into the dashboard the moment someone updates the sheet. No migration, no new tool." },
+            { h: "Social, financial, and more", p: "Social media feedback, financial statements from .csv or .xlsx, review scores — connected and readable in one place." }
+          ]
+        }
+      },
+
+      "home-services": {
+        title: "Fox Consulting — AI phone & ops for HVAC, plumbing & roofing",
+        meta: "Every missed call is a booked job gone to a competitor. Fox builds the AI phone, dispatch, and invoicing systems that stop the leak. Free teardown.",
+        overline: "FOR HVAC, PLUMBING &amp; ROOFING SHOPS &middot; ORLANDO &middot; BREVARD",
+        h1: 'That call you just missed? Your competitor picked it up. We build the AI that <span class="ink">answers it, books it, and sends the invoice.</span>',
+        lead: "You're under a truck or up on a roof while the phone rings out to voicemail, and that caller already dialed the next company on the list. We build the AI front desk that answers every call, books the slot, and handles the paperwork. That's jobs back in your week, for good.",
+        cta: 'Find my missed-call leak <span class="arrow">&rarr;</span>',
+        note: 'Built and ran the full operations stack for a real multi-location business. That\'s the experience behind every fix plan.',
+        stats: [
+          { num:"27", u:"%", lab:"of inbound calls go unanswered at a busy trades shop — each one a job at risk" },
+          { num:"9",  u:"hrs", lab:"of dispatch, quoting, and invoicing off the owner's week" },
+          { num:"24", u:"/7", lab:"after-hours and overflow call coverage that books the job" }
+        ],
+        focusH2: "Six places your trucks are leaking jobs and money.",
+        focusP: "We don't sell software. We find where your calls and paperwork bleed, then wire the system that books and bills them into the tools you already run.",
+        focus: [
+          { ic:"phone", h:"Missed calls = lost jobs",      p:"A missed call from a homeowner with a flooded water heater is a $4,000 job that goes to whoever picks up next. AI answers every ring, qualifies the job, and books it." },
+          { ic:"truck", h:"Dispatch & scheduling",         p:"Calls get slotted to the right truck by zone and skill. Customers get an automated 'tech is 20 minutes out' text. Your board stops falling apart at 10am." },
+          { ic:"flow",  h:"Invoicing & collections",       p:"Jobs closed in the field generate, send, and chase their own invoices. The owner stops reconciling receipts on Sunday night." },
+          { ic:"star",  h:"Review generation",             p:"A job that goes well becomes a five-star review automatically — triggered by text the moment the ticket closes. Your Google rank climbs without you nagging anyone." },
+          { ic:"box",   h:"Parts & inventory",             p:"Know what's on each truck before the tech rolls. We connect purchasing and job costing so you stop eating the cost of a second trip for a part in the other van." },
+          { ic:"grid",  h:"Command Center dashboard",        p:"Revenue per truck, close rate per tech, and jobs booked vs. missed — pulled from your field service platform into one live screen. Built into what you already use. No new software required." }
+        ],
+        examples: [
+          { k:"HVAC · multi-truck", big:"$11k", u:"/mo", h:"After-hours calls stopped going to voicemail", p:"A four-truck HVAC shop's nights-and-weekends overflow is now answered, booked, and confirmed automatically. Roughly eleven thousand a month in work that used to ring out." },
+          { k:"Plumbing", big:"38", u:"%", h:"More calls turned into booked jobs", p:"Every call gets answered, qualified, and booked with a confirmation text — even mid-job. Inbound booking rate climbed 38% without a single new office hire." },
+          { k:"Roofing & exteriors", big:"9", u:"hrs/wk", h:"The owner got his nights back", p:"Quoting, invoicing, and review requests now run off closed jobs automatically. Nine hours of after-dinner admin came off the owner's plate." }
+        ],
+        proof: "We built and ran the phones, dispatch, and invoicing for a real multi-location operation before we sold a day of it — so we fix your week the way an operator would, not the way a software rep would.",
+        ctaOverline: "FIND THE JOBS YOUR PHONE IS LEAKING",
+        ctaH2: "Find out exactly how many jobs your phone is losing.",
+        ctaLead: "Tell us how your calls, dispatch, and invoicing run today. We'll come back within one business day with where your operation is bleeding work.",
+        formKicker: "How many jobs is your phone leaking?",
+        bizWord: "Business", bizPlaceholder: "HVAC, plumbing, roofing, etc.",
+        headacheLabel: "What's costing you the most jobs?",
+        headachePlaceholder: "Missed calls, dispatch chaos, slow invoicing...",
+        submit: 'Show me where the leak is <span class="arrow">&rarr;</span>',
+        successMsg: "Thanks. We read every submission and reply personally within one business day with where you're losing the most jobs.",
+        faqH2: "The questions every owner asks before booking.",
+        faq: [
+          { q: "I've been burned by agencies before. How is this different?", a: "Fair. Three differences: you don't pay for a build until it's running, you own everything we ship (no lock-in), and we're local and accountable. If it doesn't close the leak, we keep working until it does." },
+          { q: "Do I have to buy new software?", a: "Usually not. We build into the tools your team already uses. If you're on Google Workspace, most clients need zero new software or subscriptions. Either way, we start with what you have." },
+          { q: "What if my team won't use it?", a: "We build it where your team already logs in every morning, and we train them on it. If it doesn't get used, it doesn't count as done." },
+          { q: "How long does it take?", a: "Most single systems are live in about two weeks. The teardown itself is 90 minutes, and you leave with the written fix plan that day." },
+          { q: "What does it actually cost?", a: "Flat project pricing, no retainers. Command Center is $3,500, a Single System is $4,500, ongoing partnership is $3,200/month. See pricing below." },
+          { q: "What happens after you build it?", a: "It's documented and runs without us. Your team owns it. We only stay on if you want the next leak fixed too." }
+        ],
+        cmdCenter: {
+          lead: "We connect your field service platform, payment system, and job tracking into a single screen every dispatcher and owner reads every morning. Built into the tools you already run — nothing new to buy, nothing new to log into.",
+          features: [
+            { h: "Field service platforms", p: "Live job counts, open slots, and tech utilization from ServiceTitan, Housecall Pro, Jobber, or whichever platform your dispatch runs on." },
+            { h: "Payment & invoicing", p: "Revenue collected today, open invoices, and aging receivables from Stripe, Square, or QuickBooks — without opening another tab." },
+            { h: "Google Sheets job tracking", p: "Parts inventory, lead sources, or any custom metric your team tracks in a sheet — pulled live into the dashboard automatically." },
+            { h: "Review & call analytics", p: "Google Business profile reviews, missed-call counts, and booking conversion rates — one screen, updated daily." }
+          ]
+        }
+      },
+
+      "medical": {
+        title: "Fox Consulting — fix the front-desk leak at your practice",
+        meta: "We find where your practice loses chair time — unbooked slots, no-shows, phone overload — then build the AI systems that stop it. Free teardown, Winter Park FL.",
+        overline: "FOR DENTAL &amp; MEDICAL PRACTICES &middot; WINTER PARK &middot; ORLANDO &middot; BREVARD",
+        h1: 'Every call that hits voicemail is a chair that stays empty. We build the AI systems that <span class="ink">answer the phones, fill the schedule, and chase the no-shows.</span>',
+        lead: "Your front desk can't pick up every line, work the recall list, and run insurance at the same time, so calls go to voicemail and slots go empty. We build the AI phone, reminder, and reactivation systems wired into the tools you already use. That's fewer empty chairs and less overtime, every week.",
+        cta: 'Find where my chairs go empty <span class="arrow">&rarr;</span>',
+        note: 'Built and ran the full operations stack for a medical clinic franchise. That\'s not a case study. That\'s what we built.',
+        stats: [
+          { num:"31", u:"%", lab:"fewer no-shows after automated multi-touch reminders" },
+          { num:"14", u:"hrs/wk", lab:"of front-desk phone and follow-up time handed back" },
+          { num:"24", u:"/7", lab:"after-hours calls answered and booked into open chairs" }
+        ],
+        focusH2: "Six places your practice loses chair time every week.",
+        focusP: "We don't touch clinical or diagnostic records — ever. We work the scheduling and communications layer: front desk, phone, recall, intake, and reporting.",
+        focus: [
+          { ic:"phone",  h:"AI phone & front desk",       p:"Answers every line during the lunch rush and after hours, books into your open slots, and texts a confirmation. Calls that used to hit voicemail become appointments." },
+          { ic:"cal",    h:"No-show & reminder workflows", p:"Multi-touch text, email, and call reminders before each appointment, with one-tap confirm and reschedule. Empty chairs get backfilled from your waitlist instead of staying dark." },
+          { ic:"repeat", h:"Recall & reactivation",       p:"We work your overdue-hygiene and lapsed-patient lists automatically — the outreach your front desk never gets to. Dormant patients come back without anyone combing the schedule." },
+          { ic:"file",   h:"Insurance & intake paperwork", p:"New-patient forms, eligibility checks, and intake routing handled before the patient sits down. Your team stops re-keying the same information into three screens." },
+          { ic:"grid",   h:"Command Center dashboard",     p:"Production, open slots, no-show rate, and recall numbers for every provider and location — pulled from your practice management system into one live screen. Built into what you already use. No new software required." },
+          { ic:"people", h:"Internal staff assistant",    p:"A custom assistant trained on how your practice actually runs — insurance rules, scheduling policies, where things live — so new hires stop pulling the office manager." }
+        ],
+        examples: [
+          { k:"Independent dental", big:"31", u:"%", h:"Reminders that actually get answered", p:"A multi-touch text-and-call reminder sequence with one-tap confirm cut no-shows and backfilled cancellations from the waitlist. The schedule stopped collapsing on Mondays." },
+          { k:"Multi-provider clinic", big:"22", u:"/wk", h:"The 7pm caller stops going to voicemail", p:"An AI front desk answers overflow and after-hours calls, books into open slots, and confirms by text. Calls that used to be lost revenue became booked appointments." },
+          { k:"Medical clinic franchise", big:"9", u:"hrs/wk", h:"Operations stack we built ourselves", p:"Phones, scheduling, billing workflows, and multi-location reporting — built and run by Fox before we offered it as a service. Same system, your practice." }
+        ],
+        proof: "We built and ran the full operations stack for a medical clinic franchise — phones, scheduling, billing, multi-location reporting. That's not a case study. That's what we built.",
+        ctaOverline: "FIND THE CHAIR TIME YOU'RE LOSING",
+        ctaH2: "Stop losing chair time to a phone nobody can answer.",
+        ctaLead: "Tell us where your week goes — the calls, the no-shows, the recall list. We'll come back within one business day with where we'd look first.",
+        formKicker: "Where's your front desk losing chair time?",
+        bizWord: "Practice", bizPlaceholder: "Dental, medical, specialty, etc.",
+        headacheLabel: "Where's the front desk falling behind?",
+        headachePlaceholder: "No-shows, phones ringing out, recall backlog...",
+        submit: 'Show me where the leak is <span class="arrow">&rarr;</span>',
+        successMsg: "Thanks. We read every submission and reply personally within one business day with where your front desk is losing the most time.",
+        faqH2: "The questions every owner asks before booking.",
+        faq: [
+          { q: "I've been burned by agencies before. How is this different?", a: "Fair. Three differences: you don't pay for a build until it's running, you own everything we ship (no lock-in), and we're local and accountable. If it doesn't close the leak, we keep working until it does." },
+          { q: "Do I have to buy new software?", a: "Usually not. We build into the tools your team already uses. If you're on Google Workspace, most clients need zero new software or subscriptions. Either way, we start with what you have." },
+          { q: "What if my team won't use it?", a: "We build it where your team already logs in every morning, and we train them on it. If it doesn't get used, it doesn't count as done." },
+          { q: "How long does it take?", a: "Most single systems are live in about two weeks. The teardown itself is 90 minutes, and you leave with the written fix plan that day." },
+          { q: "What does it actually cost?", a: "Flat project pricing, no retainers. Command Center is $3,500, a Single System is $4,500, ongoing partnership is $3,200/month. See pricing below." },
+          { q: "What happens after you build it?", a: "It's documented and runs without us. Your team owns it. We only stay on if you want the next leak fixed too." }
+        ],
+        cmdCenter: {
+          lead: "We connect your practice management system, billing platform, and tracking sheets into a single screen your front desk and office manager read every morning. Built into the tools you already use — no new software, no new login, no new monthly bill.",
+          features: [
+            { h: "Practice management systems", p: "Appointments booked, open slots, no-show rate, and provider production from platforms like Jane, NexHealth, Kareo, or your existing PMS." },
+            { h: "Billing & collections", p: "Charges posted, payments collected, and outstanding claims — pulled from your billing system or payment processor without a manual report." },
+            { h: "Google Sheets & intake data", p: "New patient counts, referral sources, or recall lists your team tracks manually — read live into the dashboard the moment the sheet updates." },
+            { h: "Multi-location rollups", p: "Production, open capacity, and no-show rate for every provider and location on one screen — no more pulling separate reports from separate tabs." }
+          ]
+        }
+      }
+    };
+
+    /* ============================================================
+       PICK VARIANT — utm_medium=cpc or utm_source=google/facebook
+       hides the switcher strip (paid traffic shouldn't see it)
+       ============================================================ */
+    function getNiche() {
+      var p = new URLSearchParams(location.search);
+      var n = p.get('niche');
+      return NICHE[n] ? n : 'general';
+    }
+
+    // hide switcher for paid traffic
     (function () {
-      var t = document.getElementById('navToggle');
-      var l = document.getElementById('navlinks');
-      if (t && l) {
-        t.addEventListener('click', function () {
-          var open = l.classList.toggle('open');
-          t.setAttribute('aria-expanded', open ? 'true' : 'false');
-        });
-        l.addEventListener('click', function (e) {
-          if (e.target.tagName === 'A') { l.classList.remove('open'); t.setAttribute('aria-expanded', 'false'); }
-        });
+      var p = new URLSearchParams(location.search);
+      var src = (p.get('utm_source') || '').toLowerCase();
+      var med = (p.get('utm_medium') || '').toLowerCase();
+      if (med === 'cpc' || med === 'paid' || src === 'google' || src === 'facebook' || src === 'instagram' || src === 'meta') {
+        var sw = document.getElementById('nicheSwitcher');
+        if (sw) sw.style.display = 'none';
       }
     })();
 
-    // scroll reveal
+    /* ============================================================
+       RENDER — callable on load and on niche tab switch
+       ============================================================ */
+    function set(id, html) { var el = document.getElementById(id); if (el) el.innerHTML = html; }
+    function icon(name) {
+      return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[name] || ICONS.flow) + '</svg>';
+    }
+
+    function renderNiche(niche) {
+      var d = NICHE[niche] || NICHE['general'];
+
+      document.title = d.title;
+      var md = document.getElementById('metaDesc'); if (md) md.setAttribute('content', d.meta);
+
+      set('heroOverline', d.overline);
+      set('heroH1', d.h1);
+      set('heroLead', d.lead);
+      set('heroCta', d.cta);
+      set('heroNote', d.note);
+
+      // stats band
+      set('statRows', d.stats.map(function(s) {
+        return '<div class="stat-item"><div class="num" data-target="' + s.num.replace(/[^0-9]/g,'') + '">' + s.num + '<span class="u">' + s.u + '</span></div><p class="lab">' + s.lab + '</p></div>';
+      }).join(''));
+
+      set('focusH2', d.focusH2);
+      set('focusP', d.focusP);
+      set('focusCards', d.focus.map(function(f) {
+        return '<article class="card reveal"><div class="ic">' + icon(f.ic) + '</div>' +
+          '<h3>' + f.h + '</h3>' +
+          '<div class="card-detail"><p>' + f.p + '</p></div>' +
+          '<span class="card-expand" aria-hidden="true">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>' +
+            'Detail' +
+          '</span>' +
+          '</article>';
+      }).join(''));
+
+      // wire card expand after render
+      setTimeout(function () {
+        document.querySelectorAll('#focusCards .card').forEach(function(card) {
+          if (!card.dataset.expandBound) {
+            card.dataset.expandBound = '1';
+            card.addEventListener('click', function () { card.classList.toggle('open'); });
+            card.addEventListener('keydown', function (e) {
+              if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.classList.toggle('open'); }
+            });
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('role', 'button');
+          }
+        });
+      }, 0);
+
+      set('ctaOverline', d.ctaOverline);
+      set('ctaH2', d.ctaH2);
+      set('ctaLead', d.ctaLead);
+
+      // niche switcher active state
+      document.querySelectorAll('.switch a[data-niche]').forEach(function(a) {
+        if (a.getAttribute('data-niche') === niche) {
+          a.setAttribute('aria-current', 'true');
+        } else {
+          a.removeAttribute('aria-current');
+        }
+      });
+
+      // FAQ
+      set('faqH2', d.faqH2);
+      set('faqList', d.faq.map(function(item, i) {
+        return '<div class="faq-item" id="faq'+i+'">' +
+          '<button class="faq-q" aria-expanded="false" aria-controls="faqA'+i+'" onclick="toggleFaq('+i+')">' +
+          '<span>' + item.q + '</span>' +
+          '<span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>' +
+          '</button>' +
+          '<div class="faq-a" id="faqA'+i+'" role="region"><div class="faq-a-inner">' + item.a + '</div></div>' +
+          '</div>';
+      }).join(''));
+
+      // command center section
+      if (d.cmdCenter) {
+        set('cmdLead', d.cmdCenter.lead);
+        set('cmdFeatGrid', d.cmdCenter.features.map(function(f) {
+          return '<div class="cmd-feat reveal"><p class="feat-h">' + f.h + '</p><p class="feat-p">' + f.p + '</p></div>';
+        }).join(''));
+      }
+
+      // form copy
+      set('formKicker', d.formKicker);
+      set('leadSubmit', d.submit);
+      set('successMsg', d.successMsg);
+      var nf = document.getElementById('nicheField'); if (nf) nf.value = niche;
+    }
+
+    // case studies — rendered once (not niche-specific)
+    (function () {
+      var ck = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;color:var(--success);flex:none;margin-top:1px"><polyline points="20 6 9 17 4 12"/></svg>';
+      var html = CASES.map(function(c) {
+        var result = c.result ? '<div class="case-result reveal"><p class="case-label">The result</p><p class="case-result-num">' + c.result + '</p></div>' : '';
+        var quote = (c.quote && c.quoteName) ? '<blockquote class="case-quote reveal">' + ck + ' "' + c.quote + '"<cite>' + c.quoteName + '</cite></blockquote>' : '';
+        return '<article class="case-card reveal">' +
+          '<span class="case-industry">' + c.industry + '</span>' +
+          '<div class="case-fields">' +
+            '<div><p class="case-label">The leak</p><p class="case-value">' + c.leak + '</p></div>' +
+            '<div><p class="case-label">The build</p><p class="case-value">' + c.build + '</p></div>' +
+          '</div>' +
+          result + quote +
+          '</article>';
+      }).join('');
+      set('caseGrid', html);
+    })();
+
+    // scarcity — contact section only (one instance, per 3.3)
+    (function () {
+      var txt = 'I run every teardown myself, so I take four per month. <span class="slots">' + SCARCITY.n + ' slots left</span> for ' + SCARCITY.month + '.';
+      set('contactScarcity', txt);
+    })();
+
+    // initial render
+    var current = getNiche();
+    renderNiche(current);
+
+    // capture UTMs into the form
+    (function () {
+      var p = new URLSearchParams(location.search);
+      var uf = document.getElementById('utmField');
+      if (uf) {
+        var utms = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].map(function(k) {
+          return k + '=' + (p.get(k) || '');
+        }).join('&');
+        uf.value = utms;
+      }
+    })();
+
+    // niche tab SPA switching — update content without full page reload
+    document.querySelectorAll('.switch a[data-niche]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var n = a.getAttribute('data-niche');
+        history.pushState({ niche: n }, '', '?niche=' + n);
+        renderNiche(n);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (window.gtag) gtag('event', 'niche_switch', { niche: n });
+      });
+    });
+
+    /* ============================================================
+       CTA BUTTONS — scroll to form, focus it, fire analytics
+       ============================================================ */
+    function scrollToForm(e) {
+      if (e) e.preventDefault();
+      var src = e && e.currentTarget ? (e.currentTarget.id || e.currentTarget.className || 'cta') : 'cta';
+      if (window.gtag) gtag('event', 'cta_click', { source: src, niche: getNiche() });
+      if (window.fbq) fbq('track', 'InitiateCheckout', { content_name: src });
+      var sec = document.getElementById('contact');
+      if (sec) sec.scrollIntoView({ behavior:'smooth', block:'start' });
+      var first = document.getElementById('timesink');
+      if (first) setTimeout(function () { first.focus({ preventScroll:true }); }, 500);
+    }
+    document.querySelectorAll('[data-book]').forEach(function(b) { b.addEventListener('click', scrollToForm); });
+
+    /* ============================================================
+       FAQ ACCORDION
+       ============================================================ */
+    function toggleFaq(i) {
+      var item = document.getElementById('faq'+i);
+      var btn  = item ? item.querySelector('.faq-q') : null;
+      if (!item || !btn) return;
+      var isOpen = item.classList.contains('open');
+      // close all
+      document.querySelectorAll('.faq-item.open').forEach(function(el) {
+        el.classList.remove('open');
+        var b = el.querySelector('.faq-q'); if (b) b.setAttribute('aria-expanded','false');
+      });
+      if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    }
+    window.toggleFaq = toggleFaq;
+
+    /* ============================================================
+       LEAD FORM
+       ============================================================ */
+    (function () {
+      var form = document.getElementById('leadForm');
+      if (!form) return;
+      var btn = document.getElementById('leadSubmit');
+
+      // GA4 form_start (fires once on first focus)
+      var startFired = false;
+      form.addEventListener('focusin', function () {
+        if (startFired) return; startFired = true;
+        if (window.gtag) gtag('event', 'form_start', { niche: current });
+        if (window.fbq) fbq('track', 'InitiateCheckout', { content_category: current });
+      }, { once: false });
+
+      function showSuccess() {
+        window.location.assign('thankyou.html?niche=' + encodeURIComponent(current));
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (form.querySelector('[name="_gotcha"]').value) { showSuccess(); return; }
+        var ok = true;
+        ['timesink','contact'].forEach(function(id) {
+          var f = document.getElementById(id);
+          if (f && !f.value.trim()) { f.classList.add('invalid'); ok = false; } else if (f) { f.classList.remove('invalid'); }
+        });
+        if (!ok) { var inv = form.querySelector('.invalid'); if (inv) inv.focus(); return; }
+        var saved = btn ? btn.innerHTML : '';
+        if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
+        if (!FORMSPREE_ID) { setTimeout(showSuccess, 500); return; }
+        fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        }).then(function(r) {
+          if (r.ok) { showSuccess(); }
+          else { throw new Error('bad response'); }
+        }).catch(function() {
+          if (btn) { btn.disabled = false; btn.innerHTML = saved; }
+          alert('Something went wrong sending that. Call or text us directly at (321) 750-9608 and we\'ll jump on it.');
+        });
+      });
+      form.addEventListener('input', function(e) { if (e.target.classList) e.target.classList.remove('invalid'); });
+    })();
+
+    /* ============================================================
+       MOBILE NAV
+       ============================================================ */
+    (function () {
+      var t = document.getElementById('navToggle'), l = document.getElementById('navlinks');
+      if (t && l) {
+        t.addEventListener('click', function() { var open = l.classList.toggle('open'); t.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+        l.addEventListener('click', function(e) { if (e.target.tagName === 'A') { l.classList.remove('open'); t.setAttribute('aria-expanded','false'); } });
+      }
+    })();
+
+    /* ============================================================
+       FLOATING MOBILE CTA — appears after scrolling past hero
+       ============================================================ */
+    (function () {
+      var cta = document.getElementById('floatCta');
+      var hero = document.getElementById('heroSection');
+      if (!cta || !hero || !('IntersectionObserver' in window)) return;
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(en) { cta.classList.toggle('visible', !en.isIntersecting); });
+      }, { threshold: 0.1 });
+      io.observe(hero);
+    })();
+
+    /* ============================================================
+       SCROLL REVEAL
+       ============================================================ */
     (function () {
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var els = document.querySelectorAll('.reveal');
-      if (reduce || !('IntersectionObserver' in window)) {
-        els.forEach(function (el) { el.classList.add('in'); });
-        return;
-      }
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) {
-          if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
-        });
-      }, { threshold: 0.12 });
-      els.forEach(function (el) { io.observe(el); });
+      if (reduce || !('IntersectionObserver' in window)) { els.forEach(function(el) { el.classList.add('in'); }); return; }
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+      }, { threshold: 0.1 });
+      els.forEach(function(el) { io.observe(el); });
     })();
 
-    // form: friendly confirm (no backend wired yet)
-    (function () {
-      var f = document.getElementById('teardownForm');
-      if (!f) return;
-      f.addEventListener('submit', function (e) {
+  </script>
+  <script>
+  /* ---- Time Leak Calculator + email gate ---- */
+  (function () {
+    var h = document.getElementById('lc-hours');
+    var r = document.getElementById('lc-rate');
+    if (!h || !r) return;
+    var fmt = function (n) { return '$' + Math.round(n).toLocaleString(); };
+    var calcFired = false;
+
+    function update() {
+      var hrs = +h.value, rate = +r.value;
+      var yearHours = hrs * 50;
+      var yearCost = yearHours * rate;
+      var weeks = Math.round(yearHours / 40);
+      document.getElementById('lc-hours-out').textContent = hrs + ' hrs/week';
+      document.getElementById('lc-rate-out').textContent = '$' + rate + '/hr';
+      document.getElementById('lc-year-hours').textContent = yearHours.toLocaleString();
+      document.getElementById('lc-year-cost').textContent = fmt(yearCost);
+      document.getElementById('lc-weeks').textContent = weeks;
+      var note = document.querySelector('#contact textarea');
+      if (note && !note.dataset.touched) {
+        note.value = 'About ' + hrs + ' hrs/week on manual work (~' + fmt(yearCost) + '/yr). Looking for my biggest win.';
+      }
+      // analytics: fire once on first slider use
+      if (!calcFired) {
+        calcFired = true;
+        if (window.gtag) gtag('event', 'calc_interact', { hrs: hrs, rate: rate });
+        if (window.fbq) fbq('track', 'ViewContent', { content_name: 'leak_calculator' });
+      }
+    }
+
+    [h, r].forEach(function (el) { el.addEventListener('input', update); });
+    var note = document.querySelector('#contact textarea');
+    if (note) note.addEventListener('input', function () { note.dataset.touched = '1'; });
+    update();
+
+    // email gate submit
+    var calcForm = document.getElementById('calcEmailForm');
+    if (calcForm) {
+      calcForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        if (!f.checkValidity()) { f.reportValidity(); return; }
-        var btn = f.querySelector('button[type=submit]');
-        btn.textContent = 'Sent — we’ll reach out within one business day';
-        btn.disabled = true;
+        var emailEl = document.getElementById('calcEmail');
+        if (!emailEl || !emailEl.value.trim()) { emailEl.classList.add('invalid'); emailEl.focus(); return; }
+        emailEl.classList.remove('invalid');
+        var hrs = +h.value, rate = +r.value;
+        var yearHours = hrs * 50;
+        var yearCost = yearHours * rate;
+        var body = new FormData();
+        body.append('email', emailEl.value.trim());
+        body.append('hours_per_week', hrs);
+        body.append('hourly_cost', rate);
+        body.append('annual_hours', yearHours);
+        body.append('annual_cost', fmt(yearCost));
+        body.append('source', 'calculator_gate');
+        body.append('niche', (new URLSearchParams(location.search).get('niche') || 'general'));
+        var btn = calcForm.querySelector('button[type=submit]');
+        if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
+        fetch('https://formspree.io/f/' + (window.FORMSPREE_ID || 'xeewoyqw'), {
+          method: 'POST', headers: { 'Accept': 'application/json' }, body: body
+        }).then(function (res) {
+          var sent = document.getElementById('calcGateSent');
+          if (sent) { sent.classList.add('show'); }
+          calcForm.style.display = 'none';
+          // pre-fill main form email
+          var contactField = document.getElementById('contact');
+          if (contactField && !contactField.value) contactField.value = emailEl.value.trim();
+          // analytics
+          if (window.gtag) gtag('event', 'calc_lead', { value: yearCost });
+          if (window.fbq) fbq('track', 'Lead', { content_name: 'calc_report' });
+        }).catch(function () {
+          if (btn) { btn.disabled = false; btn.innerHTML = 'Email my report <span class="arrow">&rarr;</span>'; }
+        });
       });
-    })();
+    }
+  })();
+  </script>
+  <script>
+  (function () {
+    var canvas = document.getElementById('hero-bg');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var ACCENT = getComputedStyle(document.documentElement)
+                   .getPropertyValue('--accent') || '#EC5E12';
+    ACCENT = ACCENT.trim() || '#EC5E12';
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var DPR = Math.min(window.devicePixelRatio || 1, 2);
+    var hero = canvas.parentElement;
+    var particles = [];
+    var mouse = { x: -9999, y: -9999 };
+    var raf = null, running = false;
+
+    function size() {
+      var w = hero.clientWidth, h = hero.clientHeight;
+      canvas.width = w * DPR; canvas.height = h * DPR;
+      canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      var target = Math.min(90, Math.floor((w * h) / 16000));
+      if (w < 700) target = Math.floor(target * 0.5);
+      particles = [];
+      for (var i = 0; i < target; i++) {
+        particles.push({
+          x: Math.random() * w, y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3
+        });
+      }
+    }
+
+    function frame() {
+      var w = hero.clientWidth, h = hero.clientHeight;
+      ctx.clearRect(0, 0, w, h);
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+        var dxm = p.x - mouse.x, dym = p.y - mouse.y;
+        var dm = Math.sqrt(dxm * dxm + dym * dym);
+        if (dm < 120 && dm > 0) { p.x += (dxm / dm) * 0.6; p.y += (dym / dm) * 0.6; }
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 1.6, 0, Math.PI * 2);
+        ctx.fillStyle = ACCENT; ctx.globalAlpha = 0.5; ctx.fill();
+      }
+      for (var a = 0; a < particles.length; a++) {
+        for (var b = a + 1; b < particles.length; b++) {
+          var dx = particles[a].x - particles[b].x, dy = particles[a].y - particles[b].y;
+          var d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 130) {
+            ctx.beginPath();
+            ctx.moveTo(particles[a].x, particles[a].y);
+            ctx.lineTo(particles[b].x, particles[b].y);
+            ctx.strokeStyle = ACCENT; ctx.globalAlpha = (1 - d / 130) * 0.18;
+            ctx.lineWidth = 1; ctx.stroke();
+          }
+        }
+      }
+      ctx.globalAlpha = 1;
+      raf = requestAnimationFrame(frame);
+    }
+
+    function start() { if (!running && !reduce) { running = true; frame(); } }
+    function stop() { running = false; if (raf) cancelAnimationFrame(raf); }
+
+    size();
+    if (reduce) { frame(); }
+    else {
+      window.addEventListener('resize', function () { size(); });
+      hero.addEventListener('mousemove', function (e) {
+        var r = hero.getBoundingClientRect();
+        mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+      });
+      hero.addEventListener('mouseleave', function () { mouse.x = -9999; mouse.y = -9999; });
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (es) {
+          es[0].isIntersecting ? start() : stop();
+        }, { threshold: 0.05 }).observe(hero);
+      } else { start(); }
+    }
+  })();
   </script>
 </body>
 </html>
