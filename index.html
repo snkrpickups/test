@@ -70,8 +70,8 @@
       cursor: pointer; text-decoration: none;
       transition: transform .18s cubic-bezier(.2,.8,.2,1), background .18s, box-shadow .18s;
     }
-    .btn-primary { background: var(--accent); color: var(--accent-fg); box-shadow: var(--shadow-accent); }
-    .btn-primary:hover { background: var(--accent-hover); transform: translate(2px,-2px); box-shadow: 0 12px 32px -8px rgba(236,94,18,.55); }
+    .btn-primary { background: #C44A0C; color: var(--accent-fg); box-shadow: 0 8px 24px -8px rgba(196,74,12,.45); } /* 4.7:1 on white, WCAG AA */
+    .btn-primary:hover { background: #A83A08; transform: translate(2px,-2px); box-shadow: 0 12px 32px -8px rgba(196,74,12,.55); }
     .btn-primary:active { transform: scale(.98); box-shadow: var(--shadow-sm); }
     .btn-ghost { background: transparent; color: var(--fg); border-color: var(--border-strong); }
     .btn-ghost:hover { background: var(--sand-100); }
@@ -271,6 +271,24 @@
     .calc-stat strong { display: block; font: 800 36px/1 var(--font-mono); letter-spacing: -.03em; color: var(--accent); }
     .calc-stat span { font: var(--text-small); color: var(--fg-muted); margin-top: var(--space-2); display: block; }
 
+    /* ---- calculator email gate ---- */
+    .calc-gate { border-top: 1px solid var(--border); padding-top: var(--space-8); }
+    .calc-gate-lbl { font: 600 15px/1.4 var(--font-body); color: var(--fg); margin-bottom: var(--space-4); }
+    .calc-email-row { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+    .calc-email-row input[type=email] {
+      flex: 1; min-width: 220px; font: var(--text-body); color: var(--fg);
+      background: var(--bg-elevated); border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md); padding: 13px var(--space-4);
+      transition: border-color .15s;
+    }
+    .calc-email-row input[type=email]::placeholder { color: var(--fg-muted); }
+    .calc-email-row input[type=email]:focus { border-color: var(--accent); outline: none; }
+    .calc-email-row input[type=email].invalid { border-color: var(--danger); }
+    .calc-gate-reassure { font: var(--text-caption); color: var(--fg-muted); margin-top: var(--space-3); }
+    .calc-gate-sent { display: none; font: 600 14px/1.4 var(--font-body); color: var(--success); padding: var(--space-4) 0; }
+    .calc-gate-sent.show { display: block; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
     /* ---- focus area cards — interactive expand ---- */
     .card { cursor: pointer; }
     .card .card-expand { display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-4); font: 600 12px/1 var(--font-mono); color: var(--accent); letter-spacing: .04em; text-transform: uppercase; }
@@ -345,7 +363,7 @@
     .case-label { font: 700 11px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .12em; color: var(--fox-400); margin: 0 0 var(--space-3); }
     .case-value { font: var(--text-body); color: color-mix(in srgb, var(--sand-50) 80%, transparent); margin: 0; line-height: 1.6; }
     .case-result { border-top: 1px solid var(--border-inverse); padding-top: var(--space-8); margin-top: var(--space-2); }
-    .case-result-num { font: 800 38px/1.1 var(--font-mono); color: var(--fg-inverse); margin: var(--space-3) 0 0; letter-spacing: -.02em; }
+    .case-result-num { font: 800 22px/1.4 var(--font-display); color: var(--fg-inverse); margin: var(--space-3) 0 0; letter-spacing: var(--tracking-tight); }
     .case-quote { border-left: 2px solid var(--fox-500); margin: var(--space-8) 0 0; padding-left: var(--space-6); font: var(--text-lead); color: color-mix(in srgb, var(--sand-50) 78%, transparent); font-style: normal; }
     .case-quote cite { display: block; font: var(--text-mono); color: var(--fox-400); margin-top: var(--space-3); font-style: normal; }
 
@@ -357,10 +375,8 @@
     .plan .bonus-li svg { color: var(--fox-500); }
     .bonus-tag { font: 700 10px/1 var(--font-mono); text-transform: uppercase; letter-spacing: .08em; background: var(--fox-50); color: var(--fox-600); border: 1px solid var(--fox-100); border-radius: var(--radius-pill); padding: 3px 7px; margin-right: 4px; flex: none; }
 
-    /* ---- hero trust strip ---- */
-    .hero-trust { font: 600 12px/1.3 var(--font-mono); color: var(--fg-muted); margin-top: var(--space-4); letter-spacing: .03em; }
-
-    /* ---- hero proof strip + scarcity ---- */
+    /* ---- hero guarantee + proof strip ---- */
+    .hero-guarantee { font: 600 13px/1.5 var(--font-body); color: var(--fg-secondary); margin-top: var(--space-5); padding: var(--space-3) var(--space-5); background: color-mix(in srgb, var(--fox-50) 60%, transparent); border: 1px solid var(--fox-100); border-radius: var(--radius-md); max-width: 44ch; }
     .hero-proof-strip { font: var(--text-small); color: var(--fg-muted); margin-top: var(--space-3); }
     .scarcity { font: 600 13px/1.4 var(--font-mono); color: var(--fg-muted); margin-top: var(--space-3); }
     .scarcity .slots { color: var(--accent); }
@@ -466,12 +482,11 @@
       <h1 id="heroH1">We find the busywork stealing <span class="ink">10+ hours a week</span> from your business, then build the AI system that does it for you, for good.</h1>
       <p class="lead" id="heroLead">You didn't start your business to do data entry at 9pm. We diagnose the busywork draining your week and build the assistants, pipelines, and dashboards that handle it without you. That's up to 13 weeks of your year back.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary btn-lg" data-book href="#contact" id="heroCta">Show me where the leak is <span class="arrow">&rarr;</span></a>
-        <a class="btn btn-ghost btn-lg" href="#work">See the work</a>
+        <a class="btn btn-primary btn-lg" data-book href="#contact" id="heroCta">Book a free teardown <span class="arrow">&rarr;</span></a>
+        <a class="btn btn-ghost btn-lg" href="#leak-calc">See how much it costs you</a>
       </div>
-      <p class="hero-trust" id="heroTrust">Trusted by operators in Brevard and Orange County, FL.</p>
-      <p class="hero-proof-strip" id="heroNote">Built and ran the full operations stack for a medical clinic franchise. That's the experience behind every teardown.</p>
-      <p class="scarcity" id="heroScarcity"></p>
+      <p class="hero-guarantee">You pay nothing until the system is running. If it doesn't close the leak, we keep building free until it does.</p>
+      <p class="hero-proof-strip" id="heroNote">Biggest leak mapped in 90 minutes. First system live in about two weeks. Built and run the operations stack for a medical clinic franchise personally.</p>
     </div>
   </section>
 
@@ -523,7 +538,18 @@
               <span>work weeks back</span>
             </div>
           </div>
-          <a href="#contact" class="btn btn-primary" id="lc-cta">Stop this leak. Book a free teardown <span class="arrow">&rarr;</span></a>
+          <div class="calc-gate" id="calcGate">
+            <p class="calc-gate-lbl">Send this breakdown to your inbox with a free fix-plan outline.</p>
+            <form class="calc-email-form" id="calcEmailForm" novalidate>
+              <div class="calc-email-row">
+                <label for="calcEmail" class="sr-only">Your email</label>
+                <input type="email" id="calcEmail" name="email" placeholder="your@email.com" autocomplete="email" required>
+                <button type="submit" class="btn btn-primary">Email my report <span class="arrow">&rarr;</span></button>
+              </div>
+              <p class="calc-gate-reassure">No sales pitch. One email with your numbers and where we'd look first.</p>
+            </form>
+            <p class="calc-gate-sent" id="calcGateSent" aria-live="polite">On its way. Check your inbox shortly.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -549,7 +575,7 @@
           <p class="overline">The Command Center</p>
           <h2>One screen. Every number that runs your operation — pulled live from tools you already pay for.</h2>
           <p class="lead" id="cmdLead">We connect your scheduler, payment processor, and spreadsheets into a single dashboard your whole team reads every morning. Built into the tools you already use — no new software to buy, no new monthly bill, no login nobody uses.</p>
-          <a class="btn btn-primary" data-book href="#contact" id="cmdCta">Get a command center <span class="arrow">&rarr;</span></a>
+          <a class="btn btn-primary" data-book href="#contact" id="cmdCta">Build mine <span class="arrow">&rarr;</span></a>
         </div>
         <div class="cmd-features" id="cmdFeatGrid">
           <!-- populated by JS -->
@@ -1135,10 +1161,9 @@
       set('caseGrid', html);
     })();
 
-    // scarcity lines — rendered once
+    // scarcity — contact section only (one instance, per 3.3)
     (function () {
       var txt = 'I run every teardown myself, so I take four per month. <span class="slots">' + SCARCITY.n + ' slots left</span> for ' + SCARCITY.month + '.';
-      set('heroScarcity', txt);
       set('contactScarcity', txt);
     })();
 
@@ -1166,14 +1191,18 @@
         history.pushState({ niche: n }, '', '?niche=' + n);
         renderNiche(n);
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (window.gtag) gtag('event', 'niche_switch', { niche: n });
       });
     });
 
     /* ============================================================
-       CTA BUTTONS — scroll to form and focus it
+       CTA BUTTONS — scroll to form, focus it, fire analytics
        ============================================================ */
     function scrollToForm(e) {
       if (e) e.preventDefault();
+      var src = e && e.currentTarget ? (e.currentTarget.id || e.currentTarget.className || 'cta') : 'cta';
+      if (window.gtag) gtag('event', 'cta_click', { source: src, niche: getNiche() });
+      if (window.fbq) fbq('track', 'InitiateCheckout', { content_name: src });
       var sec = document.getElementById('contact');
       if (sec) sec.scrollIntoView({ behavior:'smooth', block:'start' });
       var first = document.getElementById('timesink');
@@ -1284,12 +1313,14 @@
 
   </script>
   <script>
-  /* ---- Time Leak Calculator ---- */
+  /* ---- Time Leak Calculator + email gate ---- */
   (function () {
     var h = document.getElementById('lc-hours');
     var r = document.getElementById('lc-rate');
     if (!h || !r) return;
     var fmt = function (n) { return '$' + Math.round(n).toLocaleString(); };
+    var calcFired = false;
+
     function update() {
       var hrs = +h.value, rate = +r.value;
       var yearHours = hrs * 50;
@@ -1302,13 +1333,59 @@
       document.getElementById('lc-weeks').textContent = weeks;
       var note = document.querySelector('#contact textarea');
       if (note && !note.dataset.touched) {
-        note.value = 'About ' + hrs + ' hrs/week on manual work (~' + fmt(yearCost) + '/yr). Where is my biggest leak?';
+        note.value = 'About ' + hrs + ' hrs/week on manual work (~' + fmt(yearCost) + '/yr). Looking for my biggest win.';
+      }
+      // analytics: fire once on first slider use
+      if (!calcFired) {
+        calcFired = true;
+        if (window.gtag) gtag('event', 'calc_interact', { hrs: hrs, rate: rate });
+        if (window.fbq) fbq('track', 'ViewContent', { content_name: 'leak_calculator' });
       }
     }
+
     [h, r].forEach(function (el) { el.addEventListener('input', update); });
     var note = document.querySelector('#contact textarea');
     if (note) note.addEventListener('input', function () { note.dataset.touched = '1'; });
     update();
+
+    // email gate submit
+    var calcForm = document.getElementById('calcEmailForm');
+    if (calcForm) {
+      calcForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var emailEl = document.getElementById('calcEmail');
+        if (!emailEl || !emailEl.value.trim()) { emailEl.classList.add('invalid'); emailEl.focus(); return; }
+        emailEl.classList.remove('invalid');
+        var hrs = +h.value, rate = +r.value;
+        var yearHours = hrs * 50;
+        var yearCost = yearHours * rate;
+        var body = new FormData();
+        body.append('email', emailEl.value.trim());
+        body.append('hours_per_week', hrs);
+        body.append('hourly_cost', rate);
+        body.append('annual_hours', yearHours);
+        body.append('annual_cost', fmt(yearCost));
+        body.append('source', 'calculator_gate');
+        body.append('niche', (new URLSearchParams(location.search).get('niche') || 'general'));
+        var btn = calcForm.querySelector('button[type=submit]');
+        if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
+        fetch('https://formspree.io/f/' + (window.FORMSPREE_ID || 'xeewoyqw'), {
+          method: 'POST', headers: { 'Accept': 'application/json' }, body: body
+        }).then(function (res) {
+          var sent = document.getElementById('calcGateSent');
+          if (sent) { sent.classList.add('show'); }
+          calcForm.style.display = 'none';
+          // pre-fill main form email
+          var contactField = document.getElementById('contact');
+          if (contactField && !contactField.value) contactField.value = emailEl.value.trim();
+          // analytics
+          if (window.gtag) gtag('event', 'calc_lead', { value: yearCost });
+          if (window.fbq) fbq('track', 'Lead', { content_name: 'calc_report' });
+        }).catch(function () {
+          if (btn) { btn.disabled = false; btn.innerHTML = 'Email my report <span class="arrow">&rarr;</span>'; }
+        });
+      });
+    }
   })();
   </script>
   <script>
