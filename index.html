@@ -337,7 +337,8 @@
     .form-success p { color: color-mix(in srgb, var(--sand-50) 72%, transparent); font: var(--text-body); max-width: 34ch; margin: 0 auto; }
 
     /* ---- case study cards ---- */
-    .case-card { border: 1px solid var(--border-inverse); border-radius: var(--radius-lg); padding: var(--space-10); background: color-mix(in srgb, var(--char-900) 70%, transparent); transition: border-color .2s; }
+    #caseGrid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+    .case-card { border: 1px solid var(--border-inverse); border-radius: var(--radius-lg); padding: var(--space-8); background: color-mix(in srgb, var(--char-900) 70%, transparent); transition: border-color .2s; }
     .case-card:hover { border-color: rgba(236,94,18,.4); }
     .case-industry { font: var(--text-overline); letter-spacing: var(--tracking-overline); text-transform: uppercase; color: var(--fox-400); display: block; margin-bottom: var(--space-8); }
     .case-fields { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); margin-bottom: var(--space-8); }
@@ -401,7 +402,7 @@
     }
     @media (max-width: 900px) {
       .hero-grid { grid-template-columns: 1fr; gap: var(--space-10); }
-      .cards, .examples, .steps, .plans, .cmd-grid, .cmd-features, .case-fields { grid-template-columns: 1fr; }
+      .cards, .examples, .steps, .plans, .cmd-grid, .cmd-features, .case-fields, #caseGrid { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; gap: var(--space-10); }
       .calc-result { grid-template-columns: 1fr; gap: var(--space-4); }
       .stats-inner { gap: var(--space-2); }
@@ -761,17 +762,41 @@
     var FORMSPREE_ID = "xeewoyqw";
 
     /* ============================================================
-       CASE STUDIES — fill in result and quote as you close clients.
-       Leave result/quote as "" to hide those elements entirely.
+       CASE STUDIES — add quote/quoteName when you have them.
+       Leave those fields as "" to hide them.
        ============================================================ */
     var CASES = [
       {
-        industry: "Medical clinic franchise, multi-location",
-        leak: "Phones, scheduling, billing, and reporting all run by hand across locations. Every number lived in a separate system nobody had time to check.",
-        build: "We built and ran the full operations stack from phone coverage and scheduling to a live multi-location reporting dashboard pulling from every system at once.",
-        result: "", // e.g. "11 hrs/week of manual admin eliminated across every location"
-        quote: "",  // e.g. "We finally know what's happening at every location before 9am."
-        quoteName: "" // e.g. "Maria, Practice Director"
+        industry: "Healthcare operations team",
+        leak: "Staff logged into six separate payment processor accounts multiple times a day to hunt for specific transactions. Repetitive, easy to miss, and a constant source of delayed handoffs.",
+        build: "Automated system that scans all six accounts, detects relevant transactions, and routes them into one centralized work queue. Status tracking, ownership, follow-up timing, and performance analytics built in.",
+        result: "Six manual portal checks replaced by one automated queue. Fewer missed transactions, faster handoffs, zero repeated logins.",
+        quote: "",
+        quoteName: ""
+      },
+      {
+        industry: "Sales team — revenue attribution",
+        leak: "CRM tracked every call, email, and text rep activity. But actual revenue lived outside the CRM. Leadership could see how busy reps were, not how much revenue their activity created.",
+        build: "Connected external transaction revenue to the responsible rep and combined it with CRM activity data in one dashboard. Rep and admin views show daily sales, products sold, revenue per touchpoint, and transaction-level drill-down.",
+        result: "Manual attribution eliminated. Leadership now sees which outreach produces revenue without stitching together separate exports.",
+        quote: "",
+        quoteName: ""
+      },
+      {
+        industry: "Multi-location service business",
+        leak: "Revenue, appointments, and location performance lived in separate spreadsheets. Leadership could not spot problems until they had grown. Daily huddle prep meant pulling and calculating numbers by hand every morning.",
+        build: "Live executive dashboard consolidating daily operating data: KPIs, period-over-period trends, location scorecards, goal progress, daily pace needed, and risk alerts. TV-ready for team huddles. Role-based access limits visibility by position.",
+        result: "Manual huddle prep eliminated. Leadership sees the full business from one screen and walks into every meeting knowing exactly where they stand.",
+        quote: "",
+        quoteName: ""
+      },
+      {
+        industry: "Growing operations team",
+        leak: "Staff relied on scattered bookmarks and manual instructions to access tools used every day. Onboarding a new hire required constant back-and-forth. Managers had no clear view of who had access to what.",
+        build: "Centralized app hub with role-based access for 20-plus internal and external tools. Users see only the tools their role allows. Managers control access from a simple admin panel with no code changes required.",
+        result: "Faster tool access across every department. Cleaner onboarding, fewer permission headaches, and a foundation for adding new tools without adding clutter.",
+        quote: "",
+        quoteName: ""
       }
     ];
 
